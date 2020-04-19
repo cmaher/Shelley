@@ -1,9 +1,38 @@
 using System;
 using System.Collections.Generic;
-using PsychoticLab;
 using UnityEngine;
 
 namespace BrassSparrow.Scripts.Models {
+    public class DollParts {
+        // From GenderedChoices
+        public DollHead Head;
+        public GameObject Eyebrows;
+        public GameObject FacialHair;
+        public GameObject Torso;
+        public GameObject ArmUpperRight;
+        public GameObject ArmUpperLeft;
+        public GameObject ArmLowerRight;
+        public GameObject ArmLowerLeft;
+        public GameObject HandRight;
+        public GameObject HandLeft;
+        public GameObject Hips;
+        public GameObject LegRight;
+        public GameObject LegLeft;
+        
+        public DollHeadCovering HeadCovering;
+        public GameObject Hair;
+        public GameObject HeadAttachment;
+        public GameObject BackAttachment;
+        public GameObject ShoulderAttachmentRight;
+        public GameObject ShoulderAttachmentLeft;
+        public GameObject ElbowAttachmentRight;
+        public GameObject ElbowAttachmentLeft;
+        public GameObject HipsAttachment;
+        public GameObject KneeAttachmentRight;
+        public GameObject KneeAttachmentLeft;
+        public GameObject Extra;
+    }
+    
     public class DollChoices {
         public UngenderedDollChoices Ungendered;
         public GenderedDollChoices Male;

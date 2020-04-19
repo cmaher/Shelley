@@ -58,8 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BrassSparrow\Scripts\Managers\BrassSparrowManager.cs" />
-     <Compile Include="Assets\BrassSparrow\Scripts\Models\Doll.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Managers\DollDesignManager.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Models\DollParts.cs" />
      <Compile Include="Assets\PolygonFantasyHeroCharacters\Scripts\CharacterRandomizer.cs" />
      <Compile Include="Assets\Scratch\Scripts\SimpleCameraController.cs" />
      <None Include="Assets\PolygonFantasyHeroCharacters\Shaders\POLYGON_CustomCharacters.shader" />
