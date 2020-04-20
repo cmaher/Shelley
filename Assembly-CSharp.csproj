@@ -58,8 +58,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollChoices.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollConfig.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollDesignManager.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollManager.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollParts.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\SceneManager.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\DeferredEvent.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\DictLocator.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\ILocator.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\IMessageBus.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\LocatorProvider.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\MaruUtils.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\MessageBus.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\PrefabPoolManager.cs" />
      <Compile Include="Assets\PolygonFantasyHeroCharacters\Scripts\CharacterRandomizer.cs" />
      <Compile Include="Assets\Scratch\Scripts\SimpleCameraController.cs" />
      <None Include="Assets\PolygonFantasyHeroCharacters\Shaders\POLYGON_CustomCharacters.shader" />
