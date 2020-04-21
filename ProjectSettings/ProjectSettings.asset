@@ -589,7 +589,18 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLWasmStreaming: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: dUI_MANAGER;dUI_TextMeshPro
+    4: dUI_MANAGER;dUI_TextMeshPro
+    7: dUI_MANAGER;dUI_TextMeshPro
+    13: dUI_MANAGER;dUI_TextMeshPro
+    14: dUI_MANAGER;dUI_TextMeshPro
+    19: dUI_MANAGER;dUI_TextMeshPro
+    21: dUI_MANAGER;dUI_TextMeshPro
+    25: dUI_MANAGER;dUI_TextMeshPro
+    27: dUI_MANAGER;dUI_TextMeshPro
+    28: dUI_MANAGER;dUI_TextMeshPro
+    29: dUI_MANAGER;dUI_TextMeshPro
   platformArchitecture: {}
   scriptingBackend:
     Standalone: 1

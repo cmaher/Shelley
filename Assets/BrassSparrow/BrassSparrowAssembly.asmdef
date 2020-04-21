@@ -1,0 +1,16 @@
+{
+    "name": "BrassSparrowAssembly",
+    "references": [
+        "GUID:e202d8932e5d90747b5b5dcfa99279ba",
+        "GUID:b113525cd0394ec4491b42938a086016"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
