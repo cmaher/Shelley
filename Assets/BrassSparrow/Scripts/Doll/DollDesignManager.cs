@@ -15,16 +15,16 @@ namespace BrassSparrow.Scripts.Doll {
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
                                                         "/Characters_ModularParts_Static";
 
+        public GameObject protoDoll;
         public GameObject dollContainer;
 
         private ILocator locator;
         private MessageBus vent;
-        private DollManager dollManager;
         private Transform partsRoot;
         private DollChoices dollChoices;
         private SysRandom random;
-        private DeferredEvent<DollManager.EvtOnStarted> dollManagerStarted;
-        private Doll doll;
+        private GameObject dollGo;
+        private WorkingDoll doll;
         private Dictionary<string, GameObject> staticParts;
 
         private void Awake() {
@@ -32,27 +32,22 @@ namespace BrassSparrow.Scripts.Doll {
             locator.Set(LocatorKey, this);
             vent = locator.Get(SceneManager.VentKey) as MessageBus;
             random = locator.Get(SceneManager.RandomKey) as SysRandom;
-            dollManagerStarted = new DeferredEvent<DollManager.EvtOnStarted>(vent);
             staticParts = LoadStaticParts();
         }
 
-        private IEnumerator Start() {
-            dollManager = locator.Get(DollManager.LocatorKey) as DollManager;
-
-            yield return dollManagerStarted;
-            dollChoices = dollManager.DollChoices;
-            doll = dollManager.NewDoll(dollContainer);
+        private void Start() {
+            dollGo = Instantiate(protoDoll, dollContainer.transform);
+            doll = new WorkingDoll(dollGo);
             var dollParts = RandomDoll();
-            dollManager.ResetDoll(doll, dollParts);
+            doll.SetConfig(dollParts);
             // SaveDoll();
             // LoadDoll();
         }
 
         private void SaveDoll() {
-            var config = doll.ToConfig();
             var bf = new BinaryFormatter();
             var file = File.Create("DevData/doll.bin");
-            bf.Serialize(file, config);
+            bf.Serialize(file, doll.Config);
             file.Close();
         }
 
@@ -60,39 +55,40 @@ namespace BrassSparrow.Scripts.Doll {
             var bf = new BinaryFormatter();
             var file = File.Open("DevData/doll.bin", FileMode.Open);
             var config = bf.Deserialize(file) as DollConfig;
-            dollManager.ResetDoll(doll, config);
+            doll.SetConfig(config);
         }
 
-        private DollParts RandomDoll() {
-            return new DollParts {
-                Head = RandomPart(RandomGender().Head),
-                Eyebrows = RandomPart(RandomGender().Eyebrows),
-                FacialHair = RandomPart(RandomGender().FacialHair),
-                Torso = RandomPart(RandomGender().Torso),
-                ArmUpperRight = RandomPart(RandomGender().ArmUpperRight),
-                ArmUpperLeft = RandomPart(RandomGender().ArmUpperLeft),
-                ArmLowerRight = RandomPart(RandomGender().ArmLowerRight),
-                ArmLowerLeft = RandomPart(RandomGender().ArmLowerLeft),
-                HandRight = RandomPart(RandomGender().HandRight),
-                HandLeft = RandomPart(RandomGender().HandLeft),
-                Hips = RandomPart(RandomGender().Hips),
-                LegRight = RandomPart(RandomGender().LegRight),
-                LegLeft = RandomPart(RandomGender().LegLeft),
+        private DollConfig RandomDoll() {
+            var parts = new DollPartsConfig {
+                head = RandomPart(RandomGender().Head),
+                eyebrows = RandomPart(RandomGender().Eyebrows),
+                facialHair = RandomPart(RandomGender().FacialHair),
+                torso = RandomPart(RandomGender().Torso),
+                armUpperRight = RandomPart(RandomGender().ArmUpperRight),
+                armUpperLeft = RandomPart(RandomGender().ArmUpperLeft),
+                armLowerRight = RandomPart(RandomGender().ArmLowerRight),
+                armLowerLeft = RandomPart(RandomGender().ArmLowerLeft),
+                handRight = RandomPart(RandomGender().HandRight),
+                handLeft = RandomPart(RandomGender().HandLeft),
+                hips = RandomPart(RandomGender().Hips),
+                legRight = RandomPart(RandomGender().LegRight),
+                legLeft = RandomPart(RandomGender().LegLeft),
             };
+            return new DollConfig {parts = parts};
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private GenderedDollChoices RandomGender() {
-            return random.Next(2) == 0 ? dollChoices.Male : dollChoices.Female;
+            return random.Next(2) == 0 ? doll.Choices.Male : doll.Choices.Female;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private T RandomPart<T>(List<T> choices) {
+        private string RandomPart(IReadOnlyList<DollPart> choices) {
             if (choices.Count == 0) {
                 return default;
             }
 
-            return choices[random.Next(choices.Count)];
+            return choices[random.Next(choices.Count)].Path;
         }
 
         private Dictionary<string, GameObject> LoadStaticParts() {

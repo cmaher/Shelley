@@ -1,210 +1,43 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Maru.MCore;
 using UnityEngine;
 
 namespace BrassSparrow.Scripts.Doll {
-    public class DollManager : MonoBehaviour {
-        public const string LocatorKey = "BrassSparrow.Scripts.Doll.DollManager";
+    public class WorkingDoll {
+        public DollChoices Choices;
 
-        public GameObject protoDoll;
-
-        [System.NonSerialized] public DollChoices DollChoices;
-
-        // Messaging
-        public struct EvtOnStarted { }
-
-        private static readonly EvtOnStarted OnStarted = new EvtOnStarted();
-
-        private ILocator locator;
-        private IMessageBus vent;
+        public DollConfig Config;
         private Transform partsRoot;
-        private GameObject rigRoot;
-        private Dictionary<string, DollPart> partsDict;
-        private Dictionary<string, DollHead> headsDict;
-        private Dictionary<string, DollHeadCovering> headCoveringsDict;
-        private Animator protoAnimator;
+        private readonly Dictionary<string, DollPart> partsDict;
+        private readonly Dictionary<string, DollHead> headsDict;
+        private readonly Dictionary<string, DollHeadCovering> headCoveringsDict;
 
-        private void Awake() {
-            locator = LocatorProvider.Get();
-            locator.Set(LocatorKey, this);
-            vent = locator.Get(SceneManager.VentKey) as MessageBus;
+        public WorkingDoll(GameObject modularDoll) {
+            partsRoot = modularDoll.transform.Find("Modular_Characters");
             partsDict = new Dictionary<string, DollPart>();
             headsDict = new Dictionary<string, DollHead>();
             headCoveringsDict = new Dictionary<string, DollHeadCovering>();
-        }
-
-        private void Start() {
-            partsRoot = protoDoll.transform.Find("Modular_Characters");
-            rigRoot = protoDoll.transform.Find("Root").gameObject;
-            protoAnimator = protoDoll.GetComponent<Animator>();
-
-            DollChoices = new DollChoices {
+            Choices = new DollChoices {
                 Ungendered = BuildUngenderedDollChoices(),
                 Male = BuildGenderedDollChoices("Male"),
                 Female = BuildGenderedDollChoices("Female")
             };
-
-            vent.Trigger(OnStarted);
         }
 
-        // Sets the new doll objects on the given game object
-        public Doll NewDoll(GameObject go) {
-            // Copy the animator
-            var animator = go.AddComponent<Animator>();
-            animator.runtimeAnimatorController = protoAnimator.runtimeAnimatorController;
-            animator.avatar = protoAnimator.avatar;
-            animator.applyRootMotion = protoAnimator.applyRootMotion;
-            animator.updateMode = protoAnimator.updateMode;
-            animator.cullingMode = protoAnimator.cullingMode;
-
-            // Copy the rigging
-            var rigGo = Instantiate(rigRoot, go.transform, false);
-
-            // Add a new object for the parts to go under (necessary for scaling)
-            var parts = new GameObject("Parts");
-            parts.transform.localScale = partsRoot.localScale;
-            parts.transform.parent = go.transform;
-
-            return new Doll {
-                Go = go,
-                RigGo = rigGo,
-                PartsGo = parts
-            };
-        }
-
-        // Modifies the passed-in parts with the new instances and sets them on the doll
-        public void ResetDoll(Doll doll, DollParts dollParts) {
-            // destroy all existing parts
-            // not terribly efficient, but should be fine
-            if (doll.Parts != null) {
-                foreach (var part in doll.Parts) {
-                    if (part != null) {
-                        Destroy(part.Go);
-                    }
-                }
-            }
-
-            var parent = doll.PartsGo.transform;
-            var newParts = dollParts.ShallowClone();
-            // Clone the part GameObject so as not to interfere with the referenced part
-            foreach (var part in newParts) {
-                if (part != null) {
-                    var name = part.Go.name;
-                    part.Go = Instantiate(part.Go, parent, false);
-                    part.Go.name = name;
-                }
-            }
-
-            doll.Parts = newParts;
-        }
-
-        public void ResetDoll(Doll doll, DollConfig config) {
-            var parts = new DollParts();
-            var partsConfig = config.parts;
-            if (partsConfig.head != null) {
-                parts.Head = headsDict[partsConfig.head];
-            }
-
-            if (partsConfig.eyebrows != null) {
-                parts.Eyebrows = partsDict[partsConfig.eyebrows];
-            }
-
-            if (partsConfig.facialHair != null) {
-                parts.FacialHair = partsDict[partsConfig.facialHair];
-            }
-
-            if (partsConfig.torso != null) {
-                parts.Torso = partsDict[partsConfig.torso];
-            }
-
-            if (partsConfig.armUpperRight != null) {
-                parts.ArmUpperRight = partsDict[partsConfig.armUpperRight];
-            }
-
-            if (partsConfig.armUpperLeft != null) {
-                parts.ArmUpperLeft = partsDict[partsConfig.armUpperLeft];
-            }
-
-            if (partsConfig.armLowerRight != null) {
-                parts.ArmLowerRight = partsDict[partsConfig.armLowerRight];
-            }
-
-            if (partsConfig.armLowerLeft != null) {
-                parts.ArmLowerLeft = partsDict[partsConfig.armLowerLeft];
-            }
-
-            if (partsConfig.handRight != null) {
-                parts.HandRight = partsDict[partsConfig.handRight];
-            }
-
-            if (partsConfig.handLeft != null) {
-                parts.HandLeft = partsDict[partsConfig.handLeft];
-            }
-
-            if (partsConfig.hips != null) {
-                parts.Hips = partsDict[partsConfig.hips];
-            }
-
-            if (partsConfig.legRight != null) {
-                parts.LegRight = partsDict[partsConfig.legRight];
-            }
-
-            if (partsConfig.legLeft != null) {
-                parts.LegLeft = partsDict[partsConfig.legLeft];
-            }
-
-            if (partsConfig.headCovering != null) {
-                parts.HeadCovering = headCoveringsDict[partsConfig.headCovering];
-            }
-
-            if (partsConfig.hair != null) {
-                parts.Hair = partsDict[partsConfig.hair];
-            }
-
-            if (partsConfig.headAttachment != null) {
-                parts.HeadAttachment = partsDict[partsConfig.headAttachment];
-            }
-
-            if (partsConfig.backAttachment != null) {
-                parts.BackAttachment = partsDict[partsConfig.backAttachment];
-            }
-
-            if (partsConfig.shoulderAttachmentRight != null) {
-                parts.ShoulderAttachmentRight = partsDict[partsConfig.shoulderAttachmentRight];
-            }
-
-            if (partsConfig.shoulderAttachmentLeft != null) {
-                parts.ShoulderAttachmentLeft = partsDict[partsConfig.shoulderAttachmentLeft];
-            }
-
-            if (partsConfig.elbowAttachmentRight != null) {
-                parts.ElbowAttachmentRight = partsDict[partsConfig.elbowAttachmentRight];
-            }
-
-            if (partsConfig.elbowAttachmentLeft != null) {
-                parts.ElbowAttachmentLeft = partsDict[partsConfig.elbowAttachmentLeft];
-            }
-
-            if (partsConfig.hipsAttachment != null) {
-                parts.HipsAttachment = partsDict[partsConfig.hipsAttachment];
-            }
-
-            if (partsConfig.kneeAttachmentRight != null) {
-                parts.KneeAttachmentRight = partsDict[partsConfig.kneeAttachmentRight];
-            }
-
-            if (partsConfig.kneeAttachmentLeft != null) {
-                parts.KneeAttachmentLeft = partsDict[partsConfig.kneeAttachmentLeft];
-            }
-
-            if (partsConfig.extra != null) {
-                parts.Extra = partsDict[partsConfig.extra];
-            }
+        public void SetConfig(DollConfig config) {
+            Config = config;
             
-            ResetDoll(doll, parts);
-        }
+            foreach (var part in partsDict.Values) {
+                part.Go.SetActive(false);
+            }
 
+            foreach (var path in Config.parts) {
+                if (path != null) {
+                    partsDict[path].Go.SetActive(true);
+                }
+            }
+        }
+        
         private UngenderedDollChoices BuildUngenderedDollChoices() {
             var path = "All_Gender_Parts";
             var ungenderedroot = partsRoot.Find(path);
@@ -289,6 +122,7 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             IndexParts(headsDict, choices);
+            IndexParts(partsDict, choices);
             return choices;
         }
 
@@ -324,6 +158,7 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             IndexParts(headCoveringsDict, choices);
+            IndexParts(partsDict, choices);
             return choices;
         }
 

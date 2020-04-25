@@ -5,9 +5,6 @@ using UnityEngine;
 
 namespace BrassSparrow.Scripts.Doll {
     public class Doll {
-        public GameObject Go;
-        public GameObject RigGo;
-        public GameObject PartsGo;
         public DollParts Parts;
 
         public DollConfig ToConfig() {

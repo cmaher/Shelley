@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Serialization;
 
 namespace BrassSparrow.Scripts.Doll {
@@ -8,7 +10,7 @@ namespace BrassSparrow.Scripts.Doll {
     }
 
     [Serializable]
-    public class DollPartsConfig {
+    public class DollPartsConfig : IEnumerable<string> {
         public string head;
         public string eyebrows;
         public string facialHair;
@@ -35,5 +37,38 @@ namespace BrassSparrow.Scripts.Doll {
         public string kneeAttachmentRight;
         public string kneeAttachmentLeft;
         public string extra;
+        
+        public IEnumerator<string> GetEnumerator() {
+            yield return head;
+            yield return eyebrows;
+            yield return facialHair;
+            yield return torso;
+            yield return armUpperRight;
+            yield return armUpperLeft;
+            yield return armLowerRight;
+            yield return armLowerLeft;
+            yield return handRight;
+            yield return handLeft;
+            yield return hips;
+            yield return legRight;
+            yield return legLeft;
+
+            yield return headCovering;
+            yield return hair;
+            yield return headAttachment;
+            yield return backAttachment;
+            yield return shoulderAttachmentRight;
+            yield return shoulderAttachmentLeft;
+            yield return elbowAttachmentRight;
+            yield return elbowAttachmentLeft;
+            yield return hipsAttachment;
+            yield return kneeAttachmentRight;
+            yield return kneeAttachmentLeft;
+            yield return extra;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
+        }
     }
 }

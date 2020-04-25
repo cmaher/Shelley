@@ -62,8 +62,8 @@
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollChoices.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollConfig.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollDesignManager.cs" />
-     <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollManager.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollParts.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Doll\WorkingDoll.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\SceneManager.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyEventTranslator.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PartSelector.cs" />
