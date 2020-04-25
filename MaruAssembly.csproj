@@ -66,6 +66,7 @@
      <Compile Include="Assets\Maru\Scripts\MCore\MaruUtils.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\MessageBus.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\PrefabPoolManager.cs" />
+     <Compile Include="Assets\Maru\Scripts\MUI\UIMesh.cs" />
      <None Include="Assets\Maru\MaruAssembly.asmdef" />
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>

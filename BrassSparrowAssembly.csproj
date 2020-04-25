@@ -58,12 +58,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BrassSparrow\Scratch\Scripts\SimpleCameraController.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollChoices.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollConfig.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollDesignManager.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollManager.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollParts.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\SceneManager.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyEventTranslator.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\PartSelector.cs" />
      <None Include="Assets\BrassSparrow\BrassSparrowAssembly.asmdef" />
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -632,6 +635,10 @@
     <ProjectReference Include="DoozyEngineAssembly.csproj">
       <Project>{2C516105-194A-5FB1-C07A-10325E09993E}</Project>
       <Name>DoozyEngineAssembly</Name>
+    </ProjectReference>
+    <ProjectReference Include="ProceduralUIImageAssembly.csproj">
+      <Project>{2A406884-AB83-E6E9-31A8-2049325C7C1C}</Project>
+      <Name>ProceduralUIImageAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

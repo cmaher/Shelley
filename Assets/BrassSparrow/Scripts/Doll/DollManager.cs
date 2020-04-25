@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BrassSparrow.Scripts.Doll {
     public class DollManager : MonoBehaviour {
-        public static readonly string LocatorKey = "BrassSparrow.Scripts.Doll.DollManager";
+        public const string LocatorKey = "BrassSparrow.Scripts.Doll.DollManager";
 
         public GameObject protoDoll;
 
@@ -90,7 +90,9 @@ namespace BrassSparrow.Scripts.Doll {
             // Clone the part GameObject so as not to interfere with the referenced part
             foreach (var part in newParts) {
                 if (part != null) {
+                    var name = part.Go.name;
                     part.Go = Instantiate(part.Go, parent, false);
+                    part.Go.name = name;
                 }
             }
 

@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using Doozy.Engine;
 using Maru.MCore;
 using UnityEngine;
 using SysRandom = System.Random;
 
 namespace BrassSparrow.Scripts.Doll {
     public class DollDesignManager : MonoBehaviour {
-        public static readonly string LocatorKey = "BrassSparrow.Scripts.Doll.DollDesignManager";
+        public const string LocatorKey = "BrassSparrow.Scripts.Doll.DollDesignManager";
+
+        private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
+                                                        "/Characters_ModularParts_Static";
 
         public GameObject dollContainer;
 
@@ -21,6 +25,7 @@ namespace BrassSparrow.Scripts.Doll {
         private SysRandom random;
         private DeferredEvent<DollManager.EvtOnStarted> dollManagerStarted;
         private Doll doll;
+        private Dictionary<string, GameObject> staticParts;
 
         private void Awake() {
             locator = LocatorProvider.Get();
@@ -28,11 +33,12 @@ namespace BrassSparrow.Scripts.Doll {
             vent = locator.Get(SceneManager.VentKey) as MessageBus;
             random = locator.Get(SceneManager.RandomKey) as SysRandom;
             dollManagerStarted = new DeferredEvent<DollManager.EvtOnStarted>(vent);
+            staticParts = LoadStaticParts();
         }
 
         private IEnumerator Start() {
             dollManager = locator.Get(DollManager.LocatorKey) as DollManager;
-            
+
             yield return dollManagerStarted;
             dollChoices = dollManager.DollChoices;
             doll = dollManager.NewDoll(dollContainer);
@@ -87,6 +93,21 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             return choices[random.Next(choices.Count)];
+        }
+
+        private Dictionary<string, GameObject> LoadStaticParts() {
+            var dict = new Dictionary<string, GameObject>();
+            var prefabs = Resources.LoadAll<GameObject>(StaticPartsDir);
+            // TODO instantiate these here and assign to some out-of-the-way container, or lazy load on UI?
+            foreach (var p in prefabs) {
+                dict[p.name] = p;
+            }
+            return dict;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private string StaticPartsName(string partName) {
+            return $"{partName}_Sattic";
         }
     }
 }

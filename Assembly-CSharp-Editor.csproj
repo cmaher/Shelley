@@ -58,7 +58,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Doozy\Examples\Scripts\Editor\UIButtonAutomatedTextValueEditor.cs" />
      <Compile Include="Assets\Doozy\Integrations\Editor\Playmaker\PlaymakerEventDispatcherEditor.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
@@ -689,6 +688,10 @@
       <Project>{7CB75598-1DD0-24F0-9593-FCFC7B138231}</Project>
       <Name>MaruAssembly</Name>
     </ProjectReference>
+    <ProjectReference Include="ProceduralUIImageAssembly.csproj">
+      <Project>{2A406884-AB83-E6E9-31A8-2049325C7C1C}</Project>
+      <Name>ProceduralUIImageAssembly</Name>
+    </ProjectReference>
     <ProjectReference Include="DoozyEditorAssembly.csproj">
       <Project>{E6E01078-18F7-1EFB-6F06-DCD4E8E59B12}</Project>
       <Name>DoozyEditorAssembly</Name>
@@ -700,6 +703,10 @@
     <ProjectReference Include="DoozyEngineAssembly.csproj">
       <Project>{2C516105-194A-5FB1-C07A-10325E09993E}</Project>
       <Name>DoozyEngineAssembly</Name>
+    </ProjectReference>
+    <ProjectReference Include="DoozyExamplesAssembly.csproj">
+      <Project>{A87991A2-8CA7-7637-BE04-40CECC3A4A49}</Project>
+      <Name>DoozyExamplesAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
