@@ -39,7 +39,7 @@ namespace BrassSparrow.Scripts.UI {
         public void TranslateDoozyEvent(string evt) {
             var sepPos = evt.IndexOf(Sep);
             var prefix = evt.Substring(0, sepPos);
-            var id = evt.Substring(sepPos);
+            var id = evt.Substring(sepPos + 1);
             if (!componentDict.ContainsKey(id)) {
                 Debug.Log($"No GameObject registered for Doozy event {evt}");
                 return;
@@ -49,7 +49,7 @@ namespace BrassSparrow.Scripts.UI {
 
             switch (prefix) {
                 case PartSelectorClickEvent.Prefix:
-                    vent.Trigger(new PartSelectorClickEvent {Component = comp});
+                    vent.Trigger(new PartSelectorClickEvent {PartSelector = comp as PartSelector});
                     break;
                 default:
                     Debug.Log($"No event handler found for Doozy event {evt}");
@@ -84,7 +84,7 @@ namespace BrassSparrow.Scripts.UI {
 
         public struct PartSelectorClickEvent {
             public const string Prefix = "PartSelector-Click";
-            public Component Component;
+            public PartSelector PartSelector;
         }
     }
 }

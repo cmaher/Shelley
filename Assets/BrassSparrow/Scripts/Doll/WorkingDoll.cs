@@ -5,16 +5,18 @@ using UnityEngine;
 namespace BrassSparrow.Scripts.Doll {
     public class WorkingDoll {
         public DollChoices Choices;
+        public readonly Dictionary<string, DollPart> PartsDict;
 
-        public DollConfig Config;
+        public DollConfig Config => config;
+
         private Transform partsRoot;
-        private readonly Dictionary<string, DollPart> partsDict;
         private readonly Dictionary<string, DollHead> headsDict;
         private readonly Dictionary<string, DollHeadCovering> headCoveringsDict;
+        private DollConfig config;
 
         public WorkingDoll(GameObject modularDoll) {
             partsRoot = modularDoll.transform.Find("Modular_Characters");
-            partsDict = new Dictionary<string, DollPart>();
+            PartsDict = new Dictionary<string, DollPart>();
             headsDict = new Dictionary<string, DollHead>();
             headCoveringsDict = new Dictionary<string, DollHeadCovering>();
             Choices = new DollChoices {
@@ -22,42 +24,74 @@ namespace BrassSparrow.Scripts.Doll {
                 Male = BuildGenderedDollChoices("Male"),
                 Female = BuildGenderedDollChoices("Female")
             };
-        }
 
-        public void SetConfig(DollConfig config) {
-            Config = config;
-            
-            foreach (var part in partsDict.Values) {
+            // Disable everything, by default
+            foreach (var part in PartsDict.Values) {
                 part.Go.SetActive(false);
             }
 
-            foreach (var path in Config.parts) {
-                if (path != null) {
-                    partsDict[path].Go.SetActive(true);
-                }
-            }
+            config = null;
         }
-        
+
+        public void SetConfig(DollConfig newConfig) {
+            if (config == null) {
+                foreach (var path in newConfig.parts) {
+                    if (path != null) {
+                        PartsDict[path].Go.SetActive(true);
+                    }
+                }
+            } else {
+                // apply the difference between the old and new config
+                var oldIter = Config.parts.GetEnumerator();
+                var newIter = newConfig.parts.GetEnumerator();
+
+                while (oldIter.MoveNext()) {
+                    newIter.MoveNext();
+                    if (oldIter.Current == null && newIter.Current != null) {
+                        PartsDict[newIter.Current].Go.SetActive(true);
+                    } else if (oldIter.Current != null && newIter.Current == null) {
+                        PartsDict[oldIter.Current].Go.SetActive(false);
+                    } else if (oldIter.Current != null && newIter.Current != null &&
+                               !oldIter.Current.Equals(newIter.Current)) {
+                        PartsDict[oldIter.Current].Go.SetActive(false);
+                        PartsDict[newIter.Current].Go.SetActive(true);
+                    }
+                }
+
+                oldIter.Dispose();
+                newIter.Dispose();
+            }
+
+            config = newConfig;
+        }
+
         private UngenderedDollChoices BuildUngenderedDollChoices() {
             var path = "All_Gender_Parts";
             var ungenderedroot = partsRoot.Find(path);
             return new UngenderedDollChoices {
-                Hair = GetParts("All_01_Hair", ungenderedroot, path),
+                Hair = GetParts("All_01_Hair", DollPartType.Hair, ungenderedroot, path),
                 HeadCovering = GetHeadCoveringParts(ungenderedroot, path),
                 // Currently, only helmet attachments exist, and they look good not on a helmet.
                 // Maybe we want an option to constrain this though?
-                HeadAttachment = GetParts("All_02_Head_Attachment/Helmet", ungenderedroot, path),
-                BackAttachment = GetParts("All_04_Back_Attachment", ungenderedroot, path),
-                ShoulderAttachmentRight = GetParts("All_05_Shoulder_Attachment_Right", ungenderedroot, path),
-                ShoulderAttachmentLeft = GetParts("All_06_Shoulder_Attachment_Left", ungenderedroot, path),
-                ElbowAttachmentRight = GetParts("All_07_Elbow_Attachment_Right", ungenderedroot, path),
-                ElbowAttachmentLeft = GetParts("All_08_Elbow_Attachment_Left", ungenderedroot, path),
-                HipsAttachment = GetParts("All_09_Hips_Attachment", ungenderedroot, path),
+                HeadAttachment = GetParts("All_02_Head_Attachment/Helmet", DollPartType.HeadAttachment, ungenderedroot,
+                    path),
+                BackAttachment = GetParts("All_04_Back_Attachment", DollPartType.BackAttachment, ungenderedroot, path),
+                ShoulderAttachmentRight = GetParts("All_05_Shoulder_Attachment_Right",
+                    DollPartType.ShoulderAttachmentRight, ungenderedroot, path),
+                ShoulderAttachmentLeft = GetParts("All_06_Shoulder_Attachment_Left",
+                    DollPartType.ShoulderAttachmentLeft, ungenderedroot, path),
+                ElbowAttachmentRight = GetParts("All_07_Elbow_Attachment_Right", DollPartType.ElbowAttachmentRight,
+                    ungenderedroot, path),
+                ElbowAttachmentLeft = GetParts("All_08_Elbow_Attachment_Left", DollPartType.ElbowAttachmentLeft,
+                    ungenderedroot, path),
+                HipsAttachment = GetParts("All_09_Hips_Attachment", DollPartType.HipsAttachment, ungenderedroot, path),
                 KneeAttachmentRight =
-                    GetParts("All_10_Knee_Attachement_Right", ungenderedroot, path), // sic "Attachement"
+                    GetParts("All_10_Knee_Attachement_Right", DollPartType.KneeAttachmentRight, ungenderedroot,
+                        path), // sic "Attachement"
                 KneeAttachmentLeft =
-                    GetParts("All_11_Knee_Attachement_Left", ungenderedroot, path), // sic "Attachement"
-                Extra = GetParts("All_12_Extra/Elf_Ear", ungenderedroot, path),
+                    GetParts("All_11_Knee_Attachement_Left", DollPartType.KneeAttachmentLeft, ungenderedroot,
+                        path), // sic "Attachement"
+                Extra = GetParts("All_12_Extra/Elf_Ear", DollPartType.Extra, ungenderedroot, path),
             };
         }
 
@@ -66,37 +100,41 @@ namespace BrassSparrow.Scripts.Doll {
             var genderRoot = partsRoot.Find(path);
             return new GenderedDollChoices {
                 Head = GetHeadParts(genderRoot, path, genderPrefix),
-                Eyebrows = GetGenderedParts("01_Eyebrows", genderRoot, path, genderPrefix),
-                FacialHair = GetGenderedParts("02_FacialHair", genderRoot, path, genderPrefix),
-                Torso = GetGenderedParts("03_Torso", genderRoot, path, genderPrefix),
-                ArmUpperRight = GetGenderedParts("04_Arm_Upper_Right", genderRoot, path, genderPrefix),
-                ArmUpperLeft = GetGenderedParts("05_Arm_Upper_Left", genderRoot, path, genderPrefix),
-                ArmLowerRight = GetGenderedParts("06_Arm_Lower_Right", genderRoot, path, genderPrefix),
-                ArmLowerLeft = GetGenderedParts("07_Arm_Lower_Left", genderRoot, path, genderPrefix),
-                HandRight = GetGenderedParts("08_Hand_Right", genderRoot, path, genderPrefix),
-                HandLeft = GetGenderedParts("09_Hand_Left", genderRoot, path, genderPrefix),
-                Hips = GetGenderedParts("10_Hips", genderRoot, path, genderPrefix),
-                LegRight = GetGenderedParts("11_Leg_Right", genderRoot, path, genderPrefix),
-                LegLeft = GetGenderedParts("12_Leg_Left", genderRoot, path, genderPrefix),
+                Eyebrows = GetGenderedParts("01_Eyebrows", DollPartType.Eyebrows, genderRoot, path, genderPrefix),
+                FacialHair = GetGenderedParts("02_FacialHair", DollPartType.FacialHair, genderRoot, path, genderPrefix),
+                Torso = GetGenderedParts("03_Torso", DollPartType.Torso, genderRoot, path, genderPrefix),
+                ArmUpperRight = GetGenderedParts("04_Arm_Upper_Right", DollPartType.ArmUpperRight, genderRoot, path,
+                    genderPrefix),
+                ArmUpperLeft = GetGenderedParts("05_Arm_Upper_Left", DollPartType.ArmUpperLeft, genderRoot, path,
+                    genderPrefix),
+                ArmLowerRight = GetGenderedParts("06_Arm_Lower_Right", DollPartType.ArmLowerRight, genderRoot, path,
+                    genderPrefix),
+                ArmLowerLeft = GetGenderedParts("07_Arm_Lower_Left", DollPartType.ArmLowerLeft, genderRoot, path,
+                    genderPrefix),
+                HandRight = GetGenderedParts("08_Hand_Right", DollPartType.HandRight, genderRoot, path, genderPrefix),
+                HandLeft = GetGenderedParts("09_Hand_Left", DollPartType.HandLeft, genderRoot, path, genderPrefix),
+                Hips = GetGenderedParts("10_Hips", DollPartType.Hips, genderRoot, path, genderPrefix),
+                LegRight = GetGenderedParts("11_Leg_Right", DollPartType.LegRight, genderRoot, path, genderPrefix),
+                LegLeft = GetGenderedParts("12_Leg_Left", DollPartType.LegLeft, genderRoot, path, genderPrefix),
             };
         }
 
-        private List<DollPart> GetParts(string branchName, Transform root, string rootPath) {
+        private List<DollPart> GetParts(string branchName, DollPartType type, Transform root, string rootPath) {
             var branch = root.Find(branchName);
             var choices = new List<DollPart>(branch.childCount);
             foreach (Transform child in branch) {
                 var path = $"{rootPath}/{branchName}/{child.transform.name}";
-                choices.Add(new DollPart(child.gameObject, path));
+                choices.Add(new DollPart(child.gameObject, path, type));
             }
 
-            IndexParts(partsDict, choices);
+            IndexParts(PartsDict, choices);
             return choices;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private List<DollPart> GetGenderedParts(string branchName, Transform root, string rootPath,
-            string genderPrefix) {
-            return GetParts($"{genderPrefix}_{branchName}", root, rootPath);
+        private List<DollPart> GetGenderedParts(string branchName, DollPartType type,
+            Transform root, string rootPath, string genderPrefix) {
+            return GetParts($"{genderPrefix}_{branchName}", type, root, rootPath);
         }
 
         private List<DollHead> GetHeadParts(Transform root, string rootPath, string genderPrefix) {
@@ -122,7 +160,7 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             IndexParts(headsDict, choices);
-            IndexParts(partsDict, choices);
+            IndexParts(PartsDict, choices);
             return choices;
         }
 
@@ -158,7 +196,7 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             IndexParts(headCoveringsDict, choices);
-            IndexParts(partsDict, choices);
+            IndexParts(PartsDict, choices);
             return choices;
         }
 

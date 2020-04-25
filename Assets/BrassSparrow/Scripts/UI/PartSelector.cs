@@ -1,4 +1,5 @@
 using System;
+using BrassSparrow.Scripts.Doll;
 using Doozy.Engine.UI;
 using Maru.MCore;
 using Maru.Scripts.MUI;
@@ -10,15 +11,18 @@ namespace BrassSparrow.Scripts.UI {
         public float meshDistance;
         public Color unselectedColor;
         public Color selectedColor;
-        public GameObject mesh;
+        
+        public DollPart DollPart;
+        public GameObject masterCanvas;
         public float meshScale;
-
+        
+        private GameObject mesh;
         private IMessageBus vent;
         private UIButton doozyButton;
         private ProceduralImage box;
         private UIMesh uiMesh;
 
-        public void Awake() {
+        private void Awake() {
             var locator = LocatorProvider.Get();
             vent = locator.Get(SceneManager.VentKey) as IMessageBus;
             doozyButton = GetComponent<UIButton>();
@@ -26,19 +30,29 @@ namespace BrassSparrow.Scripts.UI {
             var evtKey = DoozyEvents.DoozyEventKey(DoozyEvents.PartSelectorClickEvent.Prefix, this);
             doozyButton.OnClick.OnTrigger.GameEvents.Add(evtKey);
 
-            // Configure mesh
-            mesh.transform.parent = transform;
-            uiMesh = mesh.AddComponent<UIMesh>();
-            uiMesh.unscaledDistance = meshDistance;
-
             box = GetComponent<ProceduralImage>();
         }
 
-        public void Start() {
-            vent.Trigger(new RegisterUiComponentEvent {Component = this});
+        public void SetDollPart(DollPart part) {
+            DollPart = part;
+            mesh = Instantiate(part.Go, transform);
         }
 
-        public void OnDestroy() {
+        private void Start() {
+            vent.Trigger(new RegisterUiComponentEvent {Component = this});
+            
+            // Configure mesh
+            mesh.transform.parent = transform;
+            mesh.layer = gameObject.layer;
+            mesh.transform.localRotation = new Quaternion(0, 180, 0, 0);
+            
+            uiMesh = mesh.AddComponent<UIMesh>();
+            uiMesh.canvas = masterCanvas;
+            uiMesh.unscaledDistance = meshDistance;
+            mesh.transform.localScale = new Vector3(meshScale, meshScale, meshScale);
+        }
+
+        private void OnDestroy() {
             vent.Trigger(new UnregisterUiComponentEvent {Component = this});
         }
 

@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using BrassSparrow.Scripts.UI;
 using Doozy.Engine;
 using Maru.MCore;
 using UnityEngine;
@@ -17,6 +19,9 @@ namespace BrassSparrow.Scripts.Doll {
 
         public GameObject protoDoll;
         public GameObject dollContainer;
+        public GameObject choicesContainer;
+        public GameObject partSelector;
+        public GameObject masterCanvas;
 
         private ILocator locator;
         private MessageBus vent;
@@ -25,23 +30,40 @@ namespace BrassSparrow.Scripts.Doll {
         private SysRandom random;
         private GameObject dollGo;
         private WorkingDoll doll;
-        private Dictionary<string, GameObject> staticParts;
+        private Dictionary<string, DollPart> staticParts;
 
         private void Awake() {
             locator = LocatorProvider.Get();
             locator.Set(LocatorKey, this);
             vent = locator.Get(SceneManager.VentKey) as MessageBus;
             random = locator.Get(SceneManager.RandomKey) as SysRandom;
-            staticParts = LoadStaticParts();
+            vent.On<DoozyEvents.PartSelectorClickEvent>(PartSelected);
         }
 
         private void Start() {
             dollGo = Instantiate(protoDoll, dollContainer.transform);
             doll = new WorkingDoll(dollGo);
+            staticParts = LoadStaticParts();
+            
             var dollParts = RandomDoll();
             doll.SetConfig(dollParts);
+            DisplayChoices(doll.Choices.Male.Head);
             // SaveDoll();
             // LoadDoll();
+        }
+
+        private void DisplayChoices<T>(List<T> choices) where T: DollPart {
+            foreach (Transform child in choicesContainer.transform) {
+                Destroy(child.gameObject);
+            }
+
+            foreach (var choice in choices) {
+                var selectorUI = Instantiate(partSelector, choicesContainer.transform);
+                var selector = selectorUI.GetComponent<PartSelector>();
+                selector.masterCanvas = masterCanvas;
+                var part = staticParts[choice.Path];
+                selector.SetDollPart(part);
+            }
         }
 
         private void SaveDoll() {
@@ -91,19 +113,107 @@ namespace BrassSparrow.Scripts.Doll {
             return choices[random.Next(choices.Count)].Path;
         }
 
-        private Dictionary<string, GameObject> LoadStaticParts() {
-            var dict = new Dictionary<string, GameObject>();
+        private Dictionary<string, DollPart> LoadStaticParts() {
+            var namesToParts = new Dictionary<string, DollPart>();
+            foreach (var part in doll.PartsDict.Values) {
+                namesToParts[part.Go.name] = part;
+            }
+            
+            var dict = new Dictionary<string, DollPart>();
             var prefabs = Resources.LoadAll<GameObject>(StaticPartsDir);
             // TODO instantiate these here and assign to some out-of-the-way container, or lazy load on UI?
             foreach (var p in prefabs) {
-                dict[p.name] = p;
+                var partName = p.name.Replace("_Static", "");
+                var part = namesToParts[partName];
+                dict[part.Path] = new DollPart(p, part.Path, part.Type);
             }
             return dict;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private string StaticPartsName(string partName) {
-            return $"{partName}_Sattic";
+        private void PartSelected(DoozyEvents.PartSelectorClickEvent evt) {
+            var part = evt.PartSelector.DollPart;
+            var newConfig = doll.Config.Clone();
+            var partConfig = newConfig.parts;
+
+            switch (part.Type) {
+                case DollPartType.Head:
+                    partConfig.head = part.Path;
+                    break;
+                case DollPartType.Eyebrows:
+                    partConfig.eyebrows = part.Path;
+                    break;
+                case DollPartType.FacialHair:
+                    partConfig.facialHair = part.Path;
+                    break;
+                case DollPartType.Torso:
+                    partConfig.torso = part.Path;
+                    break;
+                case DollPartType.ArmUpperRight:
+                    partConfig.armUpperRight = part.Path;
+                    break;
+                case DollPartType.ArmUpperLeft:
+                    partConfig.armUpperLeft = part.Path;
+                    break;
+                case DollPartType.ArmLowerRight:
+                    partConfig.armLowerRight = part.Path;
+                    break;
+                case DollPartType.ArmLowerLeft:
+                    partConfig.armLowerLeft = part.Path;
+                    break;
+                case DollPartType.HandRight:
+                    partConfig.handRight = part.Path;
+                    break;
+                case DollPartType.HandLeft:
+                    partConfig.handLeft = part.Path;
+                    break;
+                case DollPartType.Hips:
+                    partConfig.hips = part.Path;
+                    break;
+                case DollPartType.LegRight:
+                    partConfig.legRight = part.Path;
+                    break;
+                case DollPartType.LegLeft:
+                    partConfig.legLeft = part.Path;
+                    break;
+                case DollPartType.HeadCovering:
+                    partConfig.headCovering = part.Path;
+                    break;
+                case DollPartType.Hair:
+                    partConfig.hair = part.Path;
+                    break;
+                case DollPartType.HeadAttachment:
+                    partConfig.headAttachment = part.Path;
+                    break;
+                case DollPartType.BackAttachment:
+                    partConfig.backAttachment = part.Path;
+                    break;
+                case DollPartType.ShoulderAttachmentRight:
+                    partConfig.shoulderAttachmentRight = part.Path;
+                    break;
+                case DollPartType.ShoulderAttachmentLeft:
+                    partConfig.shoulderAttachmentLeft = part.Path;
+                    break;
+                case DollPartType.ElbowAttachmentRight:
+                    partConfig.elbowAttachmentRight = part.Path;
+                    break;
+                case DollPartType.ElbowAttachmentLeft:
+                    partConfig.elbowAttachmentLeft = part.Path;
+                    break;
+                case DollPartType.HipsAttachment:
+                    partConfig.hipsAttachment = part.Path;
+                    break;
+                case DollPartType.KneeAttachmentRight:
+                    partConfig.kneeAttachmentRight = part.Path;
+                    break;
+                case DollPartType.KneeAttachmentLeft:
+                    partConfig.kneeAttachmentLeft = part.Path;
+                    break;
+                case DollPartType.Extra:
+                    partConfig.extra = part.Path;
+                    break;
+            }
+            
+            doll.SetConfig(newConfig);
         }
     }
 }

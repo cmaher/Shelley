@@ -972,8 +972,7 @@ MonoBehaviour:
       Event:
         m_PersistentCalls:
           m_Calls: []
-      GameEvents:
-      - PartSelector:Click
+      GameEvents: []
       SoundData:
         SoundSource: 0
         DatabaseName: General
@@ -2414,7 +2413,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  borderWidth: 15
+  borderWidth: 8
   falloffDistance: 1
 --- !u!114 &963491296263593466
 MonoBehaviour:
@@ -2445,4 +2444,5 @@ MonoBehaviour:
   unselectedColor: {r: 0.7372549, g: 0.20392159, b: 0.20392159, a: 0}
   selectedColor: {r: 0.9339623, g: 0.8856862, b: 0.057271298, a: 0}
   mesh: {fileID: 0}
-  meshScale: 4
+  masterCanvas: {fileID: 0}
+  meshScale: 3

@@ -7,6 +7,12 @@ namespace BrassSparrow.Scripts.Doll {
     [Serializable]
     public class DollConfig {
         public DollPartsConfig parts;
+
+        public DollConfig Clone() {
+            return new DollConfig {
+                parts = parts.Clone()
+            };
+        }
     }
 
     [Serializable]
@@ -69,6 +75,10 @@ namespace BrassSparrow.Scripts.Doll {
 
         IEnumerator IEnumerable.GetEnumerator() {
             return GetEnumerator();
+        }
+
+        public DollPartsConfig Clone() {
+            return MemberwiseClone() as DollPartsConfig;
         }
     }
 }
