@@ -65,6 +65,10 @@
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollParts.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\WorkingDoll.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\SceneManager.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\AdjustableUIManager.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\AdjustableUIManagerBehavior.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\ExpandableUI.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\ScalableUI.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyEventTranslator.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PartSelector.cs" />
      <None Include="Assets\BrassSparrow\BrassSparrowAssembly.asmdef" />
