@@ -121,101 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &57926909
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 57926910}
-  - component: {fileID: 57926911}
-  m_Layer: 0
-  m_Name: DollDesignManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &57926910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57926909}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2103406009}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &57926911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57926909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75b7199b917ea45438dc99c690f19499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  protoDoll: {fileID: 1588895830433058, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
-  dollContainer: {fileID: 1486347970}
-  choicesContainer: {fileID: 326505740}
-  partSelector: {fileID: 963491296263593470, guid: b7a150ee8a61cf14cacef3c72634c229,
-    type: 3}
-  masterCanvas: {fileID: 1502246782}
---- !u!1 &297057066
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 297057067}
-  - component: {fileID: 297057068}
-  m_Layer: 0
-  m_Name: ScalableUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &297057067
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297057066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2103406009}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &297057068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297057066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9488ba76003458f8122c04079c22764, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scale: 1
-  expand: {x: 0, y: 0}
-  canvas: {fileID: 1502246786}
 --- !u!1 &301934596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +973,8 @@ GameObject:
   - component: {fileID: 672394518}
   - component: {fileID: 672394519}
   - component: {fileID: 672394520}
+  - component: {fileID: 672394522}
+  - component: {fileID: 672394521}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -1119,6 +1026,39 @@ MonoBehaviour:
       m_Calls: []
   GameEvent: 
   ListenForAllGameEvents: 1
+--- !u!114 &672394521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672394517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9488ba76003458f8122c04079c22764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
+  expand: {x: 0, y: 0}
+  canvas: {fileID: 1502246786}
+--- !u!114 &672394522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672394517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b7199b917ea45438dc99c690f19499, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  protoDoll: {fileID: 1588895830433058, guid: ddc4cd0622acc4847817cc15268b4a19, type: 3}
+  dollContainer: {fileID: 1486347970}
+  choicesContainer: {fileID: 326505740}
+  partSelector: {fileID: 963491296263593470, guid: b7a150ee8a61cf14cacef3c72634c229,
+    type: 3}
+  masterCanvas: {fileID: 1502246782}
 --- !u!1 &924276694
 GameObject:
   m_ObjectHideFlags: 0
@@ -4355,8 +4295,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 672394518}
-  - {fileID: 57926910}
-  - {fileID: 297057067}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
