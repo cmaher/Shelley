@@ -15,13 +15,13 @@ namespace BrassSparrow.Scripts.Doll {
         public const string LocatorKey = "BrassSparrow.Scripts.Doll.DollDesignManager";
 
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
-                                                        "/Characters_ModularParts_Static";
+                                              "/Characters_ModularParts_Static";
 
         public GameObject protoDoll;
         public GameObject dollContainer;
-        public GameObject choicesContainer;
-        public GameObject partSelector;
         public GameObject masterCanvas;
+        public string choiceContainerKey;
+        public GameObject partSelector;
 
         private ILocator locator;
         private MessageBus vent;
@@ -37,14 +37,14 @@ namespace BrassSparrow.Scripts.Doll {
             locator.Set(LocatorKey, this);
             vent = locator.Get(SceneManager.VentKey) as MessageBus;
             random = locator.Get(SceneManager.RandomKey) as SysRandom;
-            vent.On<DoozyEvents.PartSelectorClickEvent>(PartSelected);
+            vent.On<PartSelectorClickEvent>(PartSelected);
         }
 
         private void Start() {
             dollGo = Instantiate(protoDoll, dollContainer.transform);
             doll = new WorkingDoll(dollGo);
             staticParts = LoadStaticParts();
-            
+
             var dollParts = RandomDoll();
             doll.SetConfig(dollParts);
             DisplayChoices(doll.Choices.Male.Head);
@@ -52,18 +52,18 @@ namespace BrassSparrow.Scripts.Doll {
             // LoadDoll();
         }
 
-        private void DisplayChoices<T>(List<T> choices) where T: DollPart {
-            foreach (Transform child in choicesContainer.transform) {
-                Destroy(child.gameObject);
-            }
-
+        private void DisplayChoices<T>(IReadOnlyCollection<T> choices) where T : DollPart {
+            var choiceGos = new List<GameObject>(choices.Count);
             foreach (var choice in choices) {
-                var selectorUI = Instantiate(partSelector, choicesContainer.transform);
+                var selectorUI = Instantiate(partSelector);
                 var selector = selectorUI.GetComponent<PartSelector>();
                 selector.masterCanvas = masterCanvas;
                 var part = staticParts[choice.Path];
                 selector.SetDollPart(part);
+                choiceGos.Add(selectorUI);
             }
+
+            vent.Trigger(new SetItemsEvent {Items = choiceGos, Key = choiceContainerKey});
         }
 
         private void SaveDoll() {
@@ -118,19 +118,19 @@ namespace BrassSparrow.Scripts.Doll {
             foreach (var part in doll.PartsDict.Values) {
                 namesToParts[part.Go.name] = part;
             }
-            
+
             var dict = new Dictionary<string, DollPart>();
             var prefabs = Resources.LoadAll<GameObject>(StaticPartsDir);
-            // TODO instantiate these here and assign to some out-of-the-way container, or lazy load on UI?
             foreach (var p in prefabs) {
                 var partName = p.name.Replace("_Static", "");
                 var part = namesToParts[partName];
                 dict[part.Path] = new DollPart(p, part.Path, part.Type);
             }
+
             return dict;
         }
 
-        private void PartSelected(DoozyEvents.PartSelectorClickEvent evt) {
+        private void PartSelected(PartSelectorClickEvent evt) {
             var part = evt.PartSelector.DollPart;
             var newConfig = doll.Config.Clone();
             var partConfig = newConfig.parts;
@@ -212,7 +212,7 @@ namespace BrassSparrow.Scripts.Doll {
                     partConfig.extra = part.Path;
                     break;
             }
-            
+
             doll.SetConfig(newConfig);
         }
     }

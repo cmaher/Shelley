@@ -7,20 +7,29 @@ namespace Maru.MCore {
 		 * Returns an action that tears down the listener.
 		 */
         Action On<TEvent>(Action<TEvent> handler);
-        
+
+        Action On<TEvent>(string key, Action<TEvent> handler) where TEvent : IKeyedEvent;
+
         /**
          * Subscribe to an action, and remove the handler after one call
          */
         Action Once<TEvent>(Action<TEvent> handler);
+        
+        Action Once<TEvent>(string key, Action<TEvent> handler) where TEvent: IKeyedEvent;
 
         /**
 		 * Tear down the provided listener, ensuring it won't be called again
 		 */
         void Unsubscribe<TEvent>(Action<TEvent> handler);
 
+        void Unsubscribe<TEvent>(string key, Action<TEvent> handler) where TEvent : IKeyedEvent;
         /**
 		 * Send the message to all handlers registered for events of type TEvent
 		 */
         void Trigger<TEvent>(TEvent message);
+    }
+
+    public interface IKeyedEvent {
+        string GetEventKey();
     }
 }

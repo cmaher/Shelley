@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BrassSparrow\Scratch\Scripts\SimpleCameraController.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Core\BrassSparrowBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollChoices.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollConfig.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollDesignManager.cs" />
@@ -69,7 +70,10 @@
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\AdjustableUIManagerBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\ExpandableUI.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\ScalableUI.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyEventTranslator.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\PagingCollectionView.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\PagingController.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PartSelector.cs" />
      <None Include="Assets\BrassSparrow\BrassSparrowAssembly.asmdef" />
  <Reference Include="UnityEditor.UI">

@@ -11,11 +11,10 @@ namespace BrassSparrow.Scripts.UI {
     public class DoozyEventTranslator {
         // Use string for id, because that's the form the id will take in a game object
         private Dictionary<string, Component> componentDict;
-        
+
         private IMessageBus vent;
         private GameEventListener doozyListener;
-        private Action offRegister;
-        private Action offDeregister;
+        private Action[] unregister;
 
         public DoozyEventTranslator(IMessageBus vent, GameEventListener doozyListener) {
             componentDict = new Dictionary<string, Component>();
@@ -24,11 +23,18 @@ namespace BrassSparrow.Scripts.UI {
         }
 
         public void ListenAndTranslate() {
-            offRegister = vent.On<RegisterUiComponentEvent>(evt => {
+            if (unregister != null) {
+                Debug.LogError("Cannot call listen more than once");
+                return;
+            }
+
+            var count = 0;
+            unregister = new Action[2];
+            unregister[count++] = vent.On<RegisterUiComponentEvent>(evt => {
                 var id = evt.Component.GetInstanceID().ToString();
                 componentDict[id] = evt.Component;
             });
-            offDeregister = vent.On<UnregisterUiComponentEvent>(evt => {
+            unregister[count++] = vent.On<UnregisterUiComponentEvent>(evt => {
                 var id = evt.Component.GetInstanceID().ToString();
                 componentDict.Remove(id);
             });
@@ -38,8 +44,17 @@ namespace BrassSparrow.Scripts.UI {
 
         public void TranslateDoozyEvent(string evt) {
             var sepPos = evt.IndexOf(Sep);
+            var sepPos2 = evt.IndexOf(Sep, sepPos + 1);
             var prefix = evt.Substring(0, sepPos);
-            var id = evt.Substring(sepPos + 1);
+            string id, key;
+            if (sepPos2 < 0) {
+                id = evt.Substring(sepPos + 1);
+            } else {
+                var idLen = sepPos2 - sepPos - 1;
+                id = evt.Substring(sepPos + 1, idLen);
+                key = evt.Substring(sepPos2 + 1);
+            }
+
             if (!componentDict.ContainsKey(id)) {
                 Debug.Log($"No GameObject registered for Doozy event {evt}");
                 return;
@@ -51,6 +66,9 @@ namespace BrassSparrow.Scripts.UI {
                 case PartSelectorClickEvent.Prefix:
                     vent.Trigger(new PartSelectorClickEvent {PartSelector = comp as PartSelector});
                     break;
+                case DoozySelfEvent.Prefix:
+                    vent.Trigger(new DoozySelfEvent(comp));
+                    break;
                 default:
                     Debug.Log($"No event handler found for Doozy event {evt}");
                     break;
@@ -59,19 +77,51 @@ namespace BrassSparrow.Scripts.UI {
 
         public void Shutdown() {
             // remove these first in case another thread registers a Go before we clean the dict
-            offRegister();
-            offDeregister();
+            foreach (var action in unregister) {
+                action();
+            }
+
             componentDict = null;
             doozyListener.Event.RemoveListener(TranslateDoozyEvent);
         }
     }
-    
+
     public class RegisterUiComponentEvent {
         public Component Component;
     }
 
     public class UnregisterUiComponentEvent {
         public Component Component;
+    }
+
+    public struct PartSelectorClickEvent : IKeyedEvent {
+        public const string Prefix = "PartSelector-Click";
+        public string key;
+        public PartSelector PartSelector;
+
+        public string GetEventKey() {
+            return key;
+        }
+    }
+
+    // Useful for doozy components that want to react tho their own events
+    // I can't believe UI events are this insane
+    public class DoozySelfEvent : IKeyedEvent {
+        public const string Prefix = "DoozySelf";
+        private string compId;
+
+        public DoozySelfEvent(Component comp) {
+            compId = comp.GetInstanceID().ToString();
+        }
+
+        public string GetEventKey() {
+            return compId;
+        }
+
+        public static string DoozyEventKey(Component comp) {
+            var compId = comp.GetInstanceID().ToString();
+            return DoozyEvents.DoozyEventKey(Prefix, compId, compId);
+        }
     }
 
     public class DoozyEvents {
@@ -82,9 +132,14 @@ namespace BrassSparrow.Scripts.UI {
             return $"{prefix}:{comp.GetInstanceID().ToString()}";
         }
 
-        public struct PartSelectorClickEvent {
-            public const string Prefix = "PartSelector-Click";
-            public PartSelector PartSelector;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string DoozyEventKey(string prefix, Component comp, string key) {
+            return $"{prefix}:{comp.GetInstanceID().ToString()}:{key}";
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string DoozyEventKey(string prefix, string compId, string key) {
+            return $"{prefix}:{compId}:{key}";
         }
     }
 }
