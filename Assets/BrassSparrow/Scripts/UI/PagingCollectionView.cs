@@ -4,6 +4,7 @@ using Maru.MCore;
 using UnityEngine;
 
 namespace BrassSparrow.Scripts.UI {
+    [DisallowMultipleComponent]
     public class PagingCollectionView : BrassSparrowBehavior {
         public int itemsPerPage; // Assumed to have some type of layout
         public int currentPage = 0;
@@ -13,9 +14,7 @@ namespace BrassSparrow.Scripts.UI {
         private List<List<GameObject>> pagedItems;
         private int lastPage;
 
-        protected override int EventCapacity() {
-            return 2;
-        }
+        protected override int EventCapacity => 2;
 
         protected override void Awake() {
             base.Awake();
@@ -33,6 +32,8 @@ namespace BrassSparrow.Scripts.UI {
                 return;
             }
 
+            currentPage = 0;
+            
             if (items != null) {
                 foreach (var item in items) {
                     Destroy(item);
@@ -57,6 +58,9 @@ namespace BrassSparrow.Scripts.UI {
             }
         }
 
+        /*
+         * TODO pagination can be made nicer with UI views and animation
+         */
         private void Paginate(PaginationEvent evt) {
             currentPage = lastPage + evt.AdvancePages;
             var maxPage = pagedItems.Count - 1;

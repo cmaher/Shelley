@@ -30,11 +30,11 @@ namespace BrassSparrow.Scripts.UI {
 
             var count = 0;
             unregister = new Action[2];
-            unregister[count++] = vent.On<RegisterUiComponentEvent>(evt => {
+            unregister[count++] = vent.On<RegisterUIComponentEvent>(evt => {
                 var id = evt.Component.GetInstanceID().ToString();
                 componentDict[id] = evt.Component;
             });
-            unregister[count++] = vent.On<UnregisterUiComponentEvent>(evt => {
+            unregister[count++] = vent.On<UnregisterUIComponentEvent>(evt => {
                 var id = evt.Component.GetInstanceID().ToString();
                 componentDict.Remove(id);
             });
@@ -63,8 +63,8 @@ namespace BrassSparrow.Scripts.UI {
             var comp = componentDict[id];
 
             switch (prefix) {
-                case PartSelectorClickEvent.Prefix:
-                    vent.Trigger(new PartSelectorClickEvent {PartSelector = comp as PartSelector});
+                case PartSelectedEvent.Prefix:
+                    vent.Trigger(new PartSelectedEvent {PartSelector = comp as PartSelector});
                     break;
                 case DoozySelfEvent.Prefix:
                     vent.Trigger(new DoozySelfEvent(comp));
@@ -86,21 +86,30 @@ namespace BrassSparrow.Scripts.UI {
         }
     }
 
-    public class RegisterUiComponentEvent {
+    public class RegisterUIComponentEvent {
         public Component Component;
     }
 
-    public class UnregisterUiComponentEvent {
+    public class UnregisterUIComponentEvent {
         public Component Component;
     }
 
-    public struct PartSelectorClickEvent : IKeyedEvent {
-        public const string Prefix = "PartSelector-Click";
-        public string key;
+    public struct PartSelectedEvent : IKeyedEvent {
+        public const string Prefix = "PartSelector";
+        public string Key;
         public PartSelector PartSelector;
 
         public string GetEventKey() {
-            return key;
+            return Key;
+        }
+    }
+
+    public struct UIComponentEvent : IKeyedEvent {
+        public string Key;
+        public Component Component;
+        
+        public string GetEventKey() {
+            return Key;
         }
     }
 
@@ -125,21 +134,21 @@ namespace BrassSparrow.Scripts.UI {
     }
 
     public class DoozyEvents {
-        public const string Sep = ":";
+        public const string Sep = "|";
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string DoozyEventKey(string prefix, Component comp) {
-            return $"{prefix}:{comp.GetInstanceID().ToString()}";
+            return $"{prefix}{Sep}{comp.GetInstanceID().ToString()}";
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string DoozyEventKey(string prefix, Component comp, string key) {
-            return $"{prefix}:{comp.GetInstanceID().ToString()}:{key}";
+            return $"{prefix}{Sep}{comp.GetInstanceID().ToString()}{Sep}{key}";
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string DoozyEventKey(string prefix, string compId, string key) {
-            return $"{prefix}:{compId}:{key}";
+            return $"{prefix}{Sep}{compId}{Sep}{key}";
         }
     }
 }

@@ -10,15 +10,11 @@ namespace BrassSparrow.Scripts.Doll {
         public DollConfig Config => config;
 
         private Transform partsRoot;
-        private readonly Dictionary<string, DollHead> headsDict;
-        private readonly Dictionary<string, DollHeadCovering> headCoveringsDict;
         private DollConfig config;
 
         public WorkingDoll(GameObject modularDoll) {
             partsRoot = modularDoll.transform.Find("Modular_Characters");
             PartsDict = new Dictionary<string, DollPart>();
-            headsDict = new Dictionary<string, DollHead>();
-            headCoveringsDict = new Dictionary<string, DollHeadCovering>();
             Choices = new DollChoices {
                 Ungendered = BuildUngenderedDollChoices(),
                 Male = BuildGenderedDollChoices("Male"),
@@ -137,7 +133,7 @@ namespace BrassSparrow.Scripts.Doll {
             return GetParts($"{genderPrefix}_{branchName}", type, root, rootPath);
         }
 
-        private List<DollHead> GetHeadParts(Transform root, string rootPath, string genderPrefix) {
+        private List<DollPart> GetHeadParts(Transform root, string rootPath, string genderPrefix) {
             var headPath = $"{genderPrefix}_00_Head";
             var allElementsPath = $"{genderPrefix}_Head_All_Elements";
             var noElementsPath = $"{genderPrefix}_Head_No_Elements";
@@ -146,25 +142,24 @@ namespace BrassSparrow.Scripts.Doll {
             var allElements = headBranch.Find(allElementsPath);
             var noElements = headBranch.Find(noElementsPath);
 
-            var choices = new List<DollHead>(allElements.childCount + noElements.childCount);
+            var choices = new List<DollPart>(allElements.childCount + noElements.childCount);
             foreach (Transform child in allElements) {
                 var childGo = child.gameObject;
                 var path = $"{rootPath}/{headPath}/{allElementsPath}/{childGo.name}";
-                choices.Add(new DollHead(childGo, path, true));
+                choices.Add(new DollPart(childGo, path, DollPartType.Head, true));
             }
 
             foreach (Transform child in noElements) {
                 var childGo = child.gameObject;
                 var path = $"{rootPath}/{headPath}/{noElementsPath}/{childGo.name}";
-                choices.Add(new DollHead(childGo, path, false));
+                choices.Add(new DollPart(childGo, path, DollPartType.Head, false));
             }
 
-            IndexParts(headsDict, choices);
             IndexParts(PartsDict, choices);
             return choices;
         }
 
-        private List<DollHeadCovering> GetHeadCoveringParts(Transform root, string rootPath) {
+        private List<DollPart> GetHeadCoveringParts(Transform root, string rootPath) {
             var headCoveringPath = "All_00_HeadCoverings";
             var allHairPath = "HeadCoverings_Base_Hair";
             var noFacialPath = "HeadCoverings_No_FacialHair";
@@ -176,26 +171,25 @@ namespace BrassSparrow.Scripts.Doll {
             var noHairRoot = headCoveringRoot.Find(noHairPath);
 
             var choices =
-                new List<DollHeadCovering>(allHairRoot.childCount + noFacialRoot.childCount + noHairRoot.childCount);
+                new List<DollPart>(allHairRoot.childCount + noFacialRoot.childCount + noHairRoot.childCount);
             foreach (Transform child in allHairRoot) {
                 var go = child.gameObject;
                 var path = $"{rootPath}/{headCoveringPath}/{allHairPath}/{go.name}";
-                choices.Add(new DollHeadCovering(go, path, true, true));
+                choices.Add(new DollPart(go, path, DollPartType.HeadCovering, true, true));
             }
 
             foreach (Transform child in noFacialRoot) {
                 var go = child.gameObject;
                 var path = $"{rootPath}/{headCoveringPath}/{noFacialPath}/{go.name}";
-                choices.Add(new DollHeadCovering(go, path, true, false));
+                choices.Add(new DollPart(go, path, DollPartType.HeadCovering, true, false));
             }
 
             foreach (Transform child in noHairRoot) {
                 var go = child.gameObject;
                 var path = $"{rootPath}/{headCoveringPath}/{noHairPath}/{go.name}";
-                choices.Add(new DollHeadCovering(go, path, false, true));
+                choices.Add(new DollPart(go, path, DollPartType.HeadCovering, false, true));
             }
 
-            IndexParts(headCoveringsDict, choices);
             IndexParts(PartsDict, choices);
             return choices;
         }

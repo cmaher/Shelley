@@ -43,6 +43,86 @@ namespace BrassSparrow.Scripts.Doll {
         public string kneeAttachmentRight;
         public string kneeAttachmentLeft;
         public string extra;
+
+        public void Set(DollPartType type, string path) {
+            switch (type) {
+                case DollPartType.Head:
+                    head = path;
+                    break;
+                case DollPartType.Eyebrows:
+                    eyebrows = path;
+                    break;
+                case DollPartType.FacialHair:
+                    facialHair = path;
+                    break;
+                case DollPartType.Torso:
+                    torso = path;
+                    break;
+                case DollPartType.ArmUpperRight:
+                    armUpperRight = path;
+                    break;
+                case DollPartType.ArmUpperLeft:
+                    armUpperLeft = path;
+                    break;
+                case DollPartType.ArmLowerRight:
+                    armLowerRight = path;
+                    break;
+                case DollPartType.ArmLowerLeft:
+                    armLowerLeft = path;
+                    break;
+                case DollPartType.HandRight:
+                    handRight = path;
+                    break;
+                case DollPartType.HandLeft:
+                    handLeft = path;
+                    break;
+                case DollPartType.Hips:
+                    hips = path;
+                    break;
+                case DollPartType.LegRight:
+                    legRight =path;
+                    break;
+                case DollPartType.LegLeft:
+                    legLeft = path;
+                    break;
+                case DollPartType.HeadCovering:
+                    headCovering = path;
+                    break;
+                case DollPartType.Hair:
+                    hair = path;
+                    break;
+                case DollPartType.HeadAttachment:
+                    headAttachment = path;
+                    break;
+                case DollPartType.BackAttachment:
+                    backAttachment = path;
+                    break;
+                case DollPartType.ShoulderAttachmentRight:
+                    shoulderAttachmentRight = path;
+                    break;
+                case DollPartType.ShoulderAttachmentLeft:
+                    shoulderAttachmentLeft = path;
+                    break;
+                case DollPartType.ElbowAttachmentRight:
+                    elbowAttachmentRight = path;
+                    break;
+                case DollPartType.ElbowAttachmentLeft:
+                    elbowAttachmentLeft = path;
+                    break;
+                case DollPartType.HipsAttachment:
+                    hipsAttachment = path;
+                    break;
+                case DollPartType.KneeAttachmentRight:
+                    kneeAttachmentRight = path;
+                    break;
+                case DollPartType.KneeAttachmentLeft:
+                    kneeAttachmentLeft = path;
+                    break;
+                case DollPartType.Extra:
+                    extra = path;
+                    break;
+            }
+        }
         
         public IEnumerator<string> GetEnumerator() {
             yield return head;

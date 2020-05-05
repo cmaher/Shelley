@@ -20,7 +20,7 @@ namespace BrassSparrow.Scripts.UI {
 
         protected override void Awake() {
             base.Awake();
-            var evtKey = DoozyEvents.DoozyEventKey(PartSelectorClickEvent.Prefix, this);
+            var evtKey = DoozyEvents.DoozyEventKey(PartSelectedEvent.Prefix, this);
             
             var doozyButton = GetComponent<UIButton>();
             doozyButton.OnClick.OnTrigger.GameEvents.Add(evtKey);

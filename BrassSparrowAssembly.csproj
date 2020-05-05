@@ -70,11 +70,13 @@
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\AdjustableUIManagerBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\ExpandableUI.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\ScalableUI.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\ButtonClickTranslator.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyEventTranslator.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PagingCollectionView.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PagingController.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PartSelector.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\PartTypeSelector.cs" />
      <None Include="Assets\BrassSparrow\BrassSparrowAssembly.asmdef" />
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>

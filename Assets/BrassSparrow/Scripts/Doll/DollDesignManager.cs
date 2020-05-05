@@ -1,43 +1,47 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization.Formatters.Binary;
+using BrassSparrow.Scripts.Core;
 using BrassSparrow.Scripts.UI;
-using Doozy.Engine;
-using Maru.MCore;
 using UnityEngine;
 using SysRandom = System.Random;
 
 namespace BrassSparrow.Scripts.Doll {
-    public class DollDesignManager : MonoBehaviour {
-        public const string LocatorKey = "BrassSparrow.Scripts.Doll.DollDesignManager";
-
+    public class DollDesignManager : BrassSparrowBehavior {
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
                                               "/Characters_ModularParts_Static";
 
+        public GameObject masterCanvas;
         public GameObject protoDoll;
         public GameObject dollContainer;
-        public GameObject masterCanvas;
-        public string choiceContainerKey;
-        public GameObject partSelector;
 
-        private ILocator locator;
-        private MessageBus vent;
+        public GameObject protoPartSelector;
+        public string partSelectionKey = "DollPartSelection";
+        public GameObject partSelectionMenu;
+
+        public GameObject protoPartTypeSelector;
+        public string partTypeSelectionKey = "DollPartTypeSelection";
+        public GameObject partTypeSelectionMenu;
+
+        public string backEventKey = "DollDesignManager:Back";
+
         private Transform partsRoot;
-        private DollChoices dollChoices;
         private SysRandom random;
         private GameObject dollGo;
         private WorkingDoll doll;
         private Dictionary<string, DollPart> staticParts;
 
-        private void Awake() {
-            locator = LocatorProvider.Get();
-            locator.Set(LocatorKey, this);
-            vent = locator.Get(SceneManager.VentKey) as MessageBus;
-            random = locator.Get(SceneManager.RandomKey) as SysRandom;
-            vent.On<PartSelectorClickEvent>(PartSelected);
+        protected override int EventCapacity => 3;
+
+        protected override void Awake() {
+            base.Awake();
+            random = Locator.Get(SceneManager.RandomKey) as SysRandom;
+            On<PartTypeSelectedEvent>(PartTypeSelected);
+            On<PartSelectedEvent>(PartSelected);
+            On<UIComponentEvent>(backEventKey, ShowPartTypes);
         }
 
         private void Start() {
@@ -47,7 +51,8 @@ namespace BrassSparrow.Scripts.Doll {
 
             var dollParts = RandomDoll();
             doll.SetConfig(dollParts);
-            DisplayChoices(doll.Choices.Male.Head);
+            SetTypeOptions();
+
             // SaveDoll();
             // LoadDoll();
         }
@@ -55,7 +60,7 @@ namespace BrassSparrow.Scripts.Doll {
         private void DisplayChoices<T>(IReadOnlyCollection<T> choices) where T : DollPart {
             var choiceGos = new List<GameObject>(choices.Count);
             foreach (var choice in choices) {
-                var selectorUI = Instantiate(partSelector);
+                var selectorUI = Instantiate(protoPartSelector);
                 var selector = selectorUI.GetComponent<PartSelector>();
                 selector.masterCanvas = masterCanvas;
                 var part = staticParts[choice.Path];
@@ -63,7 +68,7 @@ namespace BrassSparrow.Scripts.Doll {
                 choiceGos.Add(selectorUI);
             }
 
-            vent.Trigger(new SetItemsEvent {Items = choiceGos, Key = choiceContainerKey});
+            Vent.Trigger(new SetItemsEvent {Items = choiceGos, Key = partSelectionKey});
         }
 
         private void SaveDoll() {
@@ -130,90 +135,45 @@ namespace BrassSparrow.Scripts.Doll {
             return dict;
         }
 
-        private void PartSelected(PartSelectorClickEvent evt) {
-            var part = evt.PartSelector.DollPart;
-            var newConfig = doll.Config.Clone();
-            var partConfig = newConfig.parts;
-
-            switch (part.Type) {
-                case DollPartType.Head:
-                    partConfig.head = part.Path;
-                    break;
-                case DollPartType.Eyebrows:
-                    partConfig.eyebrows = part.Path;
-                    break;
-                case DollPartType.FacialHair:
-                    partConfig.facialHair = part.Path;
-                    break;
-                case DollPartType.Torso:
-                    partConfig.torso = part.Path;
-                    break;
-                case DollPartType.ArmUpperRight:
-                    partConfig.armUpperRight = part.Path;
-                    break;
-                case DollPartType.ArmUpperLeft:
-                    partConfig.armUpperLeft = part.Path;
-                    break;
-                case DollPartType.ArmLowerRight:
-                    partConfig.armLowerRight = part.Path;
-                    break;
-                case DollPartType.ArmLowerLeft:
-                    partConfig.armLowerLeft = part.Path;
-                    break;
-                case DollPartType.HandRight:
-                    partConfig.handRight = part.Path;
-                    break;
-                case DollPartType.HandLeft:
-                    partConfig.handLeft = part.Path;
-                    break;
-                case DollPartType.Hips:
-                    partConfig.hips = part.Path;
-                    break;
-                case DollPartType.LegRight:
-                    partConfig.legRight = part.Path;
-                    break;
-                case DollPartType.LegLeft:
-                    partConfig.legLeft = part.Path;
-                    break;
-                case DollPartType.HeadCovering:
-                    partConfig.headCovering = part.Path;
-                    break;
-                case DollPartType.Hair:
-                    partConfig.hair = part.Path;
-                    break;
-                case DollPartType.HeadAttachment:
-                    partConfig.headAttachment = part.Path;
-                    break;
-                case DollPartType.BackAttachment:
-                    partConfig.backAttachment = part.Path;
-                    break;
-                case DollPartType.ShoulderAttachmentRight:
-                    partConfig.shoulderAttachmentRight = part.Path;
-                    break;
-                case DollPartType.ShoulderAttachmentLeft:
-                    partConfig.shoulderAttachmentLeft = part.Path;
-                    break;
-                case DollPartType.ElbowAttachmentRight:
-                    partConfig.elbowAttachmentRight = part.Path;
-                    break;
-                case DollPartType.ElbowAttachmentLeft:
-                    partConfig.elbowAttachmentLeft = part.Path;
-                    break;
-                case DollPartType.HipsAttachment:
-                    partConfig.hipsAttachment = part.Path;
-                    break;
-                case DollPartType.KneeAttachmentRight:
-                    partConfig.kneeAttachmentRight = part.Path;
-                    break;
-                case DollPartType.KneeAttachmentLeft:
-                    partConfig.kneeAttachmentLeft = part.Path;
-                    break;
-                case DollPartType.Extra:
-                    partConfig.extra = part.Path;
-                    break;
+        private void SetTypeOptions() {
+            var capacity = Enum.GetNames(typeof(DollPartType)).Length;
+            var options = new List<GameObject>(capacity);
+            for (var i = 0; i < capacity; i++) {
+                GameObject go = Instantiate(protoPartTypeSelector);
+                var comp = go.GetComponent<PartTypeSelector>();
+                comp.type = (DollPartType) i;
+                comp.label = Enum.GetName(typeof(DollPartType), comp.type);
+                options.Add(go);
             }
 
+            Vent.Trigger(new SetItemsEvent {Items = options, Key = partTypeSelectionKey});
+        }
+
+        private void PartTypeSelected(PartTypeSelectedEvent evt) {
+            List<DollPart> choices;
+            if (DollPartTypes.IsGendered(evt.Type)) {
+                // TODO set this from UI
+                var genderedParts = doll.Choices.Male;
+                choices = genderedParts.Get(evt.Type);
+            } else {
+                choices = doll.Choices.Ungendered.Get(evt.Type);
+            }
+
+            partTypeSelectionMenu.SetActive(false);
+            partSelectionMenu.SetActive(true);
+            DisplayChoices(choices);
+        }
+
+        private void PartSelected(PartSelectedEvent evt) {
+            var part = evt.PartSelector.DollPart;
+            var newConfig = doll.Config.Clone();
+            newConfig.parts.Set(part.Type, part.Path);
             doll.SetConfig(newConfig);
+        }
+
+        private void ShowPartTypes(UIComponentEvent _) {
+            partSelectionMenu.SetActive(false);
+            partTypeSelectionMenu.SetActive(true);
         }
     }
 }

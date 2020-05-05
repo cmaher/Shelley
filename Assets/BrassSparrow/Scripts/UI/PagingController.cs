@@ -7,6 +7,8 @@ namespace BrassSparrow.Scripts.UI {
 
         private DoozySelfEvent selfEvent;
 
+        protected override int EventCapacity => 1;
+
         protected override void Awake() {
             base.Awake();
             var doozyButton = GetComponent<UIButton>();
@@ -16,7 +18,7 @@ namespace BrassSparrow.Scripts.UI {
         }
 
         private void TriggerPagination() {
-            vent.Trigger(new PaginationEvent {
+            Vent.Trigger(new PaginationEvent {
                 Key = ventKey,
                 AdvancePages = advancePages
             });

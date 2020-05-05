@@ -1,51 +1,50 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Maru.MCore {
     public abstract class VentBehavior : MonoBehaviour {
-        protected IMessageBus vent;
-        protected ILocator locator;
-        protected List<Action> unregister;
+        protected IMessageBus Vent;
+        protected ILocator Locator;
+        protected Action[] Unregister;
+        private int ventIdx = 0;
 
-        protected abstract string VentKey();
+        protected abstract string VentLocatorKey { get; }
 
-        protected virtual int EventCapacity() {
-            return 0;
-        }
+        protected virtual int EventCapacity => 0;
 
         protected virtual void Awake() {
-            locator = LocatorProvider.Get();
-            vent = locator.Get(VentKey()) as IMessageBus;
-            unregister = new List<Action>(EventCapacity());
+            Locator = LocatorProvider.Get();
+            Vent = Locator.Get(VentLocatorKey) as IMessageBus;
+            Unregister = new Action[EventCapacity];
+                
         }
 
         protected Action On<TEvent>(Action<TEvent> handler) {
-            var off = vent.On(handler);
-            unregister.Add(off);
+            var off = Vent.On(handler);
+            Unregister[ventIdx++] = off;
             return off;
         }
 
         protected Action On<TEvent>(string key, Action<TEvent> handler) where TEvent : IKeyedEvent {
-            var off = vent.On(key, handler);
-            unregister.Add(off);
+            var off = Vent.On(key, handler);
+            Unregister[ventIdx++] = off;
             return off;
         }
 
         protected Action Once<TEvent>(Action<TEvent> handler) {
-            var off = vent.Once(handler);
-            unregister.Add(off);
+            var off = Vent.Once(handler);
+            Unregister[ventIdx++] = off;
             return off;
         }
         
         protected Action Once<TEvent>(string key, Action<TEvent> handler) where TEvent: IKeyedEvent {
-            var off = vent.Once(key, handler);
-            unregister.Add(off);
+            var off = Vent.Once(key, handler);
+            Unregister[ventIdx++] = off;
             return off;
         }
 
         protected virtual void OnDestroy() {
-            foreach (var off in unregister) {
+            foreach (var off in Unregister) {
                 off();
             }
         }
