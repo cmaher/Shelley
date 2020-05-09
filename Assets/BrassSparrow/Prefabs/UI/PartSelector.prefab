@@ -2443,6 +2443,5 @@ MonoBehaviour:
   meshDistance: 0.6
   unselectedColor: {r: 0.7372549, g: 0.20392159, b: 0.20392159, a: 0}
   selectedColor: {r: 0.9339623, g: 0.8856862, b: 0.057271298, a: 0}
-  mesh: {fileID: 0}
   masterCanvas: {fileID: 0}
   meshScale: 3

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization.Formatters.Binary;
 using BrassSparrow.Scripts.Core;
 using BrassSparrow.Scripts.UI;
@@ -27,12 +26,15 @@ namespace BrassSparrow.Scripts.Doll {
         public GameObject partTypeSelectionMenu;
 
         public string backEventKey = "DollDesignManager:Back";
+        
+        public Shader shader;
 
         private Transform partsRoot;
         private SysRandom random;
         private GameObject dollGo;
         private WorkingDoll doll;
         private Dictionary<string, DollPart> staticParts;
+        private Dictionary<DollPartType, Material> materials;
 
         protected override int EventCapacity => 3;
 
@@ -46,7 +48,7 @@ namespace BrassSparrow.Scripts.Doll {
 
         private void Start() {
             dollGo = Instantiate(protoDoll, dollContainer.transform);
-            doll = new WorkingDoll(dollGo);
+            doll = new WorkingDoll(dollGo, shader);
             staticParts = LoadStaticParts();
 
             var dollParts = RandomDoll();
@@ -129,6 +131,7 @@ namespace BrassSparrow.Scripts.Doll {
             foreach (var p in prefabs) {
                 var partName = p.name.Replace("_Static", "");
                 var part = namesToParts[partName];
+                p.GetComponent<Renderer>().material = doll.Materials[part.Type];
                 dict[part.Path] = new DollPart(p, part.Path, part.Type);
             }
 

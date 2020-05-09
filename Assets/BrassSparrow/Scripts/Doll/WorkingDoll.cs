@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -6,13 +7,14 @@ namespace BrassSparrow.Scripts.Doll {
     public class WorkingDoll {
         public DollChoices Choices;
         public readonly Dictionary<string, DollPart> PartsDict;
+        public readonly Dictionary<DollPartType, Material> Materials;
 
         public DollConfig Config => config;
 
         private Transform partsRoot;
         private DollConfig config;
 
-        public WorkingDoll(GameObject modularDoll) {
+        public WorkingDoll(GameObject modularDoll, Shader shader) {
             partsRoot = modularDoll.transform.Find("Modular_Characters");
             PartsDict = new Dictionary<string, DollPart>();
             Choices = new DollChoices {
@@ -21,9 +23,16 @@ namespace BrassSparrow.Scripts.Doll {
                 Female = BuildGenderedDollChoices("Female")
             };
 
+            var partTypes = Enum.GetValues(typeof(DollPartType));
+            Materials = new Dictionary<DollPartType, Material>(partTypes.Length);
+            foreach (DollPartType partType in partTypes) {
+                Materials[partType] = new Material(shader);
+            }
+
             // Disable everything, by default
             foreach (var part in PartsDict.Values) {
                 part.Go.SetActive(false);
+                part.Go.GetComponent<Renderer>().material = Materials[part.Type];
             }
 
             config = null;
