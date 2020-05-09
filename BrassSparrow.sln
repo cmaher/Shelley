@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaruAssembly", "MaruAssembl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOTween.Modules", "DOTween.Modules.csproj", "{D5A4929E-4AAD-9ECD-C50B-B02E973F21A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityUIExtensions", "UnityUIExtensions.csproj", "{D66FDEAE-18A0-0A5F-E7E2-ED468976703E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityUIExtensionsEditor", "UnityUIExtensionsEditor.csproj", "{8387C5B5-FF93-C4FD-DC64-DC70889DE50A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,14 @@ Global
 		{D5A4929E-4AAD-9ECD-C50B-B02E973F21A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5A4929E-4AAD-9ECD-C50B-B02E973F21A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5A4929E-4AAD-9ECD-C50B-B02E973F21A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66FDEAE-18A0-0A5F-E7E2-ED468976703E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66FDEAE-18A0-0A5F-E7E2-ED468976703E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66FDEAE-18A0-0A5F-E7E2-ED468976703E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66FDEAE-18A0-0A5F-E7E2-ED468976703E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8387C5B5-FF93-C4FD-DC64-DC70889DE50A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8387C5B5-FF93-C4FD-DC64-DC70889DE50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8387C5B5-FF93-C4FD-DC64-DC70889DE50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8387C5B5-FF93-C4FD-DC64-DC70889DE50A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -58,7 +58,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Doozy\Integrations\Editor\Playmaker\PlaymakerEventDispatcherEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\AccordionElementEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\BezierLineRendererEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\BoxSliderEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIBezierCurveEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIGraphicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIImageEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUITextEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CanvasGroupActivator.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ColorPickerPresetsEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\NonDrawingGraphicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ReadOnlyDrawer.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ScrollPositionControllerEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicIconEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicIconListCopier.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicRenameEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\uGUITools.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
@@ -676,13 +693,13 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{DA7F01DB-7EAE-8DAB-6FF2-71E7800ABA1E}</Project>
-      <Name>Assembly-CSharp</Name>
-    </ProjectReference>
     <ProjectReference Include="DOTween.Modules.csproj">
       <Project>{D5A4929E-4AAD-9ECD-C50B-B02E973F21A7}</Project>
       <Name>DOTween.Modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="DoozyExamplesAssembly.csproj">
+      <Project>{A87991A2-8CA7-7637-BE04-40CECC3A4A49}</Project>
+      <Name>DoozyExamplesAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="MaruAssembly.csproj">
       <Project>{7CB75598-1DD0-24F0-9593-FCFC7B138231}</Project>
@@ -704,9 +721,13 @@
       <Project>{2C516105-194A-5FB1-C07A-10325E09993E}</Project>
       <Name>DoozyEngineAssembly</Name>
     </ProjectReference>
-    <ProjectReference Include="DoozyExamplesAssembly.csproj">
-      <Project>{A87991A2-8CA7-7637-BE04-40CECC3A4A49}</Project>
-      <Name>DoozyExamplesAssembly</Name>
+    <ProjectReference Include="DoozyIntegrationsAssembly.csproj">
+      <Project>{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}</Project>
+      <Name>DoozyIntegrationsAssembly</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityUIExtensions.csproj">
+      <Project>{D66FDEAE-18A0-0A5F-E7E2-ED468976703E}</Project>
+      <Name>UnityUIExtensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
