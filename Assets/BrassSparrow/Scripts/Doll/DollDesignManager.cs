@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using BrassSparrow.Scripts.Core;
 using BrassSparrow.Scripts.UI;
+using BrassSparrow.Scripts.UI.ColorPicker;
 using UnityEngine;
 using SysRandom = System.Random;
 
@@ -13,6 +14,7 @@ namespace BrassSparrow.Scripts.Doll {
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
                                               "/Characters_ModularParts_Static";
 
+        public string listenKey;
         public GameObject masterCanvas;
         public GameObject protoDoll;
         public GameObject dollContainer;
@@ -36,7 +38,7 @@ namespace BrassSparrow.Scripts.Doll {
         private Dictionary<string, DollPart> staticParts;
         private Dictionary<DollPartType, Material> materials;
 
-        protected override int EventCapacity => 3;
+        protected override int EventCapacity => 4;
 
         protected override void Awake() {
             base.Awake();
@@ -44,6 +46,7 @@ namespace BrassSparrow.Scripts.Doll {
             On<PartTypeSelectedEvent>(PartTypeSelected);
             On<PartSelectedEvent>(PartSelected);
             On<UIComponentEvent>(backEventKey, ShowPartTypes);
+            On<ColorPickerChangedEvent>(listenKey, ColorChanged);
         }
 
         private void Start() {
@@ -172,6 +175,10 @@ namespace BrassSparrow.Scripts.Doll {
             var newConfig = doll.Config.Clone();
             newConfig.parts.Set(part.Type, part.Path);
             doll.SetConfig(newConfig);
+        }
+
+        private void ColorChanged(ColorPickerChangedEvent evt) {
+                doll?.Materials[DollPartType.Head]?.SetColor("_Color_Skin", evt.Color);
         }
 
         private void ShowPartTypes(UIComponentEvent _) {

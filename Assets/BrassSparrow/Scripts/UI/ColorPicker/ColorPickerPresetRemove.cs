@@ -1,29 +1,23 @@
-using System;
+using BrassSparrow.Scripts.Core;
 using Maru.MCore;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace BrassSparrow.Scripts.UI {
-    public class ColorPickerPresetRemove : MonoBehaviour, IPointerClickHandler {
+namespace BrassSparrow.Scripts.UI.ColorPicker {
+    public class ColorPickerPresetRemove : BrassSparrowBehavior, IPointerClickHandler {
         public int id;
         public string key;
         public Color color;
 
-        private IMessageBus vent;
-
-        private void Awake() {
-            vent = LocatorProvider.Get().Get(SceneManager.VentKey) as IMessageBus;
-        }
-
         public void OnPointerClick(PointerEventData eventData) {
             if (eventData.button == PointerEventData.InputButton.Left) {
-                vent.Trigger(new SelectColorPickerPresetEvent {
+                Vent.Trigger(new SelectColorPickerPresetEvent {
                     Key = key,
                     Id = id,
                     Color = color,
                 });
             } else if (eventData.button == PointerEventData.InputButton.Right) {
-                vent.Trigger(new RemoveColorPickerPresetEvent {
+                Vent.Trigger(new RemoveColorPickerPresetEvent {
                     Key = key,
                     Id = id,
                 });

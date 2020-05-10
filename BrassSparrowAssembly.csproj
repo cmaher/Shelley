@@ -71,8 +71,9 @@
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\ExpandableUI.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\ScalableUI.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\ButtonClickTranslator.cs" />
-     <Compile Include="Assets\BrassSparrow\Scripts\UI\ColorPickerModifiablePresets.cs" />
-     <Compile Include="Assets\BrassSparrow\Scripts\UI\ColorPickerPresetRemove.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\ColorPicker\ColorPickerModifiablePresets.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\ColorPicker\ColorPickerPresetRemove.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\ColorPicker\ColorPickerVent.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyEventTranslator.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PagingCollectionView.cs" />

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions.ColorPicker;
 
-namespace BrassSparrow.Scripts.UI {
+namespace BrassSparrow.Scripts.UI.ColorPicker {
     public class ColorPickerModifiablePresets : MonoBehaviour {
         public ColorPickerControl picker;
 

@@ -38,7 +38,6 @@ namespace UnityEngine.UI.Extensions.ColorPicker
 
         private void ColorChanged(Color newColor)
         {
-            listen = false;
             switch (type)
             {
                 case ColorValues.R:
@@ -60,7 +59,6 @@ namespace UnityEngine.UI.Extensions.ColorPicker
 
         private void HSVChanged(float hue, float saturation, float value)
         {
-            listen = false;
             switch (type)
             {
                 case ColorValues.Hue:

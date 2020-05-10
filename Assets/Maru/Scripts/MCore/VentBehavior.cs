@@ -16,7 +16,6 @@ namespace Maru.MCore {
             Locator = LocatorProvider.Get();
             Vent = Locator.Get(VentLocatorKey) as IMessageBus;
             Unregister = new Action[EventCapacity];
-                
         }
 
         protected Action On<TEvent>(Action<TEvent> handler) {
