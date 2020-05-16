@@ -18,18 +18,21 @@ namespace BrassSparrow.Scripts.Doll {
         public GameObject masterCanvas;
         public GameObject protoDoll;
         public GameObject dollContainer;
+        public string backEventKey = "DollDesignManager:Back";
+        public Shader shader;
 
-        public GameObject protoPartSelector;
+        [Header("Part")] public GameObject protoPartSelector;
         public string partSelectionKey = "DollPartSelection";
         public GameObject partSelectionMenu;
 
-        public GameObject protoPartTypeSelector;
+        [Header("Part Type")] public GameObject protoPartTypeSelector;
         public string partTypeSelectionKey = "DollPartTypeSelection";
         public GameObject partTypeSelectionMenu;
 
-        public string backEventKey = "DollDesignManager:Back";
-        
-        public Shader shader;
+        [Header("Color Type")] public GameObject protoColorTypeSelector;
+        public string colorTypeSelectionKey = "DollColorSelection";
+        public GameObject colorTypeSelectionMenu;
+
 
         private Transform partsRoot;
         private SysRandom random;
@@ -37,13 +40,16 @@ namespace BrassSparrow.Scripts.Doll {
         private WorkingDoll doll;
         private Dictionary<string, DollPart> staticParts;
         private Dictionary<DollPartType, Material> materials;
+        
+        private DollPartType selectedPartType;
+        private DollColorType selecteDollColorType;
 
         protected override int EventCapacity => 4;
 
         protected override void Awake() {
             base.Awake();
             random = Locator.Get(SceneManager.RandomKey) as SysRandom;
-            On<PartTypeSelectedEvent>(PartTypeSelected);
+            On<EnumSelectedEvent<DollPartType>>(listenKey, PartTypeSelected);
             On<PartSelectedEvent>(PartSelected);
             On<UIComponentEvent>(backEventKey, ShowPartTypes);
             On<ColorPickerChangedEvent>(listenKey, ColorChanged);
@@ -56,7 +62,7 @@ namespace BrassSparrow.Scripts.Doll {
 
             var dollParts = RandomDoll();
             doll.SetConfig(dollParts);
-            SetTypeOptions();
+            SetTypeOptions<DollPartType>(protoPartTypeSelector, partTypeSelectionKey);
 
             // SaveDoll();
             // LoadDoll();
@@ -141,28 +147,31 @@ namespace BrassSparrow.Scripts.Doll {
             return dict;
         }
 
-        private void SetTypeOptions() {
-            var capacity = Enum.GetNames(typeof(DollPartType)).Length;
+        private void SetTypeOptions<T>(GameObject proto, string menuKey) where T : Enum {
+            var capacity = Enum.GetNames(typeof(T)).Length;
             var options = new List<GameObject>(capacity);
             for (var i = 0; i < capacity; i++) {
-                GameObject go = Instantiate(protoPartTypeSelector);
-                var comp = go.GetComponent<PartTypeSelector>();
-                comp.type = (DollPartType) i;
-                comp.label = Enum.GetName(typeof(DollPartType), comp.type);
+                var go = Instantiate(proto);
+                var comp = go.AddComponent<EnumSelectorButton>();
+                var type = (T) (object) i;
+                comp.selection = new EnumSelection<T>(type, listenKey);
+                // TODO label provider for each enum (maybe just Map<T, String>)
+                comp.label = Enum.GetName(typeof(T), type);
                 options.Add(go);
             }
 
-            Vent.Trigger(new SetItemsEvent {Items = options, Key = partTypeSelectionKey});
+            Vent.Trigger(new SetItemsEvent {Items = options, Key = menuKey});
         }
 
-        private void PartTypeSelected(PartTypeSelectedEvent evt) {
+        private void PartTypeSelected(EnumSelectedEvent<DollPartType> evt) {
+            selectedPartType = evt.Type;
             List<DollPart> choices;
-            if (DollPartTypes.IsGendered(evt.Type)) {
+            if (DollPartTypes.IsGendered(selectedPartType)) {
                 // TODO set this from UI
                 var genderedParts = doll.Choices.Male;
-                choices = genderedParts.Get(evt.Type);
+                choices = genderedParts.Get(selectedPartType);
             } else {
-                choices = doll.Choices.Ungendered.Get(evt.Type);
+                choices = doll.Choices.Ungendered.Get(selectedPartType);
             }
 
             partTypeSelectionMenu.SetActive(false);
@@ -178,7 +187,7 @@ namespace BrassSparrow.Scripts.Doll {
         }
 
         private void ColorChanged(ColorPickerChangedEvent evt) {
-                doll?.Materials[DollPartType.Head]?.SetColor("_Color_Skin", evt.Color);
+            doll?.Materials[DollPartType.Head]?.SetColor("_Color_Skin", evt.Color);
         }
 
         private void ShowPartTypes(UIComponentEvent _) {

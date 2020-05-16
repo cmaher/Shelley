@@ -61,9 +61,11 @@
      <Compile Include="Assets\BrassSparrow\Scratch\Scripts\SimpleCameraController.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Core\BrassSparrowBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollChoices.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollColor.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollConfig.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollDesignManager.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollParts.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Doll\UI\PartSelector.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\WorkingDoll.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\SceneManager.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\Adjustable\AdjustableUIManager.cs" />
@@ -76,10 +78,9 @@
      <Compile Include="Assets\BrassSparrow\Scripts\UI\ColorPicker\ColorPickerVent.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\DoozyEventTranslator.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\UI\EnumSelectorButton.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PagingCollectionView.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\UI\PagingController.cs" />
-     <Compile Include="Assets\BrassSparrow\Scripts\UI\PartSelector.cs" />
-     <Compile Include="Assets\BrassSparrow\Scripts\UI\PartTypeSelector.cs" />
      <None Include="Assets\BrassSparrow\BrassSparrowAssembly.asmdef" />
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
