@@ -14,12 +14,14 @@ namespace BrassSparrow.Scripts.Doll {
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
                                               "/Characters_ModularParts_Static";
 
+        public const string NavToPartTypeMenu = "NavTo:PartTypeMenu";
+        public const string NavToPartMenu = "NavTo:PartMenu";
+        public const string NavToColorTypeMenu = "NavTo:ColorTypeMenu";
+
         public string listenKey;
         public GameObject masterCanvas;
         public GameObject protoDoll;
         public GameObject dollContainer;
-        public string backEventKey = "DollDesignManager:Back";
-        public Shader shader;
 
         [Header("Part")] public GameObject protoPartSelector;
         public string partSelectionKey = "DollPartSelection";
@@ -29,10 +31,11 @@ namespace BrassSparrow.Scripts.Doll {
         public string partTypeSelectionKey = "DollPartTypeSelection";
         public GameObject partTypeSelectionMenu;
 
-        [Header("Color Type")] public GameObject protoColorTypeSelector;
+        [Header("Color")] public GameObject protoColorTypeSelector;
         public string colorTypeSelectionKey = "DollColorSelection";
         public GameObject colorTypeSelectionMenu;
-
+        public GameObject colorPickerMenu;
+        public Shader shader;
 
         private Transform partsRoot;
         private SysRandom random;
@@ -40,30 +43,43 @@ namespace BrassSparrow.Scripts.Doll {
         private WorkingDoll doll;
         private Dictionary<string, DollPart> staticParts;
         private Dictionary<DollPartType, Material> materials;
-        
+
+        private List<GameObject> menus;
         private DollPartType selectedPartType;
         private DollColorType selecteDollColorType;
+        private bool colorTypeMenuCreated = false;
 
-        protected override int EventCapacity => 4;
+        protected override int EventCapacity => 7;
 
         protected override void Awake() {
             base.Awake();
             random = Locator.Get(SceneManager.RandomKey) as SysRandom;
             On<EnumSelectedEvent<DollPartType>>(listenKey, PartTypeSelected);
+            On<EnumSelectedEvent<DollColorType>>(listenKey, ColorTypeSelected);
             On<PartSelectedEvent>(PartSelected);
-            On<UIComponentEvent>(backEventKey, ShowPartTypes);
+            On<UIComponentEvent>($"{listenKey}:{NavToPartTypeMenu}", ShowPartTypeMenu);
+            On<UIComponentEvent>($"{listenKey}:{NavToPartMenu}", ShowPartMenu);
+            On<UIComponentEvent>($"{listenKey}:{NavToColorTypeMenu}", ShowColorTypeMenu);
             On<ColorPickerChangedEvent>(listenKey, ColorChanged);
         }
 
         private void Start() {
+            menus = new List<GameObject> {
+                partTypeSelectionMenu, 
+                partSelectionMenu, 
+                colorTypeSelectionMenu,
+                colorPickerMenu,
+            };
             dollGo = Instantiate(protoDoll, dollContainer.transform);
             doll = new WorkingDoll(dollGo, shader);
             staticParts = LoadStaticParts();
 
             var dollParts = RandomDoll();
             doll.SetConfig(dollParts);
+            
+            ShowMenu(partTypeSelectionMenu);
             SetTypeOptions<DollPartType>(protoPartTypeSelector, partTypeSelectionKey);
-
+            
             // SaveDoll();
             // LoadDoll();
         }
@@ -165,18 +181,22 @@ namespace BrassSparrow.Scripts.Doll {
 
         private void PartTypeSelected(EnumSelectedEvent<DollPartType> evt) {
             selectedPartType = evt.Type;
+            var choices = GetDollChoices(selectedPartType);
+            ShowMenu(partSelectionMenu);
+            DisplayChoices(choices);
+        }
+
+        private List<DollPart> GetDollChoices(DollPartType type) {
             List<DollPart> choices;
-            if (DollPartTypes.IsGendered(selectedPartType)) {
+            if (DollPartTypes.IsGendered(type)) {
                 // TODO set this from UI
                 var genderedParts = doll.Choices.Male;
-                choices = genderedParts.Get(selectedPartType);
+                choices = genderedParts.Get(type);
             } else {
-                choices = doll.Choices.Ungendered.Get(selectedPartType);
+                choices = doll.Choices.Ungendered.Get(type);
             }
 
-            partTypeSelectionMenu.SetActive(false);
-            partSelectionMenu.SetActive(true);
-            DisplayChoices(choices);
+            return choices;
         }
 
         private void PartSelected(PartSelectedEvent evt) {
@@ -186,13 +206,42 @@ namespace BrassSparrow.Scripts.Doll {
             doll.SetConfig(newConfig);
         }
 
-        private void ColorChanged(ColorPickerChangedEvent evt) {
-            doll?.Materials[DollPartType.Head]?.SetColor("_Color_Skin", evt.Color);
+        private void ColorTypeSelected(EnumSelectedEvent<DollColorType> evt) {
+            selecteDollColorType = evt.Type;
+            ShowMenu(colorPickerMenu);
         }
 
-        private void ShowPartTypes(UIComponentEvent _) {
-            partSelectionMenu.SetActive(false);
-            partTypeSelectionMenu.SetActive(true);
+        private void ColorChanged(ColorPickerChangedEvent evt) {
+            var colorSetting = DollColor.Get(selecteDollColorType);
+            doll?.Materials[selectedPartType]?.SetColor(colorSetting.Id, evt.Color);
+        }
+
+        private void ShowMenu(GameObject menu) {
+            foreach (var m in menus) {
+                if (m != menu) {
+                    m.SetActive(false);
+                }
+            }
+
+            menu.SetActive(true);
+        }
+
+        private void ShowPartTypeMenu(UIComponentEvent _) {
+            ShowMenu(partTypeSelectionMenu);
+        }
+
+        private void ShowPartMenu(UIComponentEvent _) {
+            ShowMenu(partSelectionMenu);
+            var choices = GetDollChoices(selectedPartType);
+            DisplayChoices(choices);
+        }
+        
+        private void ShowColorTypeMenu(UIComponentEvent _) {
+            ShowMenu(colorTypeSelectionMenu);
+            if (!colorTypeMenuCreated) {
+                SetTypeOptions<DollColorType>(protoColorTypeSelector, colorTypeSelectionKey);
+                colorTypeMenuCreated = true;
+            }
         }
     }
 }
