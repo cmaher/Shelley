@@ -7,6 +7,7 @@ using BrassSparrow.Scripts.Core;
 using BrassSparrow.Scripts.UI;
 using BrassSparrow.Scripts.UI.ColorPicker;
 using UnityEngine;
+using UnityEngine.UI.Extensions.ColorPicker;
 using SysRandom = System.Random;
 
 namespace BrassSparrow.Scripts.Doll {
@@ -35,6 +36,7 @@ namespace BrassSparrow.Scripts.Doll {
         public string colorTypeSelectionKey = "DollColorSelection";
         public GameObject colorTypeSelectionMenu;
         public GameObject colorPickerMenu;
+        public ColorPickerControl colorPicker;
         public Shader shader;
 
         private Transform partsRoot;
@@ -207,8 +209,10 @@ namespace BrassSparrow.Scripts.Doll {
         }
 
         private void ColorTypeSelected(EnumSelectedEvent<DollColorType> evt) {
-            selecteDollColorType = evt.Type;
             ShowMenu(colorPickerMenu);
+            selecteDollColorType = evt.Type;
+            var colorSetting = DollColor.Get(selecteDollColorType);
+            colorPicker.CurrentColor = doll.Materials[selectedPartType].GetColor(colorSetting.Id);
         }
 
         private void ColorChanged(ColorPickerChangedEvent evt) {
