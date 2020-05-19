@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using BrassSparrow.Scripts.Core;
 using BrassSparrow.Scripts.UI;
 using BrassSparrow.Scripts.UI.ColorPicker;
+using Maru.MCore;
 using UnityEngine;
 using UnityEngine.UI.Extensions.ColorPicker;
 using SysRandom = System.Random;
@@ -18,8 +19,9 @@ namespace BrassSparrow.Scripts.Doll {
         public const string NavToPartTypeMenu = "NavTo:PartTypeMenu";
         public const string NavToPartMenu = "NavTo:PartMenu";
         public const string NavToColorTypeMenu = "NavTo:ColorTypeMenu";
+        public const string ColorApplyToAll = "Color:ApplyToAll";
 
-        public string listenKey;
+        public string channelKey = "DollDesignManager";
         public GameObject masterCanvas;
         public GameObject protoDoll;
         public GameObject dollContainer;
@@ -32,7 +34,7 @@ namespace BrassSparrow.Scripts.Doll {
         public string partTypeSelectionKey = "DollPartTypeSelection";
         public GameObject partTypeSelectionMenu;
 
-        [Header("Color")] public GameObject protoColorTypeSelector;
+        [Header("Color")] public ColorTypeSelector protoColorTypeSelector;
         public string colorTypeSelectionKey = "DollColorSelection";
         public GameObject colorTypeSelectionMenu;
         public GameObject colorPickerMenu;
@@ -49,26 +51,28 @@ namespace BrassSparrow.Scripts.Doll {
         private List<GameObject> menus;
         private DollPartType selectedPartType;
         private DollColorType selecteDollColorType;
+        private bool partTypeMenuCreated = false;
         private bool colorTypeMenuCreated = false;
 
-        protected override int EventCapacity => 7;
+        protected override int EventCapacity => 8;
 
         protected override void Awake() {
             base.Awake();
             random = Locator.Get(SceneManager.RandomKey) as SysRandom;
-            On<EnumSelectedEvent<DollPartType>>(listenKey, PartTypeSelected);
-            On<EnumSelectedEvent<DollColorType>>(listenKey, ColorTypeSelected);
+            On<EnumSelectedEvent<DollPartType>>(channelKey, PartTypeSelected);
+            On<EnumSelectedEvent<DollColorType>>(channelKey, ColorTypeSelected);
             On<PartSelectedEvent>(PartSelected);
-            On<UIComponentEvent>($"{listenKey}:{NavToPartTypeMenu}", ShowPartTypeMenu);
-            On<UIComponentEvent>($"{listenKey}:{NavToPartMenu}", ShowPartMenu);
-            On<UIComponentEvent>($"{listenKey}:{NavToColorTypeMenu}", ShowColorTypeMenu);
-            On<ColorPickerChangedEvent>(listenKey, ColorChanged);
+            On<UIComponentEvent>($"{channelKey}:{NavToPartTypeMenu}", ShowPartTypeMenu);
+            On<UIComponentEvent>($"{channelKey}:{NavToPartMenu}", ShowPartMenu);
+            On<UIComponentEvent>($"{channelKey}:{NavToColorTypeMenu}", ShowColorTypeMenu);
+            On<ColorPickerChangedEvent>(channelKey, ColorChanged);
+            On<UIComponentEvent>($"{channelKey}:{ColorApplyToAll}", ApplyColorToAllParts);
         }
 
         private void Start() {
             menus = new List<GameObject> {
-                partTypeSelectionMenu, 
-                partSelectionMenu, 
+                partTypeSelectionMenu,
+                partSelectionMenu,
                 colorTypeSelectionMenu,
                 colorPickerMenu,
             };
@@ -78,15 +82,17 @@ namespace BrassSparrow.Scripts.Doll {
 
             var dollParts = RandomDoll();
             doll.SetConfig(dollParts);
-            
+
+            // Show and build the part type selection menu
             ShowMenu(partTypeSelectionMenu);
-            SetTypeOptions<DollPartType>(protoPartTypeSelector, partTypeSelectionKey);
-            
+            var partTypeOptions = GetTypeOptions<DollPartType>(protoPartTypeSelector);
+            Vent.Trigger(new SetItemsEvent {Items = partTypeOptions, Key = partTypeSelectionKey});
+
             // SaveDoll();
             // LoadDoll();
         }
 
-        private void DisplayChoices<T>(IReadOnlyCollection<T> choices) where T : DollPart {
+        private void DisplayDollChoices<T>(IReadOnlyCollection<T> choices) where T : DollPart {
             var choiceGos = new List<GameObject>(choices.Count);
             foreach (var choice in choices) {
                 var selectorUI = Instantiate(protoPartSelector);
@@ -165,27 +171,27 @@ namespace BrassSparrow.Scripts.Doll {
             return dict;
         }
 
-        private void SetTypeOptions<T>(GameObject proto, string menuKey) where T : Enum {
+        private List<GameObject> GetTypeOptions<T>(GameObject proto) where T : Enum {
             var capacity = Enum.GetNames(typeof(T)).Length;
             var options = new List<GameObject>(capacity);
             for (var i = 0; i < capacity; i++) {
                 var go = Instantiate(proto);
                 var comp = go.AddComponent<EnumSelectorButton>();
                 var type = (T) (object) i;
-                comp.selection = new EnumSelection<T>(type, listenKey);
+                comp.selection = new EnumSelection<T>(type, channelKey);
                 // TODO label provider for each enum (maybe just Map<T, String>)
                 comp.label = Enum.GetName(typeof(T), type);
                 options.Add(go);
             }
 
-            Vent.Trigger(new SetItemsEvent {Items = options, Key = menuKey});
+            return options;
         }
 
         private void PartTypeSelected(EnumSelectedEvent<DollPartType> evt) {
             selectedPartType = evt.Type;
             var choices = GetDollChoices(selectedPartType);
             ShowMenu(partSelectionMenu);
-            DisplayChoices(choices);
+            DisplayDollChoices(choices);
         }
 
         private List<DollPart> GetDollChoices(DollPartType type) {
@@ -218,6 +224,19 @@ namespace BrassSparrow.Scripts.Doll {
         private void ColorChanged(ColorPickerChangedEvent evt) {
             var colorSetting = DollColor.Get(selecteDollColorType);
             doll?.Materials[selectedPartType]?.SetColor(colorSetting.Id, evt.Color);
+            Vent.Trigger(new DollColorChangedEvent {
+                Key = channelKey,
+                PartType = selectedPartType,
+                ColorType = selecteDollColorType,
+                Color = evt.Color
+            });
+        }
+
+        private void ApplyColorToAllParts(UIComponentEvent _) {
+            var colorSetting = DollColor.Get(selecteDollColorType);
+            foreach (DollPartType partType in Enum.GetValues(typeof(DollPartType))) {
+                doll.Materials[partType].SetColor(colorSetting.Id, colorPicker.CurrentColor);
+            }
         }
 
         private void ShowMenu(GameObject menu) {
@@ -232,20 +251,48 @@ namespace BrassSparrow.Scripts.Doll {
 
         private void ShowPartTypeMenu(UIComponentEvent _) {
             ShowMenu(partTypeSelectionMenu);
+            if (!partTypeMenuCreated) {
+                var partTypeOptions = GetTypeOptions<DollPartType>(protoPartTypeSelector);
+                Vent.Trigger(new SetItemsEvent {Items = partTypeOptions, Key = partTypeSelectionKey});
+            }
         }
 
         private void ShowPartMenu(UIComponentEvent _) {
             ShowMenu(partSelectionMenu);
             var choices = GetDollChoices(selectedPartType);
-            DisplayChoices(choices);
+            DisplayDollChoices(choices);
         }
-        
+
         private void ShowColorTypeMenu(UIComponentEvent _) {
             ShowMenu(colorTypeSelectionMenu);
             if (!colorTypeMenuCreated) {
-                SetTypeOptions<DollColorType>(protoColorTypeSelector, colorTypeSelectionKey);
+                var colorOptions = GetTypeOptions<DollColorType>(protoColorTypeSelector.gameObject);
+                var colorTypes = Enum.GetValues(typeof(DollColorType));
+
+                // Set initial color swatch color and configure vent
+                // relies on the fact that the buttons were created in enum order
+                for (var i = 0; i < colorTypes.Length; i++) {
+                    var selector = colorOptions[i].GetComponent<ColorTypeSelector>();
+                    selector.listenKey = channelKey;
+                    var colorSetting = DollColor.Get((DollColorType) colorTypes.GetValue(i));
+                    selector.SetColor(doll.Materials[selectedPartType].GetColor(colorSetting.Id));
+                }
+
+                Vent.Trigger(new SetItemsEvent {Items = colorOptions, Key = colorTypeSelectionKey});
+
                 colorTypeMenuCreated = true;
             }
+        }
+    }
+
+    public struct DollColorChangedEvent : IKeyedEvent {
+        public string Key;
+        public DollPartType PartType;
+        public DollColorType ColorType;
+        public Color Color;
+
+        public string GetEventKey() {
+            return Key;
         }
     }
 }

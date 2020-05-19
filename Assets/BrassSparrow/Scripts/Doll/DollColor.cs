@@ -27,7 +27,7 @@ namespace BrassSparrow.Scripts.Doll {
         public static readonly DollColor BodyArt = new DollColor(DollColorType.BodyArt, "_Color_BodyArt");
         public static readonly DollColor Eyes = new DollColor(DollColorType.Eyes, "_Color_Eyes");
         
-        // NOTE: the scar/stubble reversal is deliberate. These seem to be bugged in the underlying models
+        // NOTE: the scar/stubble reversal is deliberate. These are bugged in the underlying models
         public static readonly DollColor Stubble = new DollColor(DollColorType.Stubble, "_Color_Scar");
         public static readonly DollColor Scar = new DollColor(DollColorType.Scar, "_Color_Stubble");
 
@@ -78,7 +78,7 @@ namespace BrassSparrow.Scripts.Doll {
         Stubble,
         Scar,
         BodyArt,
-        Eyes
+        Eyes,
     }
 
     public enum DollShaderRanges {

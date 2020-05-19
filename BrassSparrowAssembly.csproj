@@ -65,6 +65,7 @@
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollConfig.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollDesignManager.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollParts.cs" />
+     <Compile Include="Assets\BrassSparrow\Scripts\Doll\UI\ColorTypeSelector.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\UI\PartSelector.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\WorkingDoll.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\SceneManager.cs" />

@@ -5,7 +5,7 @@ using Maru.MCore;
 namespace BrassSparrow.Scripts.UI {
     public class EnumSelectorButton : DoozyBehavior {
         // use an interface, because generic behaviors are not supported
-        public IEnumSelection selection; 
+        public IEnumSelection selection;
         public string label;
 
         private UIButton doozyButton;
@@ -31,13 +31,18 @@ namespace BrassSparrow.Scripts.UI {
 
     public interface IEnumSelection {
         void TriggerEvent(IMessageBus vent);
+        int EnumValue();
     }
-    
-    public class EnumSelection<T>: IEnumSelection where T : Enum {
+
+    public class EnumSelection<T> : IEnumSelection where T : Enum {
         private EnumSelectedEvent<T> evt;
 
         public EnumSelection(T type, string ventKey) {
             evt = new EnumSelectedEvent<T> {Key = ventKey, Type = type};
+        }
+
+        public int EnumValue() {
+            return (int) (object) evt.Type;
         }
 
         public void TriggerEvent(IMessageBus vent) {
