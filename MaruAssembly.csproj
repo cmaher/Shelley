@@ -63,6 +63,7 @@
      <Compile Include="Assets\Maru\Scripts\MCore\ILocator.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\IMessageBus.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\LocatorProvider.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\MaruKeys.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\MaruUtils.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\MessageBus.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\PrefabPoolManager.cs" />

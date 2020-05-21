@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using BrassSparrow.Scripts.Core;
 using Maru.MCore;
 using UnityEngine;
 
 namespace BrassSparrow.Scripts.UI {
     [DisallowMultipleComponent]
-    public class PagingCollectionView : BrassSparrowBehavior {
+    public class PagingCollectionView : VentBehavior {
         public int itemsPerPage; // Assumed to have some type of layout
         public int currentPage = 0;
         public List<GameObject> items; // Assumes ownership of items

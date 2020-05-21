@@ -1,10 +1,9 @@
-using BrassSparrow.Scripts.Core;
 using Maru.MCore;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace BrassSparrow.Scripts.UI.ColorPicker {
-    public class ColorPickerPresetRemove : BrassSparrowBehavior, IPointerClickHandler {
+    public class ColorPickerPresetRemove : VentBehavior, IPointerClickHandler {
         public int id;
         public string key;
         public Color color;

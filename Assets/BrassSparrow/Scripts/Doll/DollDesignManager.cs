@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
-using BrassSparrow.Scripts.Core;
 using BrassSparrow.Scripts.UI;
 using BrassSparrow.Scripts.UI.ColorPicker;
 using Maru.MCore;
@@ -12,7 +11,7 @@ using UnityEngine.UI.Extensions.ColorPicker;
 using SysRandom = System.Random;
 
 namespace BrassSparrow.Scripts.Doll {
-    public class DollDesignManager : BrassSparrowBehavior {
+    public class DollDesignManager : VentBehavior {
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
                                               "/Characters_ModularParts_Static";
 

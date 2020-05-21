@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityUIExtensions", "UnityU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoozyExamplesAssembly", "DoozyExamplesAssembly.csproj", "{A87991A2-8CA7-7637-BE04-40CECC3A4A49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoozyIntegrationsAssembly", "DoozyIntegrationsAssembly.csproj", "{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrassSparrowAssembly", "BrassSparrowAssembly.csproj", "{A664A3C9-CD30-37E9-35E4-1C1EB926F201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoozyIntegrationsAssembly", "DoozyIntegrationsAssembly.csproj", "{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProceduralUIImageAssembly", "ProceduralUIImageAssembly.csproj", "{2A406884-AB83-E6E9-31A8-2049325C7C1C}"
 EndProject
@@ -43,14 +43,14 @@ Global
 		{A87991A2-8CA7-7637-BE04-40CECC3A4A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A87991A2-8CA7-7637-BE04-40CECC3A4A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A87991A2-8CA7-7637-BE04-40CECC3A4A49}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A664A3C9-CD30-37E9-35E4-1C1EB926F201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A664A3C9-CD30-37E9-35E4-1C1EB926F201}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A664A3C9-CD30-37E9-35E4-1C1EB926F201}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A664A3C9-CD30-37E9-35E4-1C1EB926F201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A406884-AB83-E6E9-31A8-2049325C7C1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A406884-AB83-E6E9-31A8-2049325C7C1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A406884-AB83-E6E9-31A8-2049325C7C1C}.Release|Any CPU.ActiveCfg = Release|Any CPU

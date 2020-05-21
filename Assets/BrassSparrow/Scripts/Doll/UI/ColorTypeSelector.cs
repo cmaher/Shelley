@@ -1,12 +1,12 @@
 using System;
-using BrassSparrow.Scripts.Core;
 using BrassSparrow.Scripts.Doll;
 using Doozy.Engine.Extensions;
+using Maru.MCore;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace BrassSparrow.Scripts.UI {
-    public class ColorTypeSelector : BrassSparrowBehavior {
+    public class ColorTypeSelector : VentBehavior {
         public Image colorSwatch;
         public String listenKey;
 

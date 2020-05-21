@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BrassSparrow\Scratch\Scripts\SimpleCameraController.cs" />
-     <Compile Include="Assets\BrassSparrow\Scripts\Core\BrassSparrowBehavior.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollChoices.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollColor.cs" />
      <Compile Include="Assets\BrassSparrow\Scripts\Doll\DollConfig.cs" />

@@ -19,7 +19,7 @@ namespace BrassSparrow.Scripts.UI.Adjustable {
 
         public void Awake() {
             defaultPosition = transform.position;
-            vent = LocatorProvider.Get().Get(SceneManager.VentKey) as IMessageBus;
+            vent = LocatorProvider.Get().Get(MaruKeys.Vent) as IMessageBus;
         }
 
         public void Start() {

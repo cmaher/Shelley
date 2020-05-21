@@ -14,7 +14,7 @@ namespace BrassSparrow.Scripts.UI.Adjustable {
 
         private void Awake() {
             manager = new AdjustableUIManager(canvas);
-            manager.Listen(LocatorProvider.Get().Get(SceneManager.VentKey) as IMessageBus);
+            manager.Listen(LocatorProvider.Get().Get(MaruKeys.Vent) as IMessageBus);
         }
 
         private void Start() {

@@ -8,7 +8,7 @@ namespace Maru.MCore {
         protected Action[] Unregister;
         private int ventIdx = 0;
 
-        protected abstract string VentLocatorKey { get; }
+        protected string VentLocatorKey = MaruKeys.Vent;
 
         protected virtual int EventCapacity => 0;
 

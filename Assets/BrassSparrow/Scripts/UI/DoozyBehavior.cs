@@ -1,8 +1,8 @@
 using System;
-using BrassSparrow.Scripts.Core;
+using Maru.MCore;
 
 namespace BrassSparrow.Scripts.UI {
-    public class DoozyBehavior : BrassSparrowBehavior {
+    public class DoozyBehavior : VentBehavior {
         protected virtual void Start() {
             Vent.Trigger(new RegisterUIComponentEvent {Component = this});
         }

@@ -7,7 +7,6 @@ using UnityEngine;
 namespace BrassSparrow.Scripts {
     public class SceneManager : MonoBehaviour {
         public const string RandomKey = "BrassSparrow.Random";
-        public const string VentKey = "BrassSparrow.Vent";
 
         private DoozyEventTranslator doozyTranslator; 
             
@@ -18,7 +17,7 @@ namespace BrassSparrow.Scripts {
 
             var vent = new MessageBus();
             locator.Set(RandomKey, new System.Random());
-            locator.Set(VentKey, vent);
+            locator.Set(MaruKeys.Vent, vent);
             
             var doozyListener = GetComponent<GameEventListener>();
             doozyTranslator = new DoozyEventTranslator(vent, doozyListener);
