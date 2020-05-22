@@ -8,6 +8,7 @@ using BrassSparrow.Scripts.UI;
 using BrassSparrow.Scripts.UI.ColorPicker;
 using Doozy.Engine.UI;
 using Maru.MCore;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI.Extensions.ColorPicker;
 using SysRandom = System.Random;
@@ -16,17 +17,30 @@ namespace BrassSparrow.Scripts.Doll {
     public class DollDesignManager : VentBehavior {
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
                                               "/Characters_ModularParts_Static";
+        
+        private static readonly string DefaultDirectory = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "BrassSparrow"
+        );
+
+        private static readonly string DefaultFilename = "doll.ubin";
 
         public const string NavToPartTypeMenu = "NavTo:PartTypeMenu";
         public const string NavToPartMenu = "NavTo:PartMenu";
         public const string NavToColorTypeMenu = "NavTo:ColorTypeMenu";
+        public const string NavToFileMenu = "NavTo:FileMenu";
         public const string ColorApplyToAll = "Color:ApplyToAll";
         public const string GenderToggle = "Gender:Toggle";
+        public const string FileSave = "File:Save";
+        public const string FileLoad = "File:Load";
 
         public string channelKey = "DollDesignManager";
         public GameObject masterCanvas;
         public GameObject protoDoll;
         public GameObject dollContainer;
+        public GameObject fileMenu;
+        public TMP_InputField directoryInput;
+        public TMP_InputField filenameInput;
 
         [Header("Part")] public GameObject protoPartSelector;
         public string partSelectionKey = "DollPartSelection";
@@ -62,7 +76,7 @@ namespace BrassSparrow.Scripts.Doll {
         private Dictionary<DollColorType, ColorSwatchUpdater> colorButtons;
         private Dictionary<DollRangeType, EnumComboSlider> rangeSliders;
 
-        protected override int EventCapacity => 10;
+        protected override int EventCapacity => 13;
 
         private GenderedDollChoices genderedParts;
 
@@ -73,16 +87,20 @@ namespace BrassSparrow.Scripts.Doll {
             On<EnumSelectedEvent<DollColorType>>(channelKey, ColorTypeSelected);
             On<EnumDataChangedEvent<DollRangeType, float>>(channelKey, ShaderRangeChanged);
             On<PartSelectedEvent>(PartSelected);
+            On<ColorPickerChangedEvent>(channelKey, ColorChanged);
+            On<UIComponentEvent>($"{channelKey}:{NavToFileMenu}", ShowFileMenu);
             On<UIComponentEvent>($"{channelKey}:{NavToPartTypeMenu}", ShowPartTypeMenu);
             On<UIComponentEvent>($"{channelKey}:{NavToPartMenu}", ShowPartMenu);
             On<UIComponentEvent>($"{channelKey}:{NavToColorTypeMenu}", ShowColorTypeMenu);
-            On<ColorPickerChangedEvent>(channelKey, ColorChanged);
             On<UIComponentEvent>($"{channelKey}:{ColorApplyToAll}", ApplyColorToAllParts);
             On<UIComponentEvent>($"{channelKey}:{GenderToggle}", DoToggleGender);
+            On<UIComponentEvent>($"{channelKey}:{FileSave}", SaveDoll);
+            On<UIComponentEvent>($"{channelKey}:{FileLoad}", LoadDoll);
         }
 
         private void Start() {
             menus = new List<GameObject> {
+                fileMenu,
                 partTypeSelectionMenu,
                 partSelectionMenu,
                 colorTypeSelectionMenu,
@@ -97,12 +115,9 @@ namespace BrassSparrow.Scripts.Doll {
             doll.SetConfig(dollParts);
 
             // Show and build the part type selection menu
-            ShowMenu(partTypeSelectionMenu);
-            var partTypeOptions = BuildTypeButtons<DollPartType>(protoPartTypeSelector);
-            Vent.Trigger(new SetItemsEvent {Items = partTypeOptions, Key = partTypeSelectionKey});
-
-            // SaveDoll();
-            // LoadDoll();
+            ShowFileMenu();
+            directoryInput.text = DefaultDirectory;
+            filenameInput.text = DefaultFilename;
         }
 
         private void DisplayDollChoices<T>(IReadOnlyCollection<T> choices) where T : DollPart {
@@ -119,16 +134,25 @@ namespace BrassSparrow.Scripts.Doll {
             Vent.Trigger(new SetItemsEvent {Items = choiceGos, Key = partSelectionKey});
         }
 
-        private void SaveDoll() {
+        private string filePath() {
+            return Path.Combine(directoryInput.text, filenameInput.text);
+        }
+
+        private void SaveDoll(UIComponentEvent _) {
             var bf = new BinaryFormatter();
-            var file = File.Create("DevData/doll.bin");
+            var path = filePath();
+            var dir = Path.GetDirectoryName(path);
+            if (!Directory.Exists(dir)) {
+                Directory.CreateDirectory(dir);
+            }
+            var file = File.Create(path);
             bf.Serialize(file, doll.Config);
             file.Close();
         }
 
-        private void LoadDoll() {
+        private void LoadDoll(UIComponentEvent _) {
             var bf = new BinaryFormatter();
-            var file = File.Open("DevData/doll.bin", FileMode.Open);
+            var file = File.Open(filePath(), FileMode.Open);
             var config = bf.Deserialize(file) as DollConfig;
             doll.SetConfig(config);
         }
@@ -253,6 +277,7 @@ namespace BrassSparrow.Scripts.Doll {
             } else {
                 genderedParts = doll.Choices.Male;
             }
+
             ShowPartMenu();
         }
 
@@ -266,19 +291,20 @@ namespace BrassSparrow.Scripts.Doll {
             menu.SetActive(true);
         }
 
+        private void ShowFileMenu(UIComponentEvent _ = new UIComponentEvent()) {
+            ShowMenu(fileMenu);
+        }
+
         private void ShowPartTypeMenu(UIComponentEvent _) {
             ShowMenu(partTypeSelectionMenu);
             if (!partTypeMenuCreated) {
                 var partTypeOptions = BuildTypeButtons<DollPartType>(protoPartTypeSelector);
                 Vent.Trigger(new SetItemsEvent {Items = partTypeOptions, Key = partTypeSelectionKey});
+                partTypeMenuCreated = true;
             }
         }
 
-        private void ShowPartMenu(UIComponentEvent _) {
-            ShowPartMenu();
-        }
-
-        private void ShowPartMenu() {
+        private void ShowPartMenu(UIComponentEvent _ = new UIComponentEvent()) {
             ShowMenu(partSelectionMenu);
             var choices = GetDollChoices(selectedPartType);
             DisplayDollChoices(choices);
