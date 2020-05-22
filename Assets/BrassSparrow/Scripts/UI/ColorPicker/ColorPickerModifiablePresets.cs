@@ -50,7 +50,6 @@ namespace BrassSparrow.Scripts.UI.ColorPicker {
 
             picker.onHSVChanged.AddListener(HSVChanged);
             picker.onValueChanged.AddListener(ColorChanged);
-            picker.CurrentColor = Color.white;
             presetPrefab.SetActive(false);
 
             for (var i = 0; i < predefinedPresets.Length; i++) {

@@ -27,8 +27,7 @@ namespace BrassSparrow.Scripts.Doll {
             Materials = new Dictionary<DollPartType, Material>(partTypes.Length);
             foreach (DollPartType partType in partTypes) {
                 Materials[partType] = new Material(shader);
-                // TODO provide slider in UI
-                Materials[partType].SetFloat("_BodyArt_Amount", 1.0f);
+                Materials[partType].SetFloat(DollRange.BodyArtAmount.Id, 1.0f);
             }
 
             // Disable everything, by default

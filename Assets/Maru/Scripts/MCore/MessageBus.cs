@@ -26,7 +26,7 @@ namespace Maru.MCore {
             return () => Unsubscribe(handler);
         }
 
-        public Action On<TEvent>(string key, Action<TEvent> handler) where TEvent : IKeyedEvent {
+        public Action On<TEvent>(string key, Action<TEvent> handler) {
             if (key == null) {
                 return On(handler);
             }
@@ -53,7 +53,7 @@ namespace Maru.MCore {
             });
         }
 
-        public Action Once<TEvent>(string key, Action<TEvent> handler) where TEvent : IKeyedEvent {
+        public Action Once<TEvent>(string key, Action<TEvent> handler) {
             if (key == null) {
                 return Once(handler);
             }
@@ -76,7 +76,7 @@ namespace Maru.MCore {
             }
         }
 
-        public void Unsubscribe<TEvent>(string key, Action<TEvent> handler) where TEvent : IKeyedEvent {
+        public void Unsubscribe<TEvent>(string key, Action<TEvent> handler) {
             if (key == null) {
                 Unsubscribe(handler);
                 return;
@@ -105,12 +105,17 @@ namespace Maru.MCore {
 
             if (evt is IKeyedEvent keyedEvent) {
                 var key = keyedEvent.GetEventKey();
-                var dictKey = new Tuple<Type, string>(eventType, key);
-                if (keyedListeners.ContainsKey(dictKey)) {
-                    var eventHandlers = keyedListeners[dictKey];
-                    foreach (var handler in eventHandlers) {
-                        ((Action<TEvent>) handler).Invoke(evt);
-                    }
+                Trigger(key, evt);
+            }
+        }
+
+        public void Trigger<TEvent>(string key, TEvent evt) {
+            var eventType = typeof(TEvent);
+            var dictKey = new Tuple<Type, string>(eventType, key);
+            if (keyedListeners.ContainsKey(dictKey)) {
+                var eventHandlers = keyedListeners[dictKey];
+                foreach (var handler in eventHandlers) {
+                    ((Action<TEvent>) handler).Invoke(evt);
                 }
             }
         }

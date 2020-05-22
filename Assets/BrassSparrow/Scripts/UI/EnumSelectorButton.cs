@@ -1,6 +1,5 @@
-using System;
+using BrassSparrow.Scripts.Events;
 using Doozy.Engine.UI;
-using Maru.MCore;
 
 namespace BrassSparrow.Scripts.UI {
     public class EnumSelectorButton : DoozyBehavior {
@@ -26,36 +25,6 @@ namespace BrassSparrow.Scripts.UI {
 
         private void TriggerSelected() {
             selection.TriggerEvent(Vent);
-        }
-    }
-
-    public interface IEnumSelection {
-        void TriggerEvent(IMessageBus vent);
-        int EnumValue();
-    }
-
-    public class EnumSelection<T> : IEnumSelection where T : Enum {
-        private EnumSelectedEvent<T> evt;
-
-        public EnumSelection(T type, string ventKey) {
-            evt = new EnumSelectedEvent<T> {Key = ventKey, Type = type};
-        }
-
-        public int EnumValue() {
-            return (int) (object) evt.Type;
-        }
-
-        public void TriggerEvent(IMessageBus vent) {
-            vent.Trigger(evt);
-        }
-    }
-
-    public struct EnumSelectedEvent<T> : IKeyedEvent where T : Enum {
-        public string Key;
-        public T Type;
-
-        public string GetEventKey() {
-            return Key;
         }
     }
 }

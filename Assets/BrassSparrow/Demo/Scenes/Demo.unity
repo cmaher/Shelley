@@ -1044,9 +1044,12 @@ MonoBehaviour:
     type: 3}
   partTypeSelectionKey: DollPartTypeSelection
   partTypeSelectionMenu: {fileID: 1306994653}
-  protoColorTypeSelector: {fileID: 8189494805033850205, guid: d7f613217b088a64485fca3ffab9e463,
+  protoColorSwatchUpdater: {fileID: 8189494805033850205, guid: d7f613217b088a64485fca3ffab9e463,
     type: 3}
   colorTypeSelectionKey: DollColorTypeSelection
+  protoRangeSelector: {fileID: -4257947183279887808, guid: 699a7e2679340104c8e82176dbf8f0c7,
+    type: 3}
+  rangeSelectionKey: DollRangeSelection
   colorTypeSelectionMenu: {fileID: 1263730156}
   colorPickerMenu: {fileID: 636984090}
   colorPicker: {fileID: 2038235968}

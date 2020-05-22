@@ -24,7 +24,7 @@ namespace Maru.MCore {
             return off;
         }
 
-        protected Action On<TEvent>(string key, Action<TEvent> handler) where TEvent : IKeyedEvent {
+        protected Action On<TEvent>(string key, Action<TEvent> handler) {
             var off = Vent.On(key, handler);
             Unregister[ventIdx++] = off;
             return off;
@@ -36,7 +36,7 @@ namespace Maru.MCore {
             return off;
         }
         
-        protected Action Once<TEvent>(string key, Action<TEvent> handler) where TEvent: IKeyedEvent {
+        protected Action Once<TEvent>(string key, Action<TEvent> handler) {
             var off = Vent.Once(key, handler);
             Unregister[ventIdx++] = off;
             return off;

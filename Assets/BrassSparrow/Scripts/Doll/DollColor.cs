@@ -80,13 +80,4 @@ namespace BrassSparrow.Scripts.Doll {
         BodyArt,
         Eyes,
     }
-
-    public enum DollShaderRanges {
-        Metallic,
-        Smoothness,
-        BodyArtAmount,
-
-        // What does this do?
-        Emission
-    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using BrassSparrow.Scripts.Events;
 using BrassSparrow.Scripts.UI;
 using BrassSparrow.Scripts.UI.ColorPicker;
 using Maru.MCore;
@@ -33,8 +34,10 @@ namespace BrassSparrow.Scripts.Doll {
         public string partTypeSelectionKey = "DollPartTypeSelection";
         public GameObject partTypeSelectionMenu;
 
-        [Header("Color")] public ColorTypeSelector protoColorTypeSelector;
+        [Header("Color")] public ColorSwatchUpdater protoColorSwatchUpdater;
         public string colorTypeSelectionKey = "DollColorSelection";
+        public EnumComboSlider protoRangeSelector;
+        public string rangeSelectionKey = "DollRangeSelection";
         public GameObject colorTypeSelectionMenu;
         public GameObject colorPickerMenu;
         public ColorPickerControl colorPicker;
@@ -53,13 +56,17 @@ namespace BrassSparrow.Scripts.Doll {
         private bool partTypeMenuCreated = false;
         private bool colorTypeMenuCreated = false;
 
-        protected override int EventCapacity => 8;
+        private Dictionary<DollColorType, ColorSwatchUpdater> colorButtons;
+        private Dictionary<DollRangeType, EnumComboSlider> rangeSliders;
+
+        protected override int EventCapacity => 9;
 
         protected override void Awake() {
             base.Awake();
             random = Locator.Get(SceneManager.RandomKey) as SysRandom;
             On<EnumSelectedEvent<DollPartType>>(channelKey, PartTypeSelected);
             On<EnumSelectedEvent<DollColorType>>(channelKey, ColorTypeSelected);
+            On<EnumDataChangedEvent<DollRangeType, float>>(channelKey, ShaderRangeChanged);
             On<PartSelectedEvent>(PartSelected);
             On<UIComponentEvent>($"{channelKey}:{NavToPartTypeMenu}", ShowPartTypeMenu);
             On<UIComponentEvent>($"{channelKey}:{NavToPartMenu}", ShowPartMenu);
@@ -84,7 +91,7 @@ namespace BrassSparrow.Scripts.Doll {
 
             // Show and build the part type selection menu
             ShowMenu(partTypeSelectionMenu);
-            var partTypeOptions = GetTypeOptions<DollPartType>(protoPartTypeSelector);
+            var partTypeOptions = BuildTypeButtons<DollPartType>(protoPartTypeSelector);
             Vent.Trigger(new SetItemsEvent {Items = partTypeOptions, Key = partTypeSelectionKey});
 
             // SaveDoll();
@@ -170,7 +177,7 @@ namespace BrassSparrow.Scripts.Doll {
             return dict;
         }
 
-        private List<GameObject> GetTypeOptions<T>(GameObject proto) where T : Enum {
+        private List<GameObject> BuildTypeButtons<T>(GameObject proto) where T : Enum {
             var capacity = Enum.GetNames(typeof(T)).Length;
             var options = new List<GameObject>(capacity);
             for (var i = 0; i < capacity; i++) {
@@ -223,12 +230,11 @@ namespace BrassSparrow.Scripts.Doll {
         private void ColorChanged(ColorPickerChangedEvent evt) {
             var colorSetting = DollColor.Get(selecteDollColorType);
             doll?.Materials[selectedPartType]?.SetColor(colorSetting.Id, evt.Color);
-            Vent.Trigger(new DollColorChangedEvent {
-                Key = channelKey,
-                PartType = selectedPartType,
-                ColorType = selecteDollColorType,
-                Color = evt.Color
-            });
+        }
+
+        private void ShaderRangeChanged(EnumDataChangedEvent<DollRangeType, float> evt) {
+            var setting = DollRange.Get(evt.Type);
+            doll?.Materials[selectedPartType]?.SetFloat(setting.Id, evt.Value);
         }
 
         private void ApplyColorToAllParts(UIComponentEvent _) {
@@ -251,7 +257,7 @@ namespace BrassSparrow.Scripts.Doll {
         private void ShowPartTypeMenu(UIComponentEvent _) {
             ShowMenu(partTypeSelectionMenu);
             if (!partTypeMenuCreated) {
-                var partTypeOptions = GetTypeOptions<DollPartType>(protoPartTypeSelector);
+                var partTypeOptions = BuildTypeButtons<DollPartType>(protoPartTypeSelector);
                 Vent.Trigger(new SetItemsEvent {Items = partTypeOptions, Key = partTypeSelectionKey});
             }
         }
@@ -264,34 +270,57 @@ namespace BrassSparrow.Scripts.Doll {
 
         private void ShowColorTypeMenu(UIComponentEvent _) {
             ShowMenu(colorTypeSelectionMenu);
+            var colorTypes = Enum.GetValues(typeof(DollColorType));
+            var rangeTypes = Enum.GetValues(typeof(DollRangeType));
+            var itemsLength = colorTypes.Length + rangeTypes.Length;
             if (!colorTypeMenuCreated) {
-                var colorOptions = GetTypeOptions<DollColorType>(protoColorTypeSelector.gameObject);
-                var colorTypes = Enum.GetValues(typeof(DollColorType));
+                colorButtons = new Dictionary<DollColorType, ColorSwatchUpdater>();
+                rangeSliders = new Dictionary<DollRangeType, EnumComboSlider>();
+                
+                var colorOptions = BuildTypeButtons<DollColorType>(protoColorSwatchUpdater.gameObject);
+                var items = new List<GameObject>(itemsLength);
 
                 // Set initial color swatch color and configure vent
                 // relies on the fact that the buttons were created in enum order
                 for (var i = 0; i < colorTypes.Length; i++) {
-                    var selector = colorOptions[i].GetComponent<ColorTypeSelector>();
-                    selector.listenKey = channelKey;
-                    var colorSetting = DollColor.Get((DollColorType) colorTypes.GetValue(i));
+                    var go = colorOptions[i];
+                    var type = (DollColorType) (object) (i);
+                    items.Add(go);
+                    var selector = go.GetComponent<ColorSwatchUpdater>();
+                    var colorSetting = DollColor.Get(type);
                     selector.SetColor(doll.Materials[selectedPartType].GetColor(colorSetting.Id));
+
+                    colorButtons[type] = selector;
                 }
 
-                Vent.Trigger(new SetItemsEvent {Items = colorOptions, Key = colorTypeSelectionKey});
+                for (var i = 0; i < rangeTypes.Length; i++) {
+                    var type = (DollRangeType) (object) i;
+                    var go = Instantiate(protoRangeSelector.gameObject);
+                    items.Add(go);
+                    var rangeSetting = DollRange.Get(type);
+                    var slider = go.GetComponent<EnumComboSlider>();
+                    slider.label.text = Enum.GetName(typeof(DollRangeType), type);
+                    slider.ValueTrigger = new EnumDataTrigger<DollRangeType, float>(type, channelKey);
+                    slider.SetValue(doll.Materials[selectedPartType].GetFloat(rangeSetting.Id));
 
+                    rangeSliders[type] = slider;
+                }
+
+                Vent.Trigger(new SetItemsEvent {Items = items, Key = colorTypeSelectionKey});
                 colorTypeMenuCreated = true;
+            } else {
+                foreach (DollColorType type in colorTypes) {
+                    var setting = DollColor.Get(type);
+                    var color = doll.Materials[selectedPartType].GetColor(setting.Id);
+                    colorButtons[type].SetColor(color);
+                }
+
+                foreach (DollRangeType type in rangeTypes) {
+                    var setting = DollRange.Get(type);
+                    var value = doll.Materials[selectedPartType].GetFloat(setting.Id);
+                    rangeSliders[type].SetValue(value);
+                }
             }
-        }
-    }
-
-    public struct DollColorChangedEvent : IKeyedEvent {
-        public string Key;
-        public DollPartType PartType;
-        public DollColorType ColorType;
-        public Color Color;
-
-        public string GetEventKey() {
-            return Key;
         }
     }
 }
