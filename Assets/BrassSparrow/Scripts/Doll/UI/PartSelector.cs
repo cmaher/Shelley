@@ -12,7 +12,9 @@ namespace BrassSparrow.Scripts.UI {
         
         public DollPart DollPart;
         public GameObject masterCanvas;
-        public float meshScale;
+        public float defaultScale = 1;
+        public float backAttachmentScale = 1;
+        public float torsoScale = 1;
         
         private GameObject mesh;
         private ProceduralImage box;
@@ -46,7 +48,20 @@ namespace BrassSparrow.Scripts.UI {
             uiMesh = mesh.AddComponent<UIMesh>();
             uiMesh.canvas = masterCanvas;
             uiMesh.unscaledDistance = meshDistance;
-            mesh.transform.localScale = new Vector3(meshScale, meshScale, meshScale);
+
+            float scale;
+            switch (DollPart.Type) {
+                case DollPartType.Torso:
+                    scale = torsoScale;
+                    break;
+                case DollPartType.BackAttachment:
+                    scale = backAttachmentScale;
+                    break;
+                default:
+                    scale = defaultScale;
+                    break;
+            }
+            mesh.transform.localScale = new Vector3(scale, scale, scale);
         }
 
         public void SetSelected(bool selected) {

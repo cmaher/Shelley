@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using BrassSparrow.Scripts.Events;
 using BrassSparrow.Scripts.UI;
 using BrassSparrow.Scripts.UI.ColorPicker;
+using Doozy.Engine.UI;
 using Maru.MCore;
 using UnityEngine;
 using UnityEngine.UI.Extensions.ColorPicker;
@@ -20,6 +21,7 @@ namespace BrassSparrow.Scripts.Doll {
         public const string NavToPartMenu = "NavTo:PartMenu";
         public const string NavToColorTypeMenu = "NavTo:ColorTypeMenu";
         public const string ColorApplyToAll = "Color:ApplyToAll";
+        public const string GenderToggle = "Gender:Toggle";
 
         public string channelKey = "DollDesignManager";
         public GameObject masterCanvas;
@@ -29,6 +31,7 @@ namespace BrassSparrow.Scripts.Doll {
         [Header("Part")] public GameObject protoPartSelector;
         public string partSelectionKey = "DollPartSelection";
         public GameObject partSelectionMenu;
+        public UIButton toggleGender;
 
         [Header("Part Type")] public GameObject protoPartTypeSelector;
         public string partTypeSelectionKey = "DollPartTypeSelection";
@@ -59,7 +62,9 @@ namespace BrassSparrow.Scripts.Doll {
         private Dictionary<DollColorType, ColorSwatchUpdater> colorButtons;
         private Dictionary<DollRangeType, EnumComboSlider> rangeSliders;
 
-        protected override int EventCapacity => 9;
+        protected override int EventCapacity => 10;
+
+        private GenderedDollChoices genderedParts;
 
         protected override void Awake() {
             base.Awake();
@@ -73,6 +78,7 @@ namespace BrassSparrow.Scripts.Doll {
             On<UIComponentEvent>($"{channelKey}:{NavToColorTypeMenu}", ShowColorTypeMenu);
             On<ColorPickerChangedEvent>(channelKey, ColorChanged);
             On<UIComponentEvent>($"{channelKey}:{ColorApplyToAll}", ApplyColorToAllParts);
+            On<UIComponentEvent>($"{channelKey}:{GenderToggle}", DoToggleGender);
         }
 
         private void Start() {
@@ -84,6 +90,7 @@ namespace BrassSparrow.Scripts.Doll {
             };
             dollGo = Instantiate(protoDoll, dollContainer.transform);
             doll = new WorkingDoll(dollGo, shader);
+            genderedParts = RandomGender();
             staticParts = LoadStaticParts();
 
             var dollParts = RandomDoll();
@@ -195,16 +202,12 @@ namespace BrassSparrow.Scripts.Doll {
 
         private void PartTypeSelected(EnumSelectedEvent<DollPartType> evt) {
             selectedPartType = evt.Type;
-            var choices = GetDollChoices(selectedPartType);
-            ShowMenu(partSelectionMenu);
-            DisplayDollChoices(choices);
+            ShowPartMenu();
         }
 
         private List<DollPart> GetDollChoices(DollPartType type) {
             List<DollPart> choices;
             if (DollPartTypes.IsGendered(type)) {
-                // TODO set this from UI
-                var genderedParts = doll.Choices.Male;
                 choices = genderedParts.Get(type);
             } else {
                 choices = doll.Choices.Ungendered.Get(type);
@@ -244,6 +247,15 @@ namespace BrassSparrow.Scripts.Doll {
             }
         }
 
+        private void DoToggleGender(UIComponentEvent evt) {
+            if (genderedParts == doll.Choices.Male) {
+                genderedParts = doll.Choices.Female;
+            } else {
+                genderedParts = doll.Choices.Male;
+            }
+            ShowPartMenu();
+        }
+
         private void ShowMenu(GameObject menu) {
             foreach (var m in menus) {
                 if (m != menu) {
@@ -263,9 +275,21 @@ namespace BrassSparrow.Scripts.Doll {
         }
 
         private void ShowPartMenu(UIComponentEvent _) {
+            ShowPartMenu();
+        }
+
+        private void ShowPartMenu() {
             ShowMenu(partSelectionMenu);
             var choices = GetDollChoices(selectedPartType);
             DisplayDollChoices(choices);
+            toggleGender.gameObject.SetActive(DollPartTypes.IsGendered(selectedPartType));
+            if (toggleGender.gameObject.activeSelf) {
+                if (genderedParts == doll.Choices.Male) {
+                    toggleGender.SetLabelText("Male\n(Toggle)");
+                } else {
+                    toggleGender.SetLabelText("Female\n(Toggle)");
+                }
+            }
         }
 
         private void ShowColorTypeMenu(UIComponentEvent _) {
@@ -276,7 +300,7 @@ namespace BrassSparrow.Scripts.Doll {
             if (!colorTypeMenuCreated) {
                 colorButtons = new Dictionary<DollColorType, ColorSwatchUpdater>();
                 rangeSliders = new Dictionary<DollRangeType, EnumComboSlider>();
-                
+
                 var colorOptions = BuildTypeButtons<DollColorType>(protoColorSwatchUpdater.gameObject);
                 var items = new List<GameObject>(itemsLength);
 

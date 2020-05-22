@@ -13,8 +13,8 @@ namespace BrassSparrow.Scripts.UI {
             var doozyButton = GetComponent<UIButton>();
             doozyButton.OnClick.OnTrigger.GameEvents.Add(DoozySelfEvent.DoozyEventKey(this));
             OnSelfEvent(() => {
-                var evt = new UIComponentEvent {Key = key, Component = this};
-                Vent.Trigger(evt);
+                var evt = new UIComponentEvent {Component = this};
+                Vent.Trigger(key, evt);
             });
         }
     }

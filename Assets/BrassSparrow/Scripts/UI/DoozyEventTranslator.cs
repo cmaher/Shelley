@@ -104,13 +104,8 @@ namespace BrassSparrow.Scripts.UI {
         }
     }
 
-    public struct UIComponentEvent : IKeyedEvent {
-        public string Key;
+    public struct UIComponentEvent {
         public Component Component;
-        
-        public string GetEventKey() {
-            return Key;
-        }
     }
 
     // Useful for doozy components that want to react tho their own events
