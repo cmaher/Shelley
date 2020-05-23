@@ -1,74 +1,131 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Maru.Scripts.MSerialize;
 using UnityEngine;
 
 namespace BrassSparrow.Scripts.Doll {
     public class WorkingDoll {
-        public DollChoices Choices;
-        public readonly Dictionary<string, DollPart> PartsDict;
-        public readonly Dictionary<DollPartType, Material> Materials;
+        public readonly DollChoices Choices;
 
-        public DollConfig Config => config;
-
-        private Transform partsRoot;
-        private DollConfig config;
+        private readonly Transform partsRoot;
+        private readonly Dictionary<string, DollPart> AllParts;
+        private readonly Dictionary<DollPartType, DollPart> ActiveParts;
+        private readonly Dictionary<DollPartType, Material> Materials;
 
         public WorkingDoll(GameObject modularDoll, Shader shader) {
+            ActiveParts = new Dictionary<DollPartType, DollPart>(DollPartTypes.Length);
+            foreach (DollPartType partType in DollPartTypes.Values) {
+                ActiveParts[partType] = null;
+            }
+
             partsRoot = modularDoll.transform.Find("Modular_Characters");
-            PartsDict = new Dictionary<string, DollPart>();
+            AllParts = new Dictionary<string, DollPart>(720); // capacity determined experimentally
             Choices = new DollChoices {
                 Ungendered = BuildUngenderedDollChoices(),
                 Male = BuildGenderedDollChoices("Male"),
                 Female = BuildGenderedDollChoices("Female")
             };
 
-            var partTypes = Enum.GetValues(typeof(DollPartType));
-            Materials = new Dictionary<DollPartType, Material>(partTypes.Length);
-            foreach (DollPartType partType in partTypes) {
+            Materials = new Dictionary<DollPartType, Material>(DollPartTypes.Length);
+            foreach (DollPartType partType in DollPartTypes.Values) {
                 Materials[partType] = new Material(shader);
                 Materials[partType].SetFloat(DollRange.BodyArtAmount.Id, 1.0f);
             }
 
             // Disable everything, by default
-            foreach (var part in PartsDict.Values) {
+            foreach (var part in AllParts.Values) {
                 part.Go.SetActive(false);
                 part.Go.GetComponent<Renderer>().material = Materials[part.Type];
             }
-
-            config = null;
         }
 
-        public void SetConfig(DollConfig newConfig) {
-            if (config == null) {
-                foreach (var path in newConfig.parts) {
-                    if (path != null) {
-                        PartsDict[path].Go.SetActive(true);
-                    }
-                }
+        public Material GetMaterial(DollPartType type) {
+            return Materials[type];
+        }
+
+        public void SetPart(DollPartType partType, string path) {
+            ActiveParts[partType]?.Go.SetActive(false);
+            if (path != null) {
+                var newPart = AllParts[path];
+                newPart.Go.SetActive(true);
+                ActiveParts[partType] = newPart;
             } else {
-                // apply the difference between the old and new config
-                var oldIter = Config.parts.GetEnumerator();
-                var newIter = newConfig.parts.GetEnumerator();
+                ActiveParts[partType] = null;
+            }
+        }
 
-                while (oldIter.MoveNext()) {
-                    newIter.MoveNext();
-                    if (oldIter.Current == null && newIter.Current != null) {
-                        PartsDict[newIter.Current].Go.SetActive(true);
-                    } else if (oldIter.Current != null && newIter.Current == null) {
-                        PartsDict[oldIter.Current].Go.SetActive(false);
-                    } else if (oldIter.Current != null && newIter.Current != null &&
-                               !oldIter.Current.Equals(newIter.Current)) {
-                        PartsDict[oldIter.Current].Go.SetActive(false);
-                        PartsDict[newIter.Current].Go.SetActive(true);
-                    }
-                }
+        public void SetColor(DollPartType partType, DollColorType colorType, Color color) {
+            var colorSetting = DollColor.Get(colorType);
+            Materials[partType].SetColor(colorSetting.Id, color);
+        }
 
-                oldIter.Dispose();
-                newIter.Dispose();
+        public Color GetColor(DollPartType partType, DollColorType colorType) {
+            var colorSetting = DollColor.Get(colorType);
+            return Materials[partType].GetColor(colorSetting.Id);
+        }
+
+        public void SetRangeFloat(DollPartType partType, DollRangeType rangeType, float value) {
+            var setting = DollRange.Get(rangeType);
+            Materials[partType].SetFloat(setting.Id, value);
+        }
+
+        public float GetRangeFloat(DollPartType partType, DollRangeType rangeType) {
+            var setting = DollRange.Get(rangeType);
+            return Materials[partType].GetFloat(setting.Id);
+        }
+
+        public DollConfig ToConfig() {
+            var activeParts = new Dictionary<DollPartType, string>(DollPartTypes.Length);
+            foreach (DollPartType type in DollPartTypes.Values) {
+                activeParts[type] = ActiveParts[type]?.Path;
             }
 
-            config = newConfig;
+            var shaders = new Dictionary<DollPartType, DollShaderConfig>(DollPartTypes.Length);
+            foreach (DollPartType partType in DollPartTypes.Values) {
+                var colors = new Dictionary<DollColorType, SerializableColor>(DollColorTypes.Length);
+                foreach (DollColorType colorType in DollColorTypes.Values) {
+                    var color = GetColor(partType, colorType);
+                    colors[colorType] = SerializableColor.FromColor(color);
+                }
+
+                var ranges = new Dictionary<DollRangeType, float>(DollRangeTypes.Length);
+                foreach (DollRangeType rangeType in DollRangeTypes.Values) {
+                    ranges[rangeType] = GetRangeFloat(partType, rangeType);
+                }
+
+                shaders[partType] = new DollShaderConfig {colors = colors, ranges = ranges};
+            }
+
+            return new DollConfig {
+                activeParts = activeParts,
+                shaders = shaders,
+            };
+        }
+
+        public void SetFromConfig(DollConfig config) {
+            foreach (var entry in config.activeParts) {
+                SetPart(entry.Key, entry.Value);
+            }
+
+            foreach (var shader in config.shaders) {
+                foreach (var color in shader.Value.colors) {
+                    SetColor(shader.Key, color.Key, color.Value.ToColor());
+                }
+                
+                foreach (var range in shader.Value.ranges) {
+                    SetRangeFloat(shader.Key, range.Key, range.Value);
+                }
+            }
+        }
+
+        public Dictionary<string, DollPart> AllPartsByName() {
+            var namesToParts = new Dictionary<string, DollPart>(AllParts.Count);
+            foreach (var part in AllParts.Values) {
+                namesToParts[part.Go.name] = part;
+            }
+
+            return namesToParts;
         }
 
         private UngenderedDollChoices BuildUngenderedDollChoices() {
@@ -133,7 +190,7 @@ namespace BrassSparrow.Scripts.Doll {
                 choices.Add(new DollPart(child.gameObject, path, type));
             }
 
-            IndexParts(PartsDict, choices);
+            IndexParts(AllParts, choices);
             return choices;
         }
 
@@ -165,7 +222,7 @@ namespace BrassSparrow.Scripts.Doll {
                 choices.Add(new DollPart(childGo, path, DollPartType.Head, false));
             }
 
-            IndexParts(PartsDict, choices);
+            IndexParts(AllParts, choices);
             return choices;
         }
 
@@ -200,7 +257,7 @@ namespace BrassSparrow.Scripts.Doll {
                 choices.Add(new DollPart(go, path, DollPartType.HeadCovering, false, true));
             }
 
-            IndexParts(PartsDict, choices);
+            IndexParts(AllParts, choices);
             return choices;
         }
 

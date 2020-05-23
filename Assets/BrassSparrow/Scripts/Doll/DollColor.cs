@@ -80,4 +80,9 @@ namespace BrassSparrow.Scripts.Doll {
         BodyArt,
         Eyes,
     }
+
+    public static class DollColorTypes {
+        public static readonly Array Values = Enum.GetValues(typeof(DollColorType));
+        public static readonly int Length = Values.Length;
+    }
 }

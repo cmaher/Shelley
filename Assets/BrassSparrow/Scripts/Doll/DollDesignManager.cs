@@ -17,7 +17,7 @@ namespace BrassSparrow.Scripts.Doll {
     public class DollDesignManager : VentBehavior {
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
                                               "/Characters_ModularParts_Static";
-        
+
         private static readonly string DefaultDirectory = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "BrassSparrow"
@@ -110,9 +110,7 @@ namespace BrassSparrow.Scripts.Doll {
             doll = new WorkingDoll(dollGo, shader);
             genderedParts = RandomGender();
             staticParts = LoadStaticParts();
-
-            var dollParts = RandomDoll();
-            doll.SetConfig(dollParts);
+            RandomizeDoll();
 
             // Show and build the part type selection menu
             ShowFileMenu();
@@ -145,8 +143,9 @@ namespace BrassSparrow.Scripts.Doll {
             if (!Directory.Exists(dir)) {
                 Directory.CreateDirectory(dir);
             }
+
             var file = File.Create(path);
-            bf.Serialize(file, doll.Config);
+            bf.Serialize(file, doll.ToConfig());
             file.Close();
         }
 
@@ -154,26 +153,23 @@ namespace BrassSparrow.Scripts.Doll {
             var bf = new BinaryFormatter();
             var file = File.Open(filePath(), FileMode.Open);
             var config = bf.Deserialize(file) as DollConfig;
-            doll.SetConfig(config);
+            doll.SetFromConfig(config);
         }
 
-        private DollConfig RandomDoll() {
-            var parts = new DollPartsConfig {
-                head = RandomPart(RandomGender().Head),
-                eyebrows = RandomPart(RandomGender().Eyebrows),
-                facialHair = RandomPart(RandomGender().FacialHair),
-                torso = RandomPart(RandomGender().Torso),
-                armUpperRight = RandomPart(RandomGender().ArmUpperRight),
-                armUpperLeft = RandomPart(RandomGender().ArmUpperLeft),
-                armLowerRight = RandomPart(RandomGender().ArmLowerRight),
-                armLowerLeft = RandomPart(RandomGender().ArmLowerLeft),
-                handRight = RandomPart(RandomGender().HandRight),
-                handLeft = RandomPart(RandomGender().HandLeft),
-                hips = RandomPart(RandomGender().Hips),
-                legRight = RandomPart(RandomGender().LegRight),
-                legLeft = RandomPart(RandomGender().LegLeft),
-            };
-            return new DollConfig {parts = parts};
+        private void RandomizeDoll() {
+            doll.SetPart(DollPartType.Head, RandomPart(RandomGender().Head));
+            doll.SetPart(DollPartType.Eyebrows, RandomPart(RandomGender().Eyebrows));
+            doll.SetPart(DollPartType.FacialHair, RandomPart(RandomGender().FacialHair));
+            doll.SetPart(DollPartType.Torso, RandomPart(RandomGender().Torso));
+            doll.SetPart(DollPartType.ArmUpperRight, RandomPart(RandomGender().ArmUpperRight));
+            doll.SetPart(DollPartType.ArmUpperLeft, RandomPart(RandomGender().ArmUpperLeft));
+            doll.SetPart(DollPartType.ArmLowerRight, RandomPart(RandomGender().ArmLowerRight));
+            doll.SetPart(DollPartType.ArmLowerLeft, RandomPart(RandomGender().ArmLowerLeft));
+            doll.SetPart(DollPartType.HandRight, RandomPart(RandomGender().HandRight));
+            doll.SetPart(DollPartType.HandLeft, RandomPart(RandomGender().HandLeft));
+            doll.SetPart(DollPartType.Hips, RandomPart(RandomGender().Hips));
+            doll.SetPart(DollPartType.LegRight, RandomPart(RandomGender().LegRight));
+            doll.SetPart(DollPartType.LegLeft, RandomPart(RandomGender().LegLeft));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -191,17 +187,13 @@ namespace BrassSparrow.Scripts.Doll {
         }
 
         private Dictionary<string, DollPart> LoadStaticParts() {
-            var namesToParts = new Dictionary<string, DollPart>();
-            foreach (var part in doll.PartsDict.Values) {
-                namesToParts[part.Go.name] = part;
-            }
-
+            var namesToParts = doll.AllPartsByName();
             var dict = new Dictionary<string, DollPart>();
             var prefabs = Resources.LoadAll<GameObject>(StaticPartsDir);
             foreach (var p in prefabs) {
                 var partName = p.name.Replace("_Static", "");
                 var part = namesToParts[partName];
-                p.GetComponent<Renderer>().material = doll.Materials[part.Type];
+                p.GetComponent<Renderer>().material = doll.GetMaterial(part.Type);
                 dict[part.Path] = new DollPart(p, part.Path, part.Type);
             }
 
@@ -242,32 +234,26 @@ namespace BrassSparrow.Scripts.Doll {
 
         private void PartSelected(PartSelectedEvent evt) {
             var part = evt.PartSelector.DollPart;
-            var newConfig = doll.Config.Clone();
-            newConfig.parts.Set(part.Type, part.Path);
-            doll.SetConfig(newConfig);
+            doll.SetPart(part.Type, part.Path);
         }
 
         private void ColorTypeSelected(EnumSelectedEvent<DollColorType> evt) {
             ShowMenu(colorPickerMenu);
             selecteDollColorType = evt.Type;
-            var colorSetting = DollColor.Get(selecteDollColorType);
-            colorPicker.CurrentColor = doll.Materials[selectedPartType].GetColor(colorSetting.Id);
+            colorPicker.CurrentColor = doll.GetColor(selectedPartType, selecteDollColorType);
         }
 
         private void ColorChanged(ColorPickerChangedEvent evt) {
-            var colorSetting = DollColor.Get(selecteDollColorType);
-            doll?.Materials[selectedPartType]?.SetColor(colorSetting.Id, evt.Color);
+            doll.SetColor(selectedPartType, selecteDollColorType, evt.Color);
         }
 
         private void ShaderRangeChanged(EnumDataChangedEvent<DollRangeType, float> evt) {
-            var setting = DollRange.Get(evt.Type);
-            doll?.Materials[selectedPartType]?.SetFloat(setting.Id, evt.Value);
+            doll.SetRangeFloat(selectedPartType, evt.Type, evt.Value);
         }
 
         private void ApplyColorToAllParts(UIComponentEvent _) {
-            var colorSetting = DollColor.Get(selecteDollColorType);
             foreach (DollPartType partType in Enum.GetValues(typeof(DollPartType))) {
-                doll.Materials[partType].SetColor(colorSetting.Id, colorPicker.CurrentColor);
+                doll.SetColor(partType, selecteDollColorType, colorPicker.CurrentColor);
             }
         }
 
@@ -334,40 +320,35 @@ namespace BrassSparrow.Scripts.Doll {
                 // relies on the fact that the buttons were created in enum order
                 for (var i = 0; i < colorTypes.Length; i++) {
                     var go = colorOptions[i];
-                    var type = (DollColorType) (object) (i);
+                    var colorType = (DollColorType) (object) (i);
                     items.Add(go);
                     var selector = go.GetComponent<ColorSwatchUpdater>();
-                    var colorSetting = DollColor.Get(type);
-                    selector.SetColor(doll.Materials[selectedPartType].GetColor(colorSetting.Id));
-
-                    colorButtons[type] = selector;
+                    selector.SetColor(doll.GetColor(selectedPartType, colorType));
+                    colorButtons[colorType] = selector;
                 }
 
                 for (var i = 0; i < rangeTypes.Length; i++) {
-                    var type = (DollRangeType) (object) i;
+                    var rangeType = (DollRangeType) (object) i;
                     var go = Instantiate(protoRangeSelector.gameObject);
                     items.Add(go);
-                    var rangeSetting = DollRange.Get(type);
                     var slider = go.GetComponent<EnumComboSlider>();
-                    slider.label.text = Enum.GetName(typeof(DollRangeType), type);
-                    slider.ValueTrigger = new EnumDataTrigger<DollRangeType, float>(type, channelKey);
-                    slider.SetValue(doll.Materials[selectedPartType].GetFloat(rangeSetting.Id));
+                    slider.label.text = Enum.GetName(typeof(DollRangeType), rangeType);
+                    slider.ValueTrigger = new EnumDataTrigger<DollRangeType, float>(rangeType, channelKey);
+                    slider.SetValue(doll.GetRangeFloat(selectedPartType, rangeType));
 
-                    rangeSliders[type] = slider;
+                    rangeSliders[rangeType] = slider;
                 }
 
                 Vent.Trigger(new SetItemsEvent {Items = items, Key = colorTypeSelectionKey});
                 colorTypeMenuCreated = true;
             } else {
                 foreach (DollColorType type in colorTypes) {
-                    var setting = DollColor.Get(type);
-                    var color = doll.Materials[selectedPartType].GetColor(setting.Id);
+                    var color = doll.GetColor(selectedPartType, type);
                     colorButtons[type].SetColor(color);
                 }
 
                 foreach (DollRangeType type in rangeTypes) {
-                    var setting = DollRange.Get(type);
-                    var value = doll.Materials[selectedPartType].GetFloat(setting.Id);
+                    var value = doll.GetRangeFloat(selectedPartType, type);
                     rangeSliders[type].SetValue(value);
                 }
             }

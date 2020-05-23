@@ -43,4 +43,9 @@ namespace BrassSparrow.Scripts.Doll {
         // What does this do?
         Emission,
     }
+
+    public static class DollRangeTypes {
+        public static readonly Array Values = Enum.GetValues(typeof(DollRangeType));
+        public static readonly int Length = Values.Length;
+    }
 }

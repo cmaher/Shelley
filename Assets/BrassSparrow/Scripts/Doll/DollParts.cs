@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using UnityEngine;
 
@@ -66,6 +67,9 @@ namespace BrassSparrow.Scripts.Doll {
                     throw new InvalidEnumArgumentException();
             }
         }
+
+        public static readonly Array Values = Enum.GetValues(typeof(DollPartType));
+        public static readonly int Length = Values.Length;
     }
 
     public class DollPart {
