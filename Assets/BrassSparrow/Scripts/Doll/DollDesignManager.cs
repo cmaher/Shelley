@@ -9,6 +9,7 @@ using BrassSparrow.Scripts.UI.ColorPicker;
 using Doozy.Engine.UI;
 using Maru.MCore;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI.Extensions.ColorPicker;
 using SysRandom = System.Random;
@@ -18,12 +19,8 @@ namespace BrassSparrow.Scripts.Doll {
         private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
                                               "/Characters_ModularParts_Static";
 
-        private static readonly string DefaultDirectory = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "BrassSparrow"
-        );
-
-        private static readonly string DefaultFilename = "doll.ubin";
+        private static readonly string DefaultSaveDirectory = "Assets/DollDesignSaves";
+        private static readonly string DefaultSaveName = "Doll";
 
         public const string NavToPartTypeMenu = "NavTo:PartTypeMenu";
         public const string NavToPartMenu = "NavTo:PartMenu";
@@ -31,8 +28,9 @@ namespace BrassSparrow.Scripts.Doll {
         public const string NavToFileMenu = "NavTo:FileMenu";
         public const string ColorApplyToAll = "Color:ApplyToAll";
         public const string GenderToggle = "Gender:Toggle";
-        public const string FileSave = "File:Save";
-        public const string FileLoad = "File:Load";
+        public const string ConfigFileSave = "ConfigFile:Save";
+        public const string ConfigFileLoad = "ConfigFile:Load";
+        public const string PrefabSave = "Prefab:Save";
         public const string PartMirror = "Part:Mirror";
 
         public string channelKey = "DollDesignManager";
@@ -40,7 +38,8 @@ namespace BrassSparrow.Scripts.Doll {
         public GameObject protoDoll;
         public GameObject dollContainer;
         public GameObject fileMenu;
-        public TMP_InputField directoryInput;
+
+        [Header("Files")] public TMP_InputField directoryInput;
         public TMP_InputField filenameInput;
 
         [Header("Part")] public GameObject protoPartSelector;
@@ -79,7 +78,7 @@ namespace BrassSparrow.Scripts.Doll {
         private Dictionary<DollColorType, ColorSwatchUpdater> colorButtons;
         private Dictionary<DollRangeType, EnumComboSlider> rangeSliders;
 
-        protected override int EventCapacity => 14;
+        protected override int EventCapacity => 15;
 
         private GenderedDollChoices genderedParts;
 
@@ -98,9 +97,10 @@ namespace BrassSparrow.Scripts.Doll {
             On<UIComponentEvent>($"{channelKey}:{NavToColorTypeMenu}", ShowColorTypeMenu);
             On<UIComponentEvent>($"{channelKey}:{ColorApplyToAll}", ApplyColorToAllParts);
             On<UIComponentEvent>($"{channelKey}:{GenderToggle}", DoToggleGender);
-            On<UIComponentEvent>($"{channelKey}:{FileSave}", SaveDoll);
-            On<UIComponentEvent>($"{channelKey}:{FileLoad}", LoadDoll);
             On<UIComponentEvent>($"{channelKey}:{PartMirror}", MirrorPart);
+            On<UIComponentEvent>($"{channelKey}:{ConfigFileSave}", SaveDoll);
+            On<UIComponentEvent>($"{channelKey}:{ConfigFileLoad}", LoadDoll);
+            On<UIComponentEvent>($"{channelKey}:{PrefabSave}", SaveDollPrefab);
         }
 
         private void Start() {
@@ -119,8 +119,8 @@ namespace BrassSparrow.Scripts.Doll {
 
             // Show and build the part type selection menu
             ShowFileMenu();
-            directoryInput.text = DefaultDirectory;
-            filenameInput.text = DefaultFilename;
+            directoryInput.text = DefaultSaveDirectory;
+            filenameInput.text = DefaultSaveName;
         }
 
         private void DisplayDollChoices<T>(IReadOnlyCollection<T> choices) where T : DollPart {
@@ -142,25 +142,47 @@ namespace BrassSparrow.Scripts.Doll {
             Vent.Trigger(new SetItemsEvent {Items = choiceGos, Key = partSelectionKey});
         }
 
-        private string filePath() {
-            return Path.Combine(directoryInput.text, filenameInput.text);
+        private string configFilePath() {
+            return $"{directoryInput.text}/Configs/{filenameInput.text}.ubin";
         }
 
         private void SaveDoll(UIComponentEvent _) {
-            var path = filePath();
-            var dir = Path.GetDirectoryName(path);
-            if (!Directory.Exists(dir)) {
-                Directory.CreateDirectory(dir);
-            }
-
+            var path = configFilePath();
+            EnsureDir(path);
             var file = File.Create(path);
             binaryFormatter.Serialize(file, doll.ToConfig());
             file.Close();
         }
 
+        private void SaveDollPrefab(UIComponentEvent _) {
+            var prefabFile = $"{directoryInput.text}/Prefabs/{filenameInput.text}.prefab";
+            EnsureDir(prefabFile);
+            
+            var prefab = new GameObject();
+            // Save materials to prefab
+            var materialDir = $"{directoryInput.text}/Materials";
+            EnsureDir($"{materialDir}/_.mat");
+            doll.Optimize(prefab.transform, (partType, material) => {
+                var partName = Enum.GetName(typeof(DollPartType), partType);
+                var materialPath = $"{materialDir}/{filenameInput.text}_{partName}.mat";
+                AssetDatabase.CreateAsset(material, materialPath);
+            });
+            PrefabUtility.SaveAsPrefabAsset(prefab, prefabFile);
+            
+            // remove the new prefab in the scene
+            Destroy(prefab);
+        }
+
         private void LoadDoll(UIComponentEvent _) {
-            var config = DollConfig.FromFile(binaryFormatter, filePath());
+            var config = DollConfig.FromFile(binaryFormatter, configFilePath());
             doll.SetFromConfig(config);
+        }
+
+        private void EnsureDir(string path) {
+            var dir = Path.GetDirectoryName(path);
+            if (!Directory.Exists(dir)) {
+                Directory.CreateDirectory(dir);
+            }
         }
 
         private void RandomizeDoll() {

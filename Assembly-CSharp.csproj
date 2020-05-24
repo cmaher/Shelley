@@ -58,7 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\EModules\Auto-Save\AutoSave.cs" />
+     <Compile Include="Assets\PolygonFantasyHeroCharacters\Scripts\CharacterRandomizer.cs" />
      <None Include="Assets\UnityUIExtensions\Resources\Shaders\UIAdditive.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -86,7 +86,6 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\Doozy\readme.txt" />
-     <None Include="Assets\EModules\Auto-Save\ReadMe.txt" />
      <None Include="Assets\UnityUIExtensions\Resources\Shaders\UISoftAdditive.shader" />
      <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle AddSmooth.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
@@ -726,6 +725,10 @@
     <ProjectReference Include="DoozyEngineAssembly.csproj">
       <Project>{2C516105-194A-5FB1-C07A-10325E09993E}</Project>
       <Name>DoozyEngineAssembly</Name>
+    </ProjectReference>
+    <ProjectReference Include="AutoSaveAssembly.csproj">
+      <Project>{596E248E-5A6E-A613-1E27-9BFD5B6307FE}</Project>
+      <Name>AutoSaveAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="DoozyIntegrationsAssembly.csproj">
       <Project>{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}</Project>

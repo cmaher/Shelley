@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Maru.Scripts.MRenderer;
@@ -15,8 +16,6 @@ namespace BrassSparrow.Scripts.Doll {
         private readonly Dictionary<DollPartType, Material> Materials;
 
         public WorkingDoll(GameObject modularDoll, Shader shader) {
-            modularDoll.SetActive(false);
-
             ActiveParts = new Dictionary<DollPartType, DollPart>(DollPartTypes.Length);
             foreach (DollPartType partType in DollPartTypes.Values) {
                 ActiveParts[partType] = null;
@@ -46,6 +45,10 @@ namespace BrassSparrow.Scripts.Doll {
 
         public Material GetMaterial(DollPartType type) {
             return Materials[type];
+        }
+
+        public void SetMaterial(DollPartType type, Material material) {
+            Materials[type] = material;
         }
 
         public void SetPart(DollPartType partType, string path) {
@@ -153,12 +156,12 @@ namespace BrassSparrow.Scripts.Doll {
             return namesToParts;
         }
 
-        public void Optimize(Transform newRoot) {
+        public void Optimize(Transform newRoot, Action<DollPartType, Material> processMaterial) {
             var newParts = new GameObject();
             newParts.transform.parent = newRoot.transform;
             newParts.name = "Parts";
             var newSkeleton = GameObject.Instantiate(skeletonRoot, newRoot.transform);
-            newSkeleton.name = "Skeleton";
+            newSkeleton.name = "Root";
 
             var reBoner = new ReBoner(newSkeleton);
             foreach (DollPartType partType in DollPartTypes.Values) {
@@ -168,8 +171,15 @@ namespace BrassSparrow.Scripts.Doll {
                     var newSkin = newPart.GetComponent<SkinnedMeshRenderer>();
                     newSkin.material = new Material(Materials[partType]);
                     reBoner.ReBone(newSkin);
+                    if (processMaterial != null) {
+                        processMaterial(partType, newSkin.material);
+                    }
                 }
             }
+        }
+
+        public void Optimize(Transform newRoot) {
+            Optimize(newRoot, null);
         }
 
         private UngenderedDollChoices BuildUngenderedDollChoices() {
