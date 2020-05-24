@@ -64,6 +64,7 @@ namespace BrassSparrow.Scripts.Doll {
 
         private Transform partsRoot;
         private SysRandom random;
+        private BinaryFormatter binaryFormatter;
         private GameObject dollGo;
         private WorkingDoll doll;
         private Dictionary<string, DollPart> staticParts;
@@ -84,7 +85,8 @@ namespace BrassSparrow.Scripts.Doll {
 
         protected override void Awake() {
             base.Awake();
-            random = Locator.Get(SceneManager.RandomKey) as SysRandom;
+            random = Locator.Get(MaruKeys.Random) as SysRandom;
+            binaryFormatter = Locator.Get(MaruKeys.BinaryFormatter) as BinaryFormatter;
             On<EnumSelectedEvent<DollPartType>>(channelKey, PartTypeSelected);
             On<EnumSelectedEvent<DollColorType>>(channelKey, ColorTypeSelected);
             On<EnumDataChangedEvent<DollRangeType, float>>(channelKey, ShaderRangeChanged);
@@ -145,7 +147,6 @@ namespace BrassSparrow.Scripts.Doll {
         }
 
         private void SaveDoll(UIComponentEvent _) {
-            var bf = new BinaryFormatter();
             var path = filePath();
             var dir = Path.GetDirectoryName(path);
             if (!Directory.Exists(dir)) {
@@ -153,14 +154,12 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             var file = File.Create(path);
-            bf.Serialize(file, doll.ToConfig());
+            binaryFormatter.Serialize(file, doll.ToConfig());
             file.Close();
         }
 
         private void LoadDoll(UIComponentEvent _) {
-            var bf = new BinaryFormatter();
-            var file = File.Open(filePath(), FileMode.Open);
-            var config = bf.Deserialize(file) as DollConfig;
+            var config = DollConfig.FromFile(binaryFormatter, filePath());
             doll.SetFromConfig(config);
         }
 

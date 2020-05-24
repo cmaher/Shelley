@@ -14,7 +14,7 @@ namespace Maru.MCore {
          * Subscribe to an action, and remove the handler after one call
          */
         Action Once<TEvent>(Action<TEvent> handler);
-        
+
         Action Once<TEvent>(string key, Action<TEvent> handler);
 
         /**
@@ -23,11 +23,12 @@ namespace Maru.MCore {
         void Unsubscribe<TEvent>(Action<TEvent> handler);
 
         void Unsubscribe<TEvent>(string key, Action<TEvent> handler);
+
         /**
 		 * Send the message to all handlers registered for events of type TEvent
 		 */
         void Trigger<TEvent>(TEvent message);
-        
+
         void Trigger<TEvent>(string key, TEvent message);
     }
 

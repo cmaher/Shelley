@@ -35,7 +35,7 @@ namespace Maru.MCore {
             Unregister[ventIdx++] = off;
             return off;
         }
-        
+
         protected Action Once<TEvent>(string key, Action<TEvent> handler) {
             var off = Vent.Once(key, handler);
             Unregister[ventIdx++] = off;
