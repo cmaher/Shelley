@@ -68,6 +68,7 @@
      <Compile Include="Assets\Maru\Scripts\MCore\MessageBus.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\PrefabPoolManager.cs" />
      <Compile Include="Assets\Maru\Scripts\MCore\VentBehavior.cs" />
+     <Compile Include="Assets\Maru\Scripts\MRenderer\ReBoner.cs" />
      <Compile Include="Assets\Maru\Scripts\MSerialize\SerializableColor.cs" />
      <Compile Include="Assets\Maru\Scripts\MUI\UIMesh.cs" />
      <None Include="Assets\Maru\MaruAssembly.asmdef" />

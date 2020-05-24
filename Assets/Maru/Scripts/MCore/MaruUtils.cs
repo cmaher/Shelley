@@ -27,5 +27,23 @@ namespace Maru.MCore {
 
             return ret;
         }
+
+        public static void BFSTransform(Transform root, Action<Transform> process) {
+            var q = new Queue<Transform>();
+            var visited = new HashSet<int>();
+            q.Enqueue(root);
+
+            while (q.Count > 0) {
+                var cur = q.Dequeue();
+                var id = cur.GetInstanceID();
+                if (!visited.Contains(id)) {
+                    process(cur);
+                    foreach (Transform child in cur.transform) {
+                        q.Enqueue(child);
+                    }
+                    visited.Add(id);
+                }
+            }
+        }
     }
 }

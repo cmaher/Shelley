@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Maru.Scripts.MRenderer;
 using Maru.Scripts.MSerialize;
 using UnityEngine;
 
@@ -8,17 +9,21 @@ namespace BrassSparrow.Scripts.Doll {
         public readonly DollChoices Choices;
 
         private readonly Transform partsRoot;
+        private readonly Transform skeletonRoot;
         private readonly Dictionary<string, DollPart> AllParts;
         private readonly Dictionary<DollPartType, DollPart> ActiveParts;
         private readonly Dictionary<DollPartType, Material> Materials;
 
         public WorkingDoll(GameObject modularDoll, Shader shader) {
+            modularDoll.SetActive(false);
+
             ActiveParts = new Dictionary<DollPartType, DollPart>(DollPartTypes.Length);
             foreach (DollPartType partType in DollPartTypes.Values) {
                 ActiveParts[partType] = null;
             }
 
             partsRoot = modularDoll.transform.Find("Modular_Characters");
+            skeletonRoot = modularDoll.transform.Find("Root");
             AllParts = new Dictionary<string, DollPart>(720); // capacity determined experimentally
             Choices = new DollChoices {
                 Ungendered = BuildUngenderedDollChoices(),
@@ -146,6 +151,25 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             return namesToParts;
+        }
+
+        public void Optimize(Transform newRoot) {
+            var newParts = new GameObject();
+            newParts.transform.parent = newRoot.transform;
+            newParts.name = "Parts";
+            var newSkeleton = GameObject.Instantiate(skeletonRoot, newRoot.transform);
+            newSkeleton.name = "Skeleton";
+
+            var reBoner = new ReBoner(newSkeleton);
+            foreach (DollPartType partType in DollPartTypes.Values) {
+                var srcPart = ActiveParts[partType];
+                if (srcPart != null) {
+                    var newPart = GameObject.Instantiate(srcPart.Go, newParts.transform);
+                    var newSkin = newPart.GetComponent<SkinnedMeshRenderer>();
+                    newSkin.material = new Material(Materials[partType]);
+                    reBoner.ReBone(newSkin);
+                }
+            }
         }
 
         private UngenderedDollChoices BuildUngenderedDollChoices() {

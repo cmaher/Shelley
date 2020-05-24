@@ -153,6 +153,79 @@ namespace BrassSparrow.Scripts.Doll {
                     throw new InvalidEnumArgumentException();
             }
         }
+        
+        private static string hipBone = "Hips";
+        private static string hipAttachmentBone = $"{hipBone}/Hips_Attachment";
+        private static string fullSpine = $"{hipBone}/Spine_01/Spine_02/Spine03";
+        private static string neckBone = $"{fullSpine}/Neck";
+        private static string eyebrowsBone = $"{neckBone}/Head/Eyebrows";
+        private static string armUpperRightBone = $"{fullSpine}/Clavicle_R";
+        private static string armUpperLeftBone = $"{fullSpine}/Clavicle_L";
+        private static string armLowerRightBone = $"{armUpperRightBone}/Shoulder_R";
+        private static string armLowerLeftBone = $"{armUpperLeftBone}/Shoulder_L";
+        private static string handRightBone = $"{armLowerRightBone}/Elbow_R/Hand_R";
+        private static string handLeftBone = $"{armLowerLeftBone}/Elbow_L/Hand_L";
+        private static string legRightBone = $"{hipBone}/UpperLeg_R/LowerLeg_R";
+        private static string legLeftBone = $"{hipBone}/UpperLeg_L/LowerLeg_L";
+
+        public static string RootBonePath(DollPartType partType) {
+            switch (partType) {
+                case DollPartType.Head:
+                    return neckBone;
+                case DollPartType.Eyebrows:
+                    return eyebrowsBone;
+                case DollPartType.FacialHair:
+                    break;
+                case DollPartType.Torso:
+                    return hipBone;
+                case DollPartType.ArmUpperRight:
+                    return armUpperRightBone;
+                case DollPartType.ArmUpperLeft:
+                    return armUpperLeftBone;
+                case DollPartType.ArmLowerRight:
+                    return armLowerRightBone;
+                case DollPartType.ArmLowerLeft:
+                    return armLowerLeftBone;
+                case DollPartType.HandRight:
+                    return handRightBone;
+                case DollPartType.HandLeft:
+                    return handLeftBone;
+                case DollPartType.Hips:
+                    return hipBone;
+                case DollPartType.LegRight:
+                    return legRightBone;
+                case DollPartType.LegLeft:
+                    return legLeftBone;
+                case DollPartType.HeadCovering:
+                    break;
+                case DollPartType.Hair:
+                    break;
+                case DollPartType.HeadAttachment:
+                    break;
+                case DollPartType.BackAttachment:
+                    break;
+                case DollPartType.ShoulderAttachmentRight:
+                    break;
+                case DollPartType.ShoulderAttachmentLeft:
+                    break;
+                case DollPartType.ElbowAttachmentRight:
+                    break;
+                case DollPartType.ElbowAttachmentLeft:
+                    break;
+                case DollPartType.HipsAttachment:
+                    break;
+                case DollPartType.KneeAttachmentRight:
+                    break;
+                case DollPartType.KneeAttachmentLeft:
+                    break;
+                case DollPartType.Extra:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(partType), partType, null);
+            }
+
+            return "";
+        }
 
         public static readonly Array Values = Enum.GetValues(typeof(DollPartType));
         public static readonly int Length = Values.Length;
