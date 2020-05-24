@@ -33,6 +33,7 @@ namespace BrassSparrow.Scripts.Doll {
         public const string GenderToggle = "Gender:Toggle";
         public const string FileSave = "File:Save";
         public const string FileLoad = "File:Load";
+        public const string PartMirror = "Part:Mirror";
 
         public string channelKey = "DollDesignManager";
         public GameObject masterCanvas;
@@ -45,7 +46,8 @@ namespace BrassSparrow.Scripts.Doll {
         [Header("Part")] public GameObject protoPartSelector;
         public string partSelectionKey = "DollPartSelection";
         public GameObject partSelectionMenu;
-        public UIButton toggleGender;
+        public UIButton toggleGenderButton;
+        public UIButton mirrorButton;
 
         [Header("Part Type")] public GameObject protoPartTypeSelector;
         public string partTypeSelectionKey = "DollPartTypeSelection";
@@ -54,7 +56,6 @@ namespace BrassSparrow.Scripts.Doll {
         [Header("Color")] public ColorSwatchUpdater protoColorSwatchUpdater;
         public string colorTypeSelectionKey = "DollColorSelection";
         public EnumComboSlider protoRangeSelector;
-        public string rangeSelectionKey = "DollRangeSelection";
         public GameObject colorTypeSelectionMenu;
         public GameObject colorPickerMenu;
         public ColorPickerControl colorPicker;
@@ -76,7 +77,7 @@ namespace BrassSparrow.Scripts.Doll {
         private Dictionary<DollColorType, ColorSwatchUpdater> colorButtons;
         private Dictionary<DollRangeType, EnumComboSlider> rangeSliders;
 
-        protected override int EventCapacity => 13;
+        protected override int EventCapacity => 14;
 
         private GenderedDollChoices genderedParts;
 
@@ -96,6 +97,7 @@ namespace BrassSparrow.Scripts.Doll {
             On<UIComponentEvent>($"{channelKey}:{GenderToggle}", DoToggleGender);
             On<UIComponentEvent>($"{channelKey}:{FileSave}", SaveDoll);
             On<UIComponentEvent>($"{channelKey}:{FileLoad}", LoadDoll);
+            On<UIComponentEvent>($"{channelKey}:{PartMirror}", MirrorPart);
         }
 
         private void Start() {
@@ -257,7 +259,7 @@ namespace BrassSparrow.Scripts.Doll {
             }
         }
 
-        private void DoToggleGender(UIComponentEvent evt) {
+        private void DoToggleGender(UIComponentEvent _) {
             if (genderedParts == doll.Choices.Male) {
                 genderedParts = doll.Choices.Female;
             } else {
@@ -265,6 +267,10 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             ShowPartMenu();
+        }
+
+        private void MirrorPart(UIComponentEvent _) {
+            doll.MirrorPart(selectedPartType);
         }
 
         private void ShowMenu(GameObject menu) {
@@ -294,12 +300,13 @@ namespace BrassSparrow.Scripts.Doll {
             ShowMenu(partSelectionMenu);
             var choices = GetDollChoices(selectedPartType);
             DisplayDollChoices(choices);
-            toggleGender.gameObject.SetActive(DollPartTypes.IsGendered(selectedPartType));
-            if (toggleGender.gameObject.activeSelf) {
+            mirrorButton.gameObject.SetActive(DollPartTypes.IsMirrorable(selectedPartType));
+            toggleGenderButton.gameObject.SetActive(DollPartTypes.IsGendered(selectedPartType));
+            if (toggleGenderButton.gameObject.activeSelf) {
                 if (genderedParts == doll.Choices.Male) {
-                    toggleGender.SetLabelText("Male\n(Toggle)");
+                    toggleGenderButton.SetLabelText("Male\n(Toggle)");
                 } else {
-                    toggleGender.SetLabelText("Female\n(Toggle)");
+                    toggleGenderButton.SetLabelText("Female\n(Toggle)");
                 }
             }
         }

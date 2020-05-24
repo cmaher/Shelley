@@ -55,6 +55,24 @@ namespace BrassSparrow.Scripts.Doll {
             }
         }
 
+        public void MirrorPart(DollPartType srcPartType) {
+            if (!DollPartTypes.IsMirrorable(srcPartType)) {
+                return;
+            }
+
+            var destPartType = DollPartTypes.Mirror(srcPartType);
+            var destPath = ActiveParts[srcPartType].MirrorPartPath();
+            SetPart(destPartType, destPath);
+            
+            foreach (DollColorType colorType in DollColorTypes.Values) {
+                SetColor(destPartType, colorType, GetColor(srcPartType, colorType));
+            }
+
+            foreach (DollRangeType rangeType in DollRangeTypes.Values) {
+                SetRangeFloat(destPartType, rangeType, GetRangeFloat(srcPartType, rangeType));
+            }
+        }
+
         public void SetColor(DollPartType partType, DollColorType colorType, Color color) {
             var colorSetting = DollColor.Get(colorType);
             Materials[partType].SetColor(colorSetting.Id, color);

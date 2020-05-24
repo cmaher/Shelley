@@ -63,6 +63,92 @@ namespace BrassSparrow.Scripts.Doll {
                 case DollPartType.KneeAttachmentLeft:
                 case DollPartType.Extra:
                     return false;
+                
+                default:
+                    throw new InvalidEnumArgumentException();
+            }
+        }
+
+        public static bool IsMirrorable(DollPartType type) {
+            switch (type) {
+                case DollPartType.ArmUpperRight:
+                case DollPartType.ArmUpperLeft:
+                case DollPartType.ArmLowerRight:
+                case DollPartType.ArmLowerLeft:
+                case DollPartType.HandRight:
+                case DollPartType.HandLeft:
+                case DollPartType.LegRight:
+                case DollPartType.LegLeft:
+                case DollPartType.ShoulderAttachmentRight:
+                case DollPartType.ShoulderAttachmentLeft:
+                case DollPartType.ElbowAttachmentRight:
+                case DollPartType.ElbowAttachmentLeft:
+                case DollPartType.KneeAttachmentRight:
+                case DollPartType.KneeAttachmentLeft:
+                    return true;
+
+                case DollPartType.Head:
+                case DollPartType.Eyebrows:
+                case DollPartType.FacialHair:
+                case DollPartType.Torso:
+                case DollPartType.Hips:
+                case DollPartType.HeadCovering:
+                case DollPartType.Hair:
+                case DollPartType.HeadAttachment:
+                case DollPartType.BackAttachment:
+                case DollPartType.HipsAttachment:
+                case DollPartType.Extra:
+                    return false;
+                
+                default:
+                    throw new InvalidEnumArgumentException();
+            }
+        }
+
+        public static DollPartType Mirror(DollPartType type) {
+            switch (type) {
+                case DollPartType.ArmUpperRight:
+                    return DollPartType.ArmUpperLeft;
+                case DollPartType.ArmUpperLeft:
+                    return DollPartType.ArmUpperRight;
+                case DollPartType.ArmLowerRight:
+                    return DollPartType.ArmLowerLeft;
+                case DollPartType.ArmLowerLeft:
+                    return DollPartType.ArmLowerRight;
+                case DollPartType.HandRight:
+                    return DollPartType.HandLeft;
+                case DollPartType.HandLeft:
+                    return DollPartType.HandRight;
+                case DollPartType.LegRight:
+                    return DollPartType.LegLeft;
+                case DollPartType.LegLeft:
+                    return DollPartType.LegRight;
+                case DollPartType.ShoulderAttachmentRight:
+                    return DollPartType.ShoulderAttachmentLeft;
+                case DollPartType.ShoulderAttachmentLeft:
+                    return DollPartType.ShoulderAttachmentRight;
+                case DollPartType.ElbowAttachmentRight:
+                    return DollPartType.ElbowAttachmentRight;
+                case DollPartType.ElbowAttachmentLeft:
+                    return DollPartType.ElbowAttachmentLeft;
+                case DollPartType.KneeAttachmentRight:
+                    return DollPartType.KneeAttachmentLeft;
+                case DollPartType.KneeAttachmentLeft:
+                    return DollPartType.KneeAttachmentRight;
+
+                case DollPartType.Head:
+                case DollPartType.Eyebrows:
+                case DollPartType.FacialHair:
+                case DollPartType.Torso:
+                case DollPartType.Hips:
+                case DollPartType.HeadCovering:
+                case DollPartType.Hair:
+                case DollPartType.HeadAttachment:
+                case DollPartType.BackAttachment:
+                case DollPartType.HipsAttachment:
+                case DollPartType.Extra:
+                    return type;
+                
                 default:
                     throw new InvalidEnumArgumentException();
             }
@@ -114,6 +200,59 @@ namespace BrassSparrow.Scripts.Doll {
             AllowsElements = true;
             AllowsHair = allowsHair;
             AllowsFacialHair = allowsFacialHair;
+        }
+
+        public string MirrorPartPath() {
+            if (!DollPartTypes.IsMirrorable(Type)) {
+                return Path;
+            }
+            
+            switch (Type) {
+                case DollPartType.ArmUpperRight:
+                    return Path.Replace("04_Arm_Upper_Right", "05_Arm_Upper_Left")
+                        .Replace("ArmUpperRight", "ArmUpperLeft");
+                case DollPartType.ArmUpperLeft:
+                    return Path.Replace("05_Arm_Upper_Left", "04_Arm_Upper_Right")
+                        .Replace("ArmUpperLeft", "ArmUpperRight");
+                case DollPartType.ArmLowerRight:
+                    return Path.Replace("06_Arm_Lower_Right", "07_Arm_Lower_Left")
+                        .Replace("ArmLowerRight", "ArmLowerLeft");
+                case DollPartType.ArmLowerLeft:
+                    return Path.Replace("07_Arm_Lower_Left", "06_Arm_Lower_Right")
+                        .Replace("ArmLowerLeft", "ArmLowerRight");
+                case DollPartType.HandRight:
+                    return Path.Replace("08_Hand_Right", "09_Hand_Left")
+                        .Replace("HandRight", "HandLeft");
+                case DollPartType.HandLeft:
+                    return Path.Replace("09_Hand_Left", "08_Hand_Right")
+                        .Replace("HandLeft", "HandRight");
+                case DollPartType.LegRight:
+                    return Path.Replace("11_Leg_Right", "12_Leg_Left")
+                        .Replace("LegRight", "LegLeft");
+                case DollPartType.LegLeft:
+                    return Path.Replace("12_Leg_Left", "11_Leg_Right")
+                        .Replace("LegLeft", "LegRight");
+                case DollPartType.ShoulderAttachmentRight:
+                    return Path.Replace("05_Shoulder_Attachment_Right", "06_Shoulder_Attachment_Left")
+                        .Replace("ShoulderAttachRight", "ShoulderAttachLeft");
+                case DollPartType.ShoulderAttachmentLeft:
+                    return Path.Replace("06_Shoulder_Attachment_Left", "05_Shoulder_Attachment_Right")
+                        .Replace("ShoulderAttachLeft", "ShoulderAttachRight");
+                case DollPartType.ElbowAttachmentRight:
+                    return Path.Replace("07_Elbow_Attachment_Right", "08_Elbow_Attachment_Left")
+                        .Replace("ElbowAttachRight", "ElbowAttachLeft");
+                case DollPartType.ElbowAttachmentLeft:
+                    return Path.Replace("08_Elbow_Attachment_Left", "07_Elbow_Attachment_Right")
+                        .Replace("ElbowAttachLeft", "ElbowAttachRight");
+                case DollPartType.KneeAttachmentRight:
+                    return Path.Replace("10_Knee_Attachement_Right", "11_Knee_Attachement_Left") // sic "Attachement"
+                        .Replace("KneeAttachRight", "KneeAttachLeft");
+                case DollPartType.KneeAttachmentLeft:
+                    return Path.Replace("11_Knee_Attachement_Left", "10_Knee_Attachement_Right") // sic "Attachement"
+                        .Replace("KneeAttachLeft", "KneeAttachRight");
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }
