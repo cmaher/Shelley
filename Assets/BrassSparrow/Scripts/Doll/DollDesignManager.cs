@@ -44,6 +44,7 @@ namespace BrassSparrow.Scripts.Doll {
         public TMP_InputField filenameInput;
 
         [Header("Part")] public GameObject protoPartSelector;
+        public GameObject protoNullPartSelector;
         public string partSelectionKey = "DollPartSelection";
         public GameObject partSelectionMenu;
         public UIButton toggleGenderButton;
@@ -121,14 +122,19 @@ namespace BrassSparrow.Scripts.Doll {
         }
 
         private void DisplayDollChoices<T>(IReadOnlyCollection<T> choices) where T : DollPart {
-            var choiceGos = new List<GameObject>(choices.Count);
+            var choiceGos = new List<GameObject>(choices.Count + 1);
+            var nullSelectorGo = Instantiate(protoNullPartSelector);
+            var nullSelector = nullSelectorGo.GetComponent<PartSelector>();
+            nullSelector.masterCanvas = masterCanvas;
+            choiceGos.Add(nullSelectorGo);
+
             foreach (var choice in choices) {
-                var selectorUI = Instantiate(protoPartSelector);
-                var selector = selectorUI.GetComponent<PartSelector>();
+                var selectorGo = Instantiate(protoPartSelector);
+                var selector = selectorGo.GetComponent<PartSelector>();
                 selector.masterCanvas = masterCanvas;
                 var part = staticParts[choice.Path];
                 selector.SetDollPart(part);
-                choiceGos.Add(selectorUI);
+                choiceGos.Add(selectorGo);
             }
 
             Vent.Trigger(new SetItemsEvent {Items = choiceGos, Key = partSelectionKey});
@@ -236,7 +242,11 @@ namespace BrassSparrow.Scripts.Doll {
 
         private void PartSelected(PartSelectedEvent evt) {
             var part = evt.PartSelector.DollPart;
-            doll.SetPart(part.Type, part.Path);
+            if (part != null) {
+                doll.SetPart(part.Type, part.Path);
+            } else {
+                doll.SetPart(selectedPartType, null);
+            }
         }
 
         private void ColorTypeSelected(EnumSelectedEvent<DollColorType> evt) {

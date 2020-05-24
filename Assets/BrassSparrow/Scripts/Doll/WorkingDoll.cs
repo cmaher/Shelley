@@ -61,9 +61,12 @@ namespace BrassSparrow.Scripts.Doll {
             }
 
             var destPartType = DollPartTypes.Mirror(srcPartType);
-            var destPath = ActiveParts[srcPartType].MirrorPartPath();
+            var srcPart = ActiveParts[srcPartType];
+            var destPath = srcPart != null
+                ? ActiveParts[srcPartType].MirrorPartPath()
+                : null;
             SetPart(destPartType, destPath);
-            
+
             foreach (DollColorType colorType in DollColorTypes.Values) {
                 SetColor(destPartType, colorType, GetColor(srcPartType, colorType));
             }
@@ -130,7 +133,7 @@ namespace BrassSparrow.Scripts.Doll {
                 foreach (var color in shader.Value.colors) {
                     SetColor(shader.Key, color.Key, color.Value.ToColor());
                 }
-                
+
                 foreach (var range in shader.Value.ranges) {
                     SetRangeFloat(shader.Key, range.Key, range.Value);
                 }

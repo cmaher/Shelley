@@ -39,8 +39,10 @@ namespace BrassSparrow.Scripts.UI {
 
         protected override void Start() {
             base.Start();
+            if (mesh == null) {
+                return;
+            }
             
-            // Configure mesh
             mesh.transform.parent = transform;
             mesh.layer = gameObject.layer;
             mesh.transform.localRotation = new Quaternion(0, 180, 0, 0);

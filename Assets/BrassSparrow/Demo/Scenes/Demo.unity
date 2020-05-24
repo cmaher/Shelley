@@ -4579,6 +4579,8 @@ MonoBehaviour:
   filenameInput: {fileID: 533562364}
   protoPartSelector: {fileID: 963491296263593470, guid: b7a150ee8a61cf14cacef3c72634c229,
     type: 3}
+  protoNullPartSelector: {fileID: 963491296263593470, guid: f0a0c320e9be38c41ab0b1302d5cbdec,
+    type: 3}
   partSelectionKey: DollPartSelection
   partSelectionMenu: {fileID: 743847574}
   toggleGenderButton: {fileID: 118708825}
