@@ -12,7 +12,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{A87991A2-8CA7-7637-BE04-40CECC3A4A49}</ProjectGuid>
+    <ProjectGuid>{ECFB2C1D-2001-473E-1743-9A1D09616263}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>DoozyExamplesAssembly</AssemblyName>
@@ -92,10 +92,10 @@
      <None Include="Assets\Doozy\Examples\Fonts\Secular_One\OFL.txt" />
      <None Include="Assets\Doozy\Examples\Fonts\Oswald\OFL.txt" />
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -284,16 +284,16 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="DOTweenEditor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
  <Reference Include="DDebug">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.NRefactory">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -652,11 +652,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DoozyEngineAssembly.csproj">
-      <Project>{2C516105-194A-5FB1-C07A-10325E09993E}</Project>
+      <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
       <Name>DoozyEngineAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="DoozyEditorAssembly.csproj">
-      <Project>{E6E01078-18F7-1EFB-6F06-DCD4E8E59B12}</Project>
+      <Project>{AAB32B20-9A68-AC7D-4EF5-75B1F3E113B7}</Project>
       <Name>DoozyEditorAssembly</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,0 +1,2 @@
+namespace Shelley.Scripts.ShelleyStudio {
+}

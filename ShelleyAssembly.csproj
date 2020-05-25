@@ -12,10 +12,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</ProjectGuid>
+    <ProjectGuid>{359F646D-C419-51C1-C076-F0BA875401D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>DoozyEngineAssembly</AssemblyName>
+    <AssemblyName>ShelleyAssembly</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -58,246 +58,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Doozy\Engine\Attributes\MinMaxRangeAttribute.cs" />
-     <Compile Include="Assets\Doozy\Engine\Enums\Language.cs" />
-     <Compile Include="Assets\Doozy\Engine\Enums\Module.cs" />
-     <Compile Include="Assets\Doozy\Engine\Enums\SetupMode.cs" />
-     <Compile Include="Assets\Doozy\Engine\Enums\SystemGameEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Events\AnimatorEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Events\BoolEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Events\ColorEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Events\GameObjectEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Events\SpriteEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Events\StringEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Events\TextureEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Extensions\ClassUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Extensions\ColorExtensions.cs" />
-     <Compile Include="Assets\Doozy\Engine\Extensions\RectExtensions.cs" />
-     <Compile Include="Assets\Doozy\Engine\Extensions\RectTransformExtensions.cs" />
-     <Compile Include="Assets\Doozy\Engine\Layouts\LayoutController.cs" />
-     <Compile Include="Assets\Doozy\Engine\Layouts\RadialLayout.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Attributes\NodeMenu.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Connections\PassthroughConnection.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Controllers\GraphController.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Models\Connection.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Models\Enums\ConnectionMode.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Models\Enums\NodeType.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Models\Enums\SocketDirection.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Models\Graph.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Models\Node.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Models\Socket.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Nodes\EnterNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Nodes\ExitNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Nodes\StartNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Nodes\SubGraphNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Nodes\SwitchBackNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\Nody\Scripts\NodySettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\Orientation\Enums\DetectedOrientation.cs" />
-     <Compile Include="Assets\Doozy\Engine\Orientation\OrientationDetector.cs" />
-     <Compile Include="Assets\Doozy\Engine\Orientation\OrientationEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\Enums\CompareType.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\Enums\ProgressorVariable.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\Enums\ResetValue.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\Enums\TargetProgress.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\Enums\TargetVariable.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\Events\ProgressEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\ProgressTarget.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\ProgressTargets\ProgressTargetAction.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\ProgressTargets\ProgressTargetAnimator.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\ProgressTargets\ProgressTargetAudioMixer.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\ProgressTargets\ProgressTargetImage.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\ProgressTargets\ProgressTargetText.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\ProgressTargets\ProgressTargetTextMeshPro.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\Progressor.cs" />
-     <Compile Include="Assets\Doozy\Engine\Progress\ProgressorGroup.cs" />
-     <Compile Include="Assets\Doozy\Engine\SceneManagement\ActiveSceneChangedEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\SceneManagement\Enums\GetSceneBy.cs" />
-     <Compile Include="Assets\Doozy\Engine\SceneManagement\SceneDirector.cs" />
-     <Compile Include="Assets\Doozy\Engine\SceneManagement\SceneLoadBehavior.cs" />
-     <Compile Include="Assets\Doozy\Engine\SceneManagement\SceneLoadedEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\SceneManagement\SceneLoader.cs" />
-     <Compile Include="Assets\Doozy\Engine\SceneManagement\SceneUnloadedEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Scripts\Coroutiner.cs" />
-     <Compile Include="Assets\Doozy\Engine\Scripts\GameEventListener.cs" />
-     <Compile Include="Assets\Doozy\Engine\Scripts\GameEventManager.cs" />
-     <Compile Include="Assets\Doozy\Engine\Scripts\GameEventMessage.cs" />
-     <Compile Include="Assets\Doozy\Engine\Scripts\MColor.cs" />
-     <Compile Include="Assets\Doozy\Engine\Scripts\Message.cs" />
-     <Compile Include="Assets\Doozy\Engine\Scripts\MessageExtensions.cs" />
-     <Compile Include="Assets\Doozy\Engine\Scripts\RangedFloat.cs" />
-     <Compile Include="Assets\Doozy\Engine\Settings\DoozySettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\Shop\UIPacks\UIPackData.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\AudioData.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\Enums\SoundSource.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\ScriptableObjects\SoundDatabase.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\ScriptableObjects\SoundGroupData.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\ScriptableObjects\SoundyDatabase.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\SoundyController.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\SoundyData.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\SoundyManager.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\SoundyPooler.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\SoundySettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\Soundy\SoundyUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Structs\ColorId.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Structs\FontAssetId.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Structs\FontId.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Structs\LabelId.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Structs\SpriteId.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Structs\TextureId.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ColorTargetImage.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ColorTargetParticleSystem.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ColorTargetRawImage.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ColorTargetSelectable.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ColorTargetSpriteRenderer.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ColorTargetText.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ColorTargetTextMeshPro.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ColorTargetUnityEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\FontTargetText.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\FontTargetTextMeshPro.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\SpriteTargetImage.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\SpriteTargetSelectable.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\SpriteTargetSpriteRenderer.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\SpriteTargetUnityEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\TextureTargetRawImage.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\TextureTargetUnityEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\Targets\ThemeTarget.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\ThemeData.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\ThemeManager.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\ThemeVariantData.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\ThemesDatabase.cs" />
-     <Compile Include="Assets\Doozy\Engine\Themes\ThemesSettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\CardinalDirection.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\Enums\GestureType.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\Enums\SimpleSwipe.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\Enums\Swipe.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\GestureListener.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\SimulatedTouch.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\TouchDetector.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\TouchHelper.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\TouchInfo.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\TouchInfoEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\Touchy\TouchySettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\AnimationClasses.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\Enums\AnimationAction.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\Enums\AnimationType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\Enums\ButtonAnimationType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\Enums\ButtonLoopAnimationType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\Enums\Direction.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\Enums\EaseType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\UIAnimation.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\UIAnimationData.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\UIAnimationDatabase.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\UIAnimations.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\UIAnimationsDatabase.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\UIAnimator.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Animation\UIAnimatorConstants.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Base\Enums\NamesDatabaseType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Base\ListOfNames.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Base\NamesDatabase.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Base\UIAction.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Base\UIComponentBase.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Base\UIContainer.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Base\UIEffect.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Connections\Enums\UIConnectionTrigger.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Connections\UIConnection.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Connections\WeightedConnection.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Enums\DynamicSorting.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Enums\PopupDisplayOn.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Enums\TargetLabel.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Enums\TargetOrientation.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Enums\UIEffectBehavior.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Enums\VisibilityState.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Input\BackButton.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Input\Enums\InputMode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Input\InputData.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Input\KeyToAction.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Input\KeyToGameEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\ActivateLoadedScenesNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\ApplicationQuitNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\BackButtonNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\GameEventNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\LoadSceneNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\PortalNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\RandomNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\SoundNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\ThemeNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\TimeScaleNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\UIDrawerNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\UINode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\UnloadSceneNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\Nodes\WaitNode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\Enums\SingleClickMode.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\Enums\UIButtonBehaviorType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\UIButton.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\UIButtonBehavior.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\UIButtonEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\UIButtonListener.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\UIButtonLoopAnimation.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\UIButtonMessage.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIButton\UIButtonSettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UICanvas\UICanvas.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UICanvas\UICanvasSettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\Enums\UIDrawerBehaviorType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\Enums\UIDrawerContainerSize.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawer.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawerArrow.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawerArrowAnimator.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawerBehavior.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawerContainer.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawerEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawerListener.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawerMessage.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIDrawer\UIDrawerSettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopup.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupBehavior.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupContentData.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupContentReferences.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupDatabase.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupLink.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupManager.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupMessage.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupQueueData.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIPopup\UIPopupSettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIToggle\UIToggle.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIToggle\UIToggleBehavior.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIToggle\UIToggleBehaviorType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIToggle\UIToggleEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIToggle\UIToggleMessage.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIToggle\UIToggleSettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIToggle\UIToggleState.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\Enums\UIViewBehaviorType.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\Enums\UIViewStartBehavior.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\Internal\UIViewCategoryName.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\UIView.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\UIViewBehavior.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\UIViewEvent.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\UIViewListener.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\UIViewMessage.cs" />
-     <Compile Include="Assets\Doozy\Engine\UI\UIView\UIViewSettings.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\AssetUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\ColorModels\CMY.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\ColorModels\CMYK.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\ColorModels\HSL.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\ColorModels\HSV.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\ColorModels\RGB.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\ColorModels\XYZ.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\ColorUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\DColor.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\DataUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\DoozyExecutionOrder.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\DoozyPath.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\DoozyUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\FileUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\GuidUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\LanguagePack.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\MenuUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\ScriptUtils.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\UILanguagePack.cs" />
-     <Compile Include="Assets\Doozy\Engine\Utils\UnityResources.cs" />
-     <None Include="Assets\Doozy\Engine\DoozyEngineAssembly.asmdef" />
- <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
- </Reference>
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollChoices.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollColor.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollConfig.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollParts.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollRange.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\WorkingDoll.cs" />
+     <None Include="Assets\Shelley\Scripts\Shelley\ShelleyAssembly.asmdef" />
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
@@ -858,9 +625,9 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{4E00825D-3C31-D188-4C43-B0350A9E7656}</Project>
-      <Name>DOTween.Modules</Name>
+    <ProjectReference Include="MaruAssembly.csproj">
+      <Project>{12C9E3CE-AA53-1B4F-C96A-BE901DD3C003}</Project>
+      <Name>MaruAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
