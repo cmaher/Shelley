@@ -12,10 +12,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{66E73332-C5C9-9089-8C87-ABCD8ADC4973}</ProjectGuid>
+    <ProjectGuid>{6E0EAF5A-87CC-4E9D-340A-FFDABC4DCC14}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>DoozyIntegrationAssembly</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -58,6 +58,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Doozy\Integrations\Editor\Playmaker\PlaymakerEventDispatcherEditor.cs" />
      <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\ActivateLoadedScenes.cs" />
      <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\ApplicationQuit.cs" />
      <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\Back.cs" />
@@ -75,97 +76,12 @@
      <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\Soundy\StopAllSounds.cs" />
      <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\Soundy\UnmuteAllSounds.cs" />
      <Compile Include="Assets\Doozy\Integrations\Playmaker\Scripts\PlaymakerEventDispatcher.cs" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UIAdditive.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle Add.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UIScreen.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle Multiply.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UIMultiply.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UILinearDodge.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle Alpha Blend.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\SoftMaskShader.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle Premultiply Blend.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle VertexLit Blended.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
-     <None Include="Assets\PolygonFantasyHeroCharacters\Shaders\POLYGON_CustomCharacters.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle MultiplyDouble.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle AddMultiply.shader" />
-     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle Blend.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-     <None Include="Assets\Doozy\readme.txt" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UISoftAdditive.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle AddSmooth.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UIImageCrop.shader" />
-     <None Include="Assets\Demigiant\DOTween\readme.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
-     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
-     <None Include="Assets\UnityUIExtensions\Resources\Shaders\UIParticleHidden.shader" />
- <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.RenderPipelines.Universal.Shaders">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
- </Reference>
- <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.RenderPipelines.Core.Editor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.RenderPipelines.Core.Runtime">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.RenderPipelines.Universal.Runtime">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
- </Reference>
- <Reference Include="Unity.RenderPipelines.Universal.Editor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+     <None Include="Assets\Doozy\Integrations\DoozyIntegrationAssembly.asmdef" />
+ <Reference Include="UnityEditor.UI">
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
- </Reference>
- <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
- </Reference>
- <Reference Include="Unity.ShaderGraph.Editor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
- </Reference>
- <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
- </Reference>
- <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -344,11 +260,26 @@
  <Reference Include="UnityEngine.XRModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.VR">
+ <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Graphs">
+ <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+ <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
  <Reference Include="DOTween">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
  <Reference Include="DDebug">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
+ </Reference>
+ <Reference Include="ICSharpCode.NRefactory">
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -706,45 +637,9 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{4E00825D-3C31-D188-4C43-B0350A9E7656}</Project>
-      <Name>DOTween.Modules</Name>
-    </ProjectReference>
-    <ProjectReference Include="MaruAssembly.csproj">
-      <Project>{12C9E3CE-AA53-1B4F-C96A-BE901DD3C003}</Project>
-      <Name>MaruAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ProceduralUIImageAssembly.csproj">
-      <Project>{50DDDA08-5727-9A97-0F0F-23E75B62E1D0}</Project>
-      <Name>ProceduralUIImageAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
-      <Project>{BCFC3C8D-8CDA-1061-E934-944664AC2EE7}</Project>
-      <Name>UnityUIExtensionsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEditorAssembly.csproj">
-      <Project>{AAB32B20-9A68-AC7D-4EF5-75B1F3E113B7}</Project>
-      <Name>DoozyEditorAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShelleyStudioAssembly.csproj">
-      <Project>{45BFF5DC-C371-BE6F-7B4D-665FD19BCF9B}</Project>
-      <Name>ShelleyStudioAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShelleyAssembly.csproj">
-      <Project>{359F646D-C419-51C1-C076-F0BA875401D5}</Project>
-      <Name>ShelleyAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.csproj">
-      <Project>{71189442-758C-DFBB-9EB5-C142AD850B95}</Project>
-      <Name>UnityUIExtensions</Name>
-    </ProjectReference>
     <ProjectReference Include="DoozyEngineAssembly.csproj">
       <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
       <Name>DoozyEngineAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="AutoSaveAssembly.csproj">
-      <Project>{46A95DFD-733A-052F-604C-B96BFBE90ECC}</Project>
-      <Name>AutoSaveAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

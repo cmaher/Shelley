@@ -12,7 +12,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{738A8995-F7E2-8CC5-FF54-E83ACC05C254}</ProjectGuid>
+    <ProjectGuid>{8311A340-88B6-F990-6745-EDF121518C2D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -58,83 +58,66 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\UnityUIExtensions\Editor\AccordionElementEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\BezierLineRendererEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\BoxSliderEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\CUIBezierCurveEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\CUIGraphicEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\CUIImageEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\CUITextEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\CanvasGroupActivator.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\ColorPickerPresetsEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\NonDrawingGraphicEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\ReadOnlyDrawer.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\ScrollPositionControllerEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicIconEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicIconListCopier.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicRenameEditor.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
-     <Compile Include="Assets\UnityUIExtensions\Editor\uGUITools.cs" />
+     <Compile Include="Assets\Doozy\Integrations\Editor\Playmaker\PlaymakerEventDispatcherEditor.cs" />
  <Reference Include="UnityEditor.TestRunner">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TestRunner">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Shaders">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Editor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Runtime">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Runtime">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Editor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ShaderGraph.Editor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -323,19 +306,19 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="DOTween">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="DOTweenEditor">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
  <Reference Include="DDebug">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.NRefactory">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>C:/Users/maher/projects/unity/BrassSparrow/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+ <HintPath>C:/Users/maher/projects/unity/Shelley/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -693,41 +676,49 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{66E73332-C5C9-9089-8C87-ABCD8ADC4973}</Project>
+      <Name>Assembly-CSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{D5A4929E-4AAD-9ECD-C50B-B02E973F21A7}</Project>
+      <Project>{4E00825D-3C31-D188-4C43-B0350A9E7656}</Project>
       <Name>DOTween.Modules</Name>
     </ProjectReference>
-    <ProjectReference Include="DoozyExamplesAssembly.csproj">
-      <Project>{A87991A2-8CA7-7637-BE04-40CECC3A4A49}</Project>
-      <Name>DoozyExamplesAssembly</Name>
-    </ProjectReference>
     <ProjectReference Include="MaruAssembly.csproj">
-      <Project>{7CB75598-1DD0-24F0-9593-FCFC7B138231}</Project>
+      <Project>{12C9E3CE-AA53-1B4F-C96A-BE901DD3C003}</Project>
       <Name>MaruAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="ProceduralUIImageAssembly.csproj">
-      <Project>{2A406884-AB83-E6E9-31A8-2049325C7C1C}</Project>
+      <Project>{50DDDA08-5727-9A97-0F0F-23E75B62E1D0}</Project>
       <Name>ProceduralUIImageAssembly</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
+      <Project>{BCFC3C8D-8CDA-1061-E934-944664AC2EE7}</Project>
+      <Name>UnityUIExtensionsEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="DoozyEditorAssembly.csproj">
-      <Project>{E6E01078-18F7-1EFB-6F06-DCD4E8E59B12}</Project>
+      <Project>{AAB32B20-9A68-AC7D-4EF5-75B1F3E113B7}</Project>
       <Name>DoozyEditorAssembly</Name>
     </ProjectReference>
-    <ProjectReference Include="BrassSparrowAssembly.csproj">
-      <Project>{A664A3C9-CD30-37E9-35E4-1C1EB926F201}</Project>
-      <Name>BrassSparrowAssembly</Name>
+    <ProjectReference Include="ShelleyStudioAssembly.csproj">
+      <Project>{45BFF5DC-C371-BE6F-7B4D-665FD19BCF9B}</Project>
+      <Name>ShelleyStudioAssembly</Name>
     </ProjectReference>
-    <ProjectReference Include="DoozyEngineAssembly.csproj">
-      <Project>{2C516105-194A-5FB1-C07A-10325E09993E}</Project>
-      <Name>DoozyEngineAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyIntegrationsAssembly.csproj">
-      <Project>{06FF2E43-E2C7-ACDC-96E9-F5522BB108B4}</Project>
-      <Name>DoozyIntegrationsAssembly</Name>
+    <ProjectReference Include="ShelleyAssembly.csproj">
+      <Project>{359F646D-C419-51C1-C076-F0BA875401D5}</Project>
+      <Name>ShelleyAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="UnityUIExtensions.csproj">
-      <Project>{D66FDEAE-18A0-0A5F-E7E2-ED468976703E}</Project>
+      <Project>{71189442-758C-DFBB-9EB5-C142AD850B95}</Project>
       <Name>UnityUIExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="DoozyEngineAssembly.csproj">
+      <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
+      <Name>DoozyEngineAssembly</Name>
+    </ProjectReference>
+    <ProjectReference Include="AutoSaveAssembly.csproj">
+      <Project>{46A95DFD-733A-052F-604C-B96BFBE90ECC}</Project>
+      <Name>AutoSaveAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
