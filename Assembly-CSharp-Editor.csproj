@@ -58,7 +58,285 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Doozy\Editor\Drawers\AnimatorEventDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\Drawers\DColorDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\Drawers\MColorDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\Drawers\RangedFloatDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\Editors\GameEventListenerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Editors\GameEventManagerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\ColorName.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\CornerType.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\Direction.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\DividerType.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\PropertyName.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\ShortDirection.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\Size.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\Skin.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\State.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\StyleState.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\TabPosition.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\TextAlign.cs" />
+     <Compile Include="Assets\Doozy\Editor\Enums\ToggleState.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\AlphaGroup.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\AnimatedTexture.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Background.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Bar.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Button.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Colors.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Copyright.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\DGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Database.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Divider.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Doozy.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Dropdown.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\DynamicToolbar.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\FadeOut.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\FoldOut.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Fonts.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Icon.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\IconGroup.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\KeyMapper.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Label.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Line.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\List.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Properties.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Property.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\RadioButton.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\SerializedProperties.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Sizes.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Tab.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Textures.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Toggle.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Toolbar.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Utility.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\Utils.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\WindowHeader.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\DGUI\WindowUtils.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\EditorColors.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\Styles.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\StylesBuilder.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\StylesUtility.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\Scripts\SystemExtensions.cs" />
+     <Compile Include="Assets\Doozy\Editor\GUI\StyleName.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\BaseDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\BaseEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\BaseEditorWindow.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DGUIContent.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DGUIElement.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DGUIElements.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DGUILayoutElement.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DProperty.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DPropertyRelative.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DefineSymbolsProcessor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DoozyAssetsProcessor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\DoozyUIVersion.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\EditorBase.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\FoldersProcessor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\InfoMessage.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\PostprocessAllAssets.cs" />
+     <Compile Include="Assets\Doozy\Editor\Internal\ProcessorsSettings.cs" />
+     <Compile Include="Assets\Doozy\Editor\Layouts\RadialLayoutEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Editors\BaseNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Editors\EnterNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Editors\ExitNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Editors\GraphControllerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Editors\GraphEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Editors\StartNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Editors\SubGraphNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Editors\SwitchBackNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Events\EditorEvent.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Events\GraphEvent.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\GUI\Scripts\NodyStylesBuilder.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\GUI\Scripts\Styles.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\GUI\StyleName.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\NodeGUI\BaseNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\NodeGUI\EnterNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\NodeGUI\ExitNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\NodeGUI\NodeGUIBase.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\NodeGUI\StartNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\NodeGUI\SubGraphNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\NodeGUI\SwitchBackNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Processors\NodyGraphAssetModProcessor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Settings\NodyWindowSettings.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Utils\GraphBackground.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Utils\GraphUtils.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Utils\ReflectionUtils.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindow.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowActions.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowAnimationTime.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowClassGraphTab.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowClassSavedNodesIds.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowClassSelectPoint.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowClassUndoUtility.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowClassVirtualConnection.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowClassVirtualPoint.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowContextMenus.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowCurves.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowDatabases.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowDetectKeys.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowDraw.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowDrawToolbar.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowDrawViewGeneral.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowDrawViewGraph.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowDrawViews.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowEditorSettings.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowErrors.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowGraph.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowHandlers.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowMethodsForDragging.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowMethodsForGraph.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowMethodsForNodes.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowMethodsForPosition.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowMethodsForSelection.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowMethodsForSockets.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowOpen.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowReflection.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowStyles.cs" />
+     <Compile Include="Assets\Doozy\Editor\Nody\Windows\NodyWindowUpdateCursorIcon.cs" />
+     <Compile Include="Assets\Doozy\Editor\Orientation\OrientationDetectorEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressTargetActionEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressTargetAnimatorEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressTargetAudioMixerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressTargetEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressTargetImageEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressTargetTextEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressTargetTextMeshProEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressorEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Progress\ProgressorGroupEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\SceneManagement\SceneDirectorEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\SceneManagement\SceneLoaderEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Settings\DoozyWindowSettings.cs" />
+     <Compile Include="Assets\Doozy\Editor\Soundy\SoundGroupDataEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Soundy\SoundyAudioPlayer.cs" />
+     <Compile Include="Assets\Doozy\Editor\Soundy\SoundyControllerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Soundy\SoundyDataDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\Soundy\SoundyManagerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Soundy\SoundyPoolerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ColorTargetImageEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ColorTargetParticleSystemEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ColorTargetRawImageEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ColorTargetSelectableEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ColorTargetSpriteRendererEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ColorTargetTextEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ColorTargetTextMeshProEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ColorTargetUnityEventEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\FontTargetTextEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\FontTargetTextMeshProEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\SpriteTargetImageEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\SpriteTargetSelectableEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\SpriteTargetSpriteRendererEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\SpriteTargetUnityEventEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\TextureTargetRawImageEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\TextureTargetUnityEventEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ThemeManagerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Themes\ThemeTargetEditorUtils.cs" />
+     <Compile Include="Assets\Doozy\Editor\Touchy\GestureListenerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Touchy\TouchDetectorEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Animation\BaseAnimationDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Animation\FadeDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Animation\MoveDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Animation\RotateDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Animation\ScaleDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Animation\UIAnimationUtils.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Animation\UIAnimationsEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Animation\UIAnimatorUtils.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Input\BackButtonEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Input\KeyToActionEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Input\KeyToGameEventEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\ActivateLoadedScenesNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\ApplicationQuitNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\BackButtonNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\GameEventNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\LoadSceneNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\PortalNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\RandomNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\SoundNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\ThemeNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\TimeScaleNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\UIDrawerNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\UINodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\UnloadSceneNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\Editors\WaitNodeEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\ActivateLoadedScenesNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\ApplicationQuitNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\BackButtonNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\GameEventNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\LoadSceneNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\PortalNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\RandomNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\SoundNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\ThemeNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\TimeScaleNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\UIDrawerNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\UINodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\UnloadSceneNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\Nodes\GUIs\WaitNodeGUI.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIButton\UIButtonEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIButton\UIButtonListenerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UICanvas\UICanvasEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIDrawer\ArrowAnimatorEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIDrawer\UIDrawerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIDrawer\UIDrawerListenerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIPopup\UIPopupEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIPopup\UIPopupManagerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIToggle\UIToggleEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIView\UIViewCategoryNameDrawer.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIView\UIViewEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\UI\UIView\UIViewListenerEditor.cs" />
+     <Compile Include="Assets\Doozy\Editor\Utils\DefineSymbolsUtils.cs" />
+     <Compile Include="Assets\Doozy\Editor\Utils\DelayedCall.cs" />
+     <Compile Include="Assets\Doozy\Editor\Utils\SpriteDrawUtils.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindow.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowButtons.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowConstants.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDatabases.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDetectKeys.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawToolbar.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewAbout.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewAnimations.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewButtons.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewCanvases.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewDebug.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewDrawers.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewGeneral.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewHelp.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewKeyboardShortcuts.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewNody.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewPopups.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewSettings.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewSoundy.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewTemplates.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewThemes.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewTouchy.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViewViews.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowDrawViews.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowEditorSettings.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowOpen.cs" />
+     <Compile Include="Assets\Doozy\Editor\Windows\DoozyWindowStyles.cs" />
      <Compile Include="Assets\Doozy\Integrations\Editor\Playmaker\PlaymakerEventDispatcherEditor.cs" />
+     <Compile Include="Assets\ProceduralUIImage\Editor\FreeModifierEditor.cs" />
+     <Compile Include="Assets\ProceduralUIImage\Editor\ModifierUtility.cs" />
+     <Compile Include="Assets\ProceduralUIImage\Editor\ProceduralImageEditor.cs" />
+     <Compile Include="Assets\ProceduralUIImage\Editor\ProceduralImageEditorUtility.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\AccordionElementEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\BezierLineRendererEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\BoxSliderEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIBezierCurveEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIGraphicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIImageEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUITextEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CanvasGroupActivator.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ColorPickerPresetsEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\NonDrawingGraphicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ReadOnlyDrawer.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ScrollPositionControllerEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicIconEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicIconListCopier.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicRenameEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\uGUITools.cs" />
+     <None Include="Assets\Doozy\Editor\Nody\Shaders\LineDraw.shader" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
@@ -679,46 +957,6 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{66E73332-C5C9-9089-8C87-ABCD8ADC4973}</Project>
       <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{4E00825D-3C31-D188-4C43-B0350A9E7656}</Project>
-      <Name>DOTween.Modules</Name>
-    </ProjectReference>
-    <ProjectReference Include="MaruAssembly.csproj">
-      <Project>{12C9E3CE-AA53-1B4F-C96A-BE901DD3C003}</Project>
-      <Name>MaruAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ProceduralUIImageAssembly.csproj">
-      <Project>{50DDDA08-5727-9A97-0F0F-23E75B62E1D0}</Project>
-      <Name>ProceduralUIImageAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
-      <Project>{BCFC3C8D-8CDA-1061-E934-944664AC2EE7}</Project>
-      <Name>UnityUIExtensionsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEditorAssembly.csproj">
-      <Project>{AAB32B20-9A68-AC7D-4EF5-75B1F3E113B7}</Project>
-      <Name>DoozyEditorAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShelleyStudioAssembly.csproj">
-      <Project>{45BFF5DC-C371-BE6F-7B4D-665FD19BCF9B}</Project>
-      <Name>ShelleyStudioAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShelleyAssembly.csproj">
-      <Project>{359F646D-C419-51C1-C076-F0BA875401D5}</Project>
-      <Name>ShelleyAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.csproj">
-      <Project>{71189442-758C-DFBB-9EB5-C142AD850B95}</Project>
-      <Name>UnityUIExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEngineAssembly.csproj">
-      <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
-      <Name>DoozyEngineAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="AutoSaveAssembly.csproj">
-      <Project>{46A95DFD-733A-052F-604C-B96BFBE90ECC}</Project>
-      <Name>AutoSaveAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
