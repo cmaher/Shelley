@@ -71,8 +71,8 @@
      <Compile Include="Assets\ProceduralUIImage\Scripts\Modifiers\UniformModifier.cs" />
      <Compile Include="Assets\ProceduralUIImage\Scripts\ProceduralImage.cs" />
      <Compile Include="Assets\ProceduralUIImage\Scripts\ProceduralImageModifier.cs" />
-     <None Include="Assets\ProceduralUIImage\ProceduralUIImageAssembly.asmdef" />
      <None Include="Assets\ProceduralUIImage\Resources\Shaders\ProceduralImageRuntime.shader" />
+     <None Include="Assets\ProceduralUIImage\ProceduralUIImageAssembly.asmdef" />
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
@@ -264,15 +264,6 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DOTweenEditor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
- </Reference>
- <Reference Include="DDebug">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.NRefactory">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>

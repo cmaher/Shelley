@@ -1,7 +1,5 @@
 using System.Runtime.Serialization.Formatters.Binary;
-using Doozy.Engine;
 using Maru.MCore;
-using Shelley.Scripts.ShelleyStudio.UI;
 using UnityEngine;
 using Random = System.Random;
 
@@ -10,8 +8,6 @@ using Random = System.Random;
 // can also make a sub locator just for the doll design manager and call Locator.Get("Key")
 namespace Shelley.Scripts.ShelleyStudio {
     public class SceneManager : MonoBehaviour {
-        private DoozyEventTranslator doozyTranslator; 
-            
         private void Awake() {
             
             var locator = new DictLocator();
@@ -21,14 +17,6 @@ namespace Shelley.Scripts.ShelleyStudio {
             locator.Set(MaruKeys.Random, new Random());
             locator.Set(MaruKeys.Vent, vent);
             locator.Set(MaruKeys.BinaryFormatter, new BinaryFormatter());
-            
-            var doozyListener = GetComponent<GameEventListener>();
-            doozyTranslator = new DoozyEventTranslator(vent, doozyListener);
-            doozyTranslator.ListenAndTranslate();
-        }
-
-        private void OnDestroy() {
-            doozyTranslator.Shutdown();
         }
     }
 }

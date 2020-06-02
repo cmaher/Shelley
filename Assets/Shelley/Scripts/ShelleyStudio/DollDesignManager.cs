@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
-using Doozy.Engine.UI;
 using Maru.MCore;
 using Shelley.Scripts.Shelley;
 using Shelley.Scripts.ShelleyStudio.Events;
@@ -11,6 +10,7 @@ using Shelley.Scripts.ShelleyStudio.UI;
 using Shelley.Scripts.ShelleyStudio.UI.ColorPicker;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UI.Extensions.ColorPicker;
 using SysRandom = System.Random;
 
@@ -51,8 +51,8 @@ namespace Shelley.Scripts.ShelleyStudio {
         public GameObject protoNullPartSelector;
         public string partSelectionKey = "DollPartSelection";
         public GameObject partSelectionMenu;
-        public UIButton toggleGenderButton;
-        public UIButton mirrorButton;
+        public GameObject toggleGenderButton;
+        public GameObject mirrorButton;
 
         [Header("Part Type")] public GameObject protoPartTypeSelector;
         public string partTypeSelectionKey = "DollPartTypeSelection";
@@ -345,9 +345,9 @@ namespace Shelley.Scripts.ShelleyStudio {
             toggleGenderButton.gameObject.SetActive(DollPartTypes.IsGendered(selectedPartType));
             if (toggleGenderButton.gameObject.activeSelf) {
                 if (genderedParts == doll.Choices.Male) {
-                    toggleGenderButton.SetLabelText("Male\n(Toggle)");
+                    toggleGenderButton.transform.Find("Label").GetComponent<TMP_Text>().text = "Male\n(Toggle)";
                 } else {
-                    toggleGenderButton.SetLabelText("Female\n(Toggle)");
+                    toggleGenderButton.transform.Find("Label").GetComponent<TMP_Text>().text = "Female\n(Toggle)";
                 }
             }
         }

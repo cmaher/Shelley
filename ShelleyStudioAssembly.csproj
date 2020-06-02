@@ -72,13 +72,12 @@
      <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\ColorPicker\ColorPickerPresetRemove.cs" />
      <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\ColorPicker\ColorPickerVent.cs" />
      <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\ColorSwatchUpdater.cs" />
-     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\DoozyBehavior.cs" />
-     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\DoozyEventTranslator.cs" />
      <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\EnumComboSlider.cs" />
      <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\EnumSelectorButton.cs" />
      <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\PagingCollectionView.cs" />
      <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\PagingController.cs" />
      <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\PartSelector.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\UIEvents.cs" />
      <None Include="Assets\Shelley\Scripts\ShelleyStudio\ShelleyStudioAssembly.asmdef" />
  <Reference Include="Unity.TextMeshPro">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
@@ -274,15 +273,6 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DOTweenEditor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
- </Reference>
- <Reference Include="DDebug">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.NRefactory">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
@@ -654,10 +644,6 @@
     <ProjectReference Include="UnityUIExtensions.csproj">
       <Project>{71189442-758C-DFBB-9EB5-C142AD850B95}</Project>
       <Name>UnityUIExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEngineAssembly.csproj">
-      <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
-      <Name>DoozyEngineAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="ShelleyAssembly.csproj">
       <Project>{359F646D-C419-51C1-C076-F0BA875401D5}</Project>

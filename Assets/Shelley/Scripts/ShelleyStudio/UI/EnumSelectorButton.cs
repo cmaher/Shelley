@@ -1,26 +1,21 @@
-using Doozy.Engine.UI;
+using Maru.MCore;
 using Shelley.Scripts.ShelleyStudio.Events;
+using TMPro;
+using UnityEngine.UI;
 
 namespace Shelley.Scripts.ShelleyStudio.UI {
-    public class EnumSelectorButton : DoozyBehavior {
+    public class EnumSelectorButton : VentBehavior {
         // use an interface, because generic behaviors are not supported
         public IEnumSelection selection;
         public string label;
 
-        private UIButton doozyButton;
-
-        protected override int EventCapacity => 1;
-
         protected override void Awake() {
             base.Awake();
-            doozyButton = GetComponent<UIButton>();
-            doozyButton.OnClick.OnTrigger.GameEvents.Add(DoozySelfEvent.DoozyEventKey(this));
-            OnSelfEvent(TriggerSelected);
+            GetComponent<Button>().onClick.AddListener(TriggerSelected);
         }
 
-        protected override void Start() {
-            base.Start();
-            doozyButton.SetLabelText(label);
+        protected void Start() {
+            transform.Find("Label").GetComponent<TMP_Text>().text = label;
         }
 
         private void TriggerSelected() {

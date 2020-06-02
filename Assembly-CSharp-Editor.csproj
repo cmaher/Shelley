@@ -680,10 +680,6 @@
       <Project>{66E73332-C5C9-9089-8C87-ABCD8ADC4973}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{4E00825D-3C31-D188-4C43-B0350A9E7656}</Project>
-      <Name>DOTween.Modules</Name>
-    </ProjectReference>
     <ProjectReference Include="MaruAssembly.csproj">
       <Project>{12C9E3CE-AA53-1B4F-C96A-BE901DD3C003}</Project>
       <Name>MaruAssembly</Name>
@@ -692,13 +688,21 @@
       <Project>{50DDDA08-5727-9A97-0F0F-23E75B62E1D0}</Project>
       <Name>ProceduralUIImageAssembly</Name>
     </ProjectReference>
+    <ProjectReference Include="DoozyEditorAssembly.csproj">
+      <Project>{AAB32B20-9A68-AC7D-4EF5-75B1F3E113B7}</Project>
+      <Name>DoozyEditorAssembly</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityUIExtensionsEditor.csproj">
       <Project>{BCFC3C8D-8CDA-1061-E934-944664AC2EE7}</Project>
       <Name>UnityUIExtensionsEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="DoozyEditorAssembly.csproj">
-      <Project>{AAB32B20-9A68-AC7D-4EF5-75B1F3E113B7}</Project>
-      <Name>DoozyEditorAssembly</Name>
+    <ProjectReference Include="DoozyEngineAssembly.csproj">
+      <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
+      <Name>DoozyEngineAssembly</Name>
+    </ProjectReference>
+    <ProjectReference Include="DOTween.Modules.csproj">
+      <Project>{4E00825D-3C31-D188-4C43-B0350A9E7656}</Project>
+      <Name>DOTween.Modules</Name>
     </ProjectReference>
     <ProjectReference Include="ShelleyStudioAssembly.csproj">
       <Project>{45BFF5DC-C371-BE6F-7B4D-665FD19BCF9B}</Project>
@@ -711,10 +715,6 @@
     <ProjectReference Include="UnityUIExtensions.csproj">
       <Project>{71189442-758C-DFBB-9EB5-C142AD850B95}</Project>
       <Name>UnityUIExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEngineAssembly.csproj">
-      <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
-      <Name>DoozyEngineAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="AutoSaveAssembly.csproj">
       <Project>{46A95DFD-733A-052F-604C-B96BFBE90ECC}</Project>

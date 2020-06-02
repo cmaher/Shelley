@@ -1,4 +1,3 @@
-using Doozy.Engine.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +6,7 @@ namespace Shelley.Scripts.ShelleyStudio.UI {
         public Image colorSwatch;
 
         public void SetColor(Color color) {
-            colorSwatch.color = color.WithAlpha(1);
+            colorSwatch.color = new Color(color.r, color.g, color.b, 1);
         }
     }
 }
