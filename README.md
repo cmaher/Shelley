@@ -3,6 +3,8 @@
 A character creator for Synty Studio's `POLYGON - Modular Fantasy Hero Characters`. Save prefabs of the characters you make.
 A config" option is also available, but requires scripting to load.
 
+![demo gif](docs/demo.gif)
+
 Tested on Unity 2019.3.10f1 Personal
 
 ## First-Time Setup
@@ -16,7 +18,7 @@ Tested on Unity 2019.3.10f1 Personal
 1. Update the references in Shelley/Scripts/ShelleyStudio/ShelleyStudioAssembly.asmdef
     * ./Assets/ProceduralUIImage/ProceduralUIImageAssembly.asmdef (create this first)
     * Unity.TextMeshPro (should be available after installing TextMeshPro)
-1. Move Assets/polygonFantasyHeroCharacters/Prefabs/Characters\_ModularParts\_Static to Assets/**Resources**/PolygonFantasyHeroCharacters/Prefabs/Characters\_ModularParts\_Static
+1. Move `Assets/polygonFantasyHeroCharacters/Prefabs/Characters_ModularParts_Static` to `Assets/Resources/PolygonFantasyHeroCharacters/Prefabs/Characters_ModularParts_Static`
 
 
 Finally, load Shelley/Scenes/Designer, and enter play mode. Note that the UI is built around a 1080p resolution.
