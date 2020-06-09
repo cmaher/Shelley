@@ -23,10 +23,16 @@ Tested on Unity 2019.3.10f1 Personal
 
 Finally, load Shelley/Scenes/Designer, and enter play mode. Note that the UI is built around a 1080p resolution.
 
-# TODO
+## TODO
 * Remove ProceduralUIImage so that the only paid asset requires will be Modular Fantasy Hero Characters
 * Less terrible UI
 * Rotate the character & parts
 * Change the camera position
 * Maybe obey head attachment & head element rules
 * Smoother/automated first time setup
+
+## License
+
+Unless otherwise noted, all code is subject to the MIT license, as specified in the [LICENSE](LICENSE).
+
+Code in the `UnityUIExtensions` directory is comes from the [UnitiyUIExtensions project](https://bitbucket.org/UnityUIExtensions/unity-ui-extensions) and is minimally modified by me at most.
