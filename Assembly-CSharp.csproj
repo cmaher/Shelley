@@ -58,23 +58,195 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\ActivateLoadedScenes.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\ApplicationQuit.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\Back.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\DisableBackButton.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\EnableBackButton.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\HideUIView.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\LoadScene.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\SendGameEvent.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\ShowUIView.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\DoozyUI\UnloadScene.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\Soundy\MuteAllSounds.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\Soundy\PauseAllSounds.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\Soundy\PlayAudioClip.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\Soundy\PlaySound.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\Soundy\StopAllSounds.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Actions\Soundy\UnmuteAllSounds.cs" />
-     <Compile Include="Assets\Doozy\Integrations\Playmaker\Scripts\PlaymakerEventDispatcher.cs" />
+     <Compile Include="Assets\EModules\Auto-Save\AutoSave.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\DeferredEvent.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\DictLocator.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\ILocator.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\IMessageBus.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\LocatorProvider.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\MaruKeys.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\MaruUtils.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\MessageBus.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\PrefabPoolManager.cs" />
+     <Compile Include="Assets\Maru\Scripts\MCore\VentBehavior.cs" />
+     <Compile Include="Assets\Maru\Scripts\MRenderer\ReBoner.cs" />
+     <Compile Include="Assets\Maru\Scripts\MSerialize\SerializableColor.cs" />
+     <Compile Include="Assets\Maru\Scripts\MUI\UIMesh.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollChoices.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollColor.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollConfig.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollParts.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\DollRange.cs" />
+     <Compile Include="Assets\Shelley\Scripts\Shelley\WorkingDoll.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\DollDesignManager.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\Events.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\Events\EnumSelectedEvent.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\Events\FloatEnumChangedEvent.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\SceneManager.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\Adjustable\AdjustableUIManager.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\Adjustable\AdjustableUIManagerBehavior.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\Adjustable\ExpandableUI.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\Adjustable\ScalableUI.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\ButtonClickTranslator.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\ColorPicker\ColorPickerModifiablePresets.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\ColorPicker\ColorPickerPresetRemove.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\ColorPicker\ColorPickerVent.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\ColorSwatchUpdater.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\EnumComboSlider.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\EnumSelectorButton.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\PagingCollectionView.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\PagingController.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\PartSelector.cs" />
+     <Compile Include="Assets\Shelley\Scripts\ShelleyStudio\UI\UIEvents.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Accordion\Accordion.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Accordion\AccordionElement.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Accordion\Tweening\FloatTween.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Accordion\Tweening\ITweenValue.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Accordion\Tweening\TweenRunner.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\BoxSlider.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorImage.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorLabel.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorPickerControl.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorPickerPresets.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorPickerTester.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorSampler.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorSlider.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorSliderImage.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\ColorValues.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\Events\ColorChangedEvent.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\Events\HSVChangedEvent.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\HSVUtil.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\HexColorField.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\SVBoxSlider.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ColorPicker\TiltWindow.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ComboBox\AutoCompleteComboBox.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ComboBox\ComboBox.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ComboBox\DropDownList.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ComboBox\DropDownListButton.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ComboBox\DropDownListItem.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\CooldownButton.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\InputFocus.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\MultiTouchScrollRect.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\RadialSlider.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ReorderableList\ReorderableList.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ReorderableList\ReorderableListContent.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ReorderableList\ReorderableListDebug.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\ReorderableList\ReorderableListElement.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\RescalingPanels\RescaleDragPanel.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\RescalingPanels\RescalePanel.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\RescalingPanels\ResizePanel.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Segment.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\SegmentedControl.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\SelectionBox\ExampleSelectable.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\SelectionBox\IBoxSelectable.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\SelectionBox\SelectionBox.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\Stepper.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\StepperSide.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\TextPic.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Controls\UI_Knob.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\BestFitOutline.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\CurlyUI\CUIBezierCurve.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\CurlyUI\CUIGraphic.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\CurlyUI\CUIImage.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\CurlyUI\CUIMisc.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\CurlyUI\CUIText.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\CurvedText.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\CylinderText.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\Gradient.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\Gradient2.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\LetterSpacing.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\MonoSpacing.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\NicerOutline.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\RaycastMask.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\ShaderEffects\UIAdditiveEffect.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\ShaderEffects\UIImageCrop.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\ShaderEffects\UILinearDodgeEffect.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\ShaderEffects\UIMultiplyEffect.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\ShaderEffects\UIScreenEffect.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\ShaderEffects\UISoftAdditiveEffect.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\ShineEffect.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\ShineEffector.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\SoftMaskScript.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\UIFlippable.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Effects\UIParticleSystem.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\InputModules\AimerInputModule.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\InputModules\GamePadInputModule.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\CardUI\2D Cards\CardExpanding2D.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\CardUI\2D Cards\CardPopup2D.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\CardUI\2D Cards\CardStack2D.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\CardUI\3D Cards\CardExpanding3D.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\CardUI\Superellipse Creation\MeshCreator.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\CardUI\Superellipse Creation\SuperellipsePoints.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\CardUI\Superellipse Creation\Triangulator.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\ContentScrollSnapHorizontal.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\CurvedLayout.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\FancyScrollView.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\FancyScrollViewCell.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\FlowLayoutGroup.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\HorizontalScrollSnap.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\IScrollSnap.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\RadialLayout.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\ScrollPositionController.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\ScrollSnap.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\ScrollSnapBase.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\ScrollSnapScrollbarHelper.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\TableLayoutGroup.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\TileSizeFitter.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\UIVerticalScroller.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Layout\VerticalScrollSnap.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\MenuSystem\Menu.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\MenuSystem\MenuManager.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\MenuSystem\SimpleMenu.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\DiamondGraph.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\UICircle.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\UICornerCut.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\UIGridRenderer.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\UILineRenderer.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\UILineRendererList.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\UILineTextureRenderer.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\UIPolygon.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Primitives\UIPrimitiveBase.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\TabNavigationHelper.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\ToolTips\BoundTooltip\BoundTooltipItem.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\ToolTips\BoundTooltip\BoundTooltipTrigger.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\ToolTips\HoverTooltip.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\ToolTips\ToolTip.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\ToolTips\TooltipTrigger.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\UIWindowBase.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\BezierPath.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\CLZF2.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\CableCurve.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\Circle.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\DragCorrector.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ExtensionsToggle.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ExtensionsToggleGroup.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ExtentionMethods.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\InputFieldEnterSubmit.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\NonDrawingGraphic.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\PPIViewer.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\PaginationManager.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ReadOnlyAttribute.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ReturnKeyTriggersButton.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ScrollConflictManager.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ScrollRectEx.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ScrollRectExtensions.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ScrollRectLinker.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\ScrollRectTweener.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\SelectableScaler.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\SetPropertyUtility.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\TestCompression.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UIExtensionMethods.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UIHighlightable.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UILineConnector.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UIScrollToSelection.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UIScrollToSelectionXY.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UISelectableExtension.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UI_InfiniteScroll.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UI_ScrollRectOcclusion.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\UI_TweenScale.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\Utilities\switchToRectTransform.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\VR Extensions\VRCursor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Scripts\VR Extensions\VRInputModule.cs" />
      <None Include="Assets\UnityUIExtensions\Resources\Shaders\UIAdditive.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -101,12 +273,11 @@
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-     <None Include="Assets\Doozy\readme.txt" />
+     <None Include="Assets\EModules\Auto-Save\ReadMe.txt" />
      <None Include="Assets\UnityUIExtensions\Resources\Shaders\UISoftAdditive.shader" />
      <None Include="Assets\UnityUIExtensions\Resources\Shaders\UI Particle AddSmooth.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\UnityUIExtensions\Resources\Shaders\UIImageCrop.shader" />
-     <None Include="Assets\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
@@ -343,12 +514,6 @@
  </Reference>
  <Reference Include="UnityEngine.XRModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DDebug">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -704,48 +869,6 @@
  <Reference Include="Boo.Lang">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="MaruAssembly.csproj">
-      <Project>{12C9E3CE-AA53-1B4F-C96A-BE901DD3C003}</Project>
-      <Name>MaruAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ProceduralUIImageAssembly.csproj">
-      <Project>{50DDDA08-5727-9A97-0F0F-23E75B62E1D0}</Project>
-      <Name>ProceduralUIImageAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEditorAssembly.csproj">
-      <Project>{AAB32B20-9A68-AC7D-4EF5-75B1F3E113B7}</Project>
-      <Name>DoozyEditorAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
-      <Project>{BCFC3C8D-8CDA-1061-E934-944664AC2EE7}</Project>
-      <Name>UnityUIExtensionsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEngineAssembly.csproj">
-      <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
-      <Name>DoozyEngineAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{4E00825D-3C31-D188-4C43-B0350A9E7656}</Project>
-      <Name>DOTween.Modules</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShelleyStudioAssembly.csproj">
-      <Project>{45BFF5DC-C371-BE6F-7B4D-665FD19BCF9B}</Project>
-      <Name>ShelleyStudioAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShelleyAssembly.csproj">
-      <Project>{359F646D-C419-51C1-C076-F0BA875401D5}</Project>
-      <Name>ShelleyAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.csproj">
-      <Project>{71189442-758C-DFBB-9EB5-C142AD850B95}</Project>
-      <Name>UnityUIExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="AutoSaveAssembly.csproj">
-      <Project>{46A95DFD-733A-052F-604C-B96BFBE90ECC}</Project>
-      <Name>AutoSaveAssembly</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

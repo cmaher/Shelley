@@ -58,7 +58,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Doozy\Integrations\Editor\Playmaker\PlaymakerEventDispatcherEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\AccordionElementEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\BezierLineRendererEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\BoxSliderEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIBezierCurveEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIGraphicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUIImageEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CUITextEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\CanvasGroupActivator.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ColorPickerPresetsEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\NonDrawingGraphicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ReadOnlyDrawer.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\ScrollPositionControllerEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicIconEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicIconListCopier.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\TextPicRenameEditor.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\UIExtensionsMenuOptions.cs" />
+     <Compile Include="Assets\UnityUIExtensions\Editor\uGUITools.cs" />
  <Reference Include="UnityEditor.TestRunner">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
  </Reference>
@@ -304,15 +321,6 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.10f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
- </Reference>
- <Reference Include="DOTweenEditor">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
- </Reference>
- <Reference Include="DDebug">
- <HintPath>C:/Users/maher/projects/unity/Shelley/Assets/Doozy/Engine/Debug/DDebug.dll</HintPath>
  </Reference>
  <Reference Include="ICSharpCode.NRefactory">
  <HintPath>C:/Users/maher/projects/unity/Shelley/Library/PackageCache/com.unity.render-pipelines.core@7.3.1/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
@@ -679,46 +687,6 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{66E73332-C5C9-9089-8C87-ABCD8ADC4973}</Project>
       <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="MaruAssembly.csproj">
-      <Project>{12C9E3CE-AA53-1B4F-C96A-BE901DD3C003}</Project>
-      <Name>MaruAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ProceduralUIImageAssembly.csproj">
-      <Project>{50DDDA08-5727-9A97-0F0F-23E75B62E1D0}</Project>
-      <Name>ProceduralUIImageAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEditorAssembly.csproj">
-      <Project>{AAB32B20-9A68-AC7D-4EF5-75B1F3E113B7}</Project>
-      <Name>DoozyEditorAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensionsEditor.csproj">
-      <Project>{BCFC3C8D-8CDA-1061-E934-944664AC2EE7}</Project>
-      <Name>UnityUIExtensionsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="DoozyEngineAssembly.csproj">
-      <Project>{81E9AF1C-0A10-D201-9792-7B917B9C4C2B}</Project>
-      <Name>DoozyEngineAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="DOTween.Modules.csproj">
-      <Project>{4E00825D-3C31-D188-4C43-B0350A9E7656}</Project>
-      <Name>DOTween.Modules</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShelleyStudioAssembly.csproj">
-      <Project>{45BFF5DC-C371-BE6F-7B4D-665FD19BCF9B}</Project>
-      <Name>ShelleyStudioAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="ShelleyAssembly.csproj">
-      <Project>{359F646D-C419-51C1-C076-F0BA875401D5}</Project>
-      <Name>ShelleyAssembly</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.csproj">
-      <Project>{71189442-758C-DFBB-9EB5-C142AD850B95}</Project>
-      <Name>UnityUIExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="AutoSaveAssembly.csproj">
-      <Project>{46A95DFD-733A-052F-604C-B96BFBE90ECC}</Project>
-      <Name>AutoSaveAssembly</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

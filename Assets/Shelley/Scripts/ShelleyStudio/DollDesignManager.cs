@@ -10,7 +10,6 @@ using Shelley.Scripts.ShelleyStudio.UI;
 using Shelley.Scripts.ShelleyStudio.UI.ColorPicker;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.UI.Extensions.ColorPicker;
 using SysRandom = System.Random;
 
@@ -20,8 +19,7 @@ using UnityEditor;
 
 namespace Shelley.Scripts.ShelleyStudio {
     public class DollDesignManager : VentBehavior {
-        private const string StaticPartsDir = "PolygonFantasyHeroCharacters/Prefabs" +
-                                              "/Characters_ModularParts_Static";
+        private const string StaticPartsDir = "Characters_ModularParts_Static";
 
         private static readonly string DefaultSaveDirectory = "Assets/ShelleySaves";
         private static readonly string DefaultSaveName = "Doll";
