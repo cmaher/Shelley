@@ -637,10 +637,6 @@
       <Project>{12C9E3CE-AA53-1B4F-C96A-BE901DD3C003}</Project>
       <Name>MaruAssembly</Name>
     </ProjectReference>
-    <ProjectReference Include="ProceduralUIImageAssembly.csproj">
-      <Project>{50DDDA08-5727-9A97-0F0F-23E75B62E1D0}</Project>
-      <Name>ProceduralUIImageAssembly</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityUIExtensions.csproj">
       <Project>{71189442-758C-DFBB-9EB5-C142AD850B95}</Project>
       <Name>UnityUIExtensions</Name>

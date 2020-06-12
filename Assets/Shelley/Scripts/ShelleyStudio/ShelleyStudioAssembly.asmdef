@@ -2,7 +2,6 @@
     "name": "ShelleyStudioAssembly",
     "references": [
         "MaruAssembly",
-        "ProceduralUIImageAssembly",
         "UnityUIExtensions",
         "Unity.TextMeshPro",
         "ShelleyAssembly"

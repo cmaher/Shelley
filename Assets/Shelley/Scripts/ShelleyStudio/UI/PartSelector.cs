@@ -3,7 +3,6 @@ using Maru.Scripts.MUI;
 using Shelley.Scripts.Shelley;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UI.ProceduralImage;
 
 namespace Shelley.Scripts.ShelleyStudio.UI {
     public class PartSelector : VentBehavior {
@@ -18,14 +17,12 @@ namespace Shelley.Scripts.ShelleyStudio.UI {
         public float torsoScale = 1;
 
         private GameObject mesh;
-        private ProceduralImage box;
         private UIMesh uiMesh;
 
         protected override void Awake() {
             base.Awake();
             var button = GetComponent<Button>();
             button.onClick.AddListener(() => { Vent.Trigger(new PartSelectedEvent {PartSelector = this}); });
-            box = GetComponent<ProceduralImage>();
         }
 
         public void SetDollPart(DollPart part) {
@@ -64,14 +61,6 @@ namespace Shelley.Scripts.ShelleyStudio.UI {
             }
 
             mesh.transform.localScale = new Vector3(scale, scale, scale);
-        }
-
-        public void SetSelected(bool selected) {
-            if (selected) {
-                box.color = selectedColor;
-            } else {
-                box.color = unselectedColor;
-            }
         }
     }
 
