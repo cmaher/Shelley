@@ -13,7 +13,7 @@ Tested on Unity 2019.3.10f1 Personal
     * [POLYGON - Modular Fantasy Hero Characters](https://assetstore.unity.com/packages/3d/characters/humanoids/polygon-modular-fantasy-hero-characters-143468) (tested with version 1.22)
     * TextMesh Pro (via the package manager)
 1. Upgrade the Synty shaders, following `PolygonFantasyHeroCharacters/RenderPipeline_ReadMe`
-1. Remove the `PolygonFantasyHeroCharacters/Scripts` directory
+1. Remove the `PolygonFantasyHeroCharacters/Scripts` directory, and remove the script component from `PolygonFantasyHeroCharacters/Prefabs/ModularCharacters.prefab`
 1. Move `Assets/polygonFantasyHeroCharacters/Prefabs/Characters_ModularParts_Static` to `Assets/Resources/Characters_ModularParts_Static`
 1. Open Shelley/Scenes/Designer. A window should open asking you to import Text Mesh Pro files. Exit play mode, and import the files.
 1. The designer is now ready to use. Note that the UI is built around a 1080p resolution.
