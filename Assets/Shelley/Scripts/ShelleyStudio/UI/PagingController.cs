@@ -1,7 +1,7 @@
 using Maru.MCore;
 using UnityEngine.UI;
 
-namespace Shelley.Scripts.ShelleyStudio.UI {
+namespace ShelleyStudio.UI {
     public class PagingController : VentBehavior {
         public int advancePages = 1; // use -1 for previous
         public string ventKey;

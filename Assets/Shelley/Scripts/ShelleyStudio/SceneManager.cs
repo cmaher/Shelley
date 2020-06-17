@@ -6,7 +6,7 @@ using Random = System.Random;
 // TODO Instantiate the doll design manager (or a DollManager) with these  locator values. Need to make this reusable.
 // doozy vent part can be copied from scene to scene
 // can also make a sub locator just for the doll design manager and call Locator.Get("Key")
-namespace Shelley.Scripts.ShelleyStudio {
+namespace ShelleyStudio {
     public class SceneManager : MonoBehaviour {
         private void Awake() {
             

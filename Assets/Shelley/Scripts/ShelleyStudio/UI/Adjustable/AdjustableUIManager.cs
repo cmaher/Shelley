@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Maru.MCore;
 using UnityEngine;
 
-namespace Shelley.Scripts.ShelleyStudio.UI.Adjustable {
+namespace ShelleyStudio.UI.Adjustable {
     public class AdjustableUIManager {
         private Dictionary<int, IExpandableUI> expandables;
         private Dictionary<int, IScalableUI> scalables;

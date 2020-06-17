@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Shelley.Scripts.ShelleyStudio.UI {
+namespace ShelleyStudio.UI {
     public class ColorSwatchUpdater : MonoBehaviour {
         public Image colorSwatch;
 

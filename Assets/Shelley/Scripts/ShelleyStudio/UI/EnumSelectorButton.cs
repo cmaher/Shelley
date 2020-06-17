@@ -1,9 +1,9 @@
 using Maru.MCore;
-using Shelley.Scripts.ShelleyStudio.Events;
+using ShelleyStudio.Events;
 using TMPro;
 using UnityEngine.UI;
 
-namespace Shelley.Scripts.ShelleyStudio.UI {
+namespace ShelleyStudio.UI {
     public class EnumSelectorButton : VentBehavior {
         // use an interface, because generic behaviors are not supported
         public IEnumSelection selection;

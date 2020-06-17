@@ -4,20 +4,21 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using Maru.MCore;
-using Shelley.Scripts.Shelley;
-using Shelley.Scripts.ShelleyStudio.Events;
-using Shelley.Scripts.ShelleyStudio.UI;
-using Shelley.Scripts.ShelleyStudio.UI.ColorPicker;
+using Shelley;
+using ShelleyStudio.Events;
+using ShelleyStudio.UI;
+using ShelleyStudio.UI.ColorPicker;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI.Extensions.ColorPicker;
 using SysRandom = System.Random;
 
 #if UNITY_EDITOR
-using UnityEditor;
+
 #endif
 
-namespace Shelley.Scripts.ShelleyStudio {
+namespace ShelleyStudio {
     public class DollDesignManager : VentBehavior {
         private const string StaticPartsDir = "Characters_ModularParts_Static";
 

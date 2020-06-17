@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using Maru.Scripts.MRenderer;
-using Maru.Scripts.MSerialize;
+using Maru.MRenderer;
+using Maru.MSerialize;
 using UnityEngine;
 
-namespace Shelley.Scripts.Shelley {
+namespace Shelley {
     // Used to manage the construction of a doll
     // Can also be used as a doll factory:
     //     workingDoll.SetConfig(config);

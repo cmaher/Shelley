@@ -2,7 +2,7 @@ using System;
 using Maru.MCore;
 using UnityEngine;
 
-namespace Shelley.Scripts.ShelleyStudio.UI.Adjustable {
+namespace ShelleyStudio.UI.Adjustable {
     public interface IExpandableUI {
         void SetCanvas(Canvas canvas);
 

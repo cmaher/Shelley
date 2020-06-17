@@ -1,10 +1,10 @@
 using Maru.MCore;
-using Maru.Scripts.MUI;
-using Shelley.Scripts.Shelley;
+using Maru.MUI;
+using Shelley;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Shelley.Scripts.ShelleyStudio.UI {
+namespace ShelleyStudio.UI {
     public class PartSelector : VentBehavior {
         public float meshDistance;
         public Color unselectedColor;

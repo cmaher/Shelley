@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Shelley.Scripts.Shelley {
+namespace Shelley {
     public class DollColor {
         public readonly DollColorType Type;
         public readonly string Label;

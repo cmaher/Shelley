@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Maru.Scripts.MSerialize {
+namespace Maru.MSerialize {
     [Serializable]
     public struct SerializableColor {
         public float r;

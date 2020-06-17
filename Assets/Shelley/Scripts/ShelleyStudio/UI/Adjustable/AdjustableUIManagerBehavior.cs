@@ -1,7 +1,7 @@
 using Maru.MCore;
 using UnityEngine;
 
-namespace Shelley.Scripts.ShelleyStudio.UI.Adjustable {
+namespace ShelleyStudio.UI.Adjustable {
 
     public class AdjustableUIManagerBehavior : MonoBehaviour {
         public float scale = 1f;

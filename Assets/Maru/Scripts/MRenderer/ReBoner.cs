@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Maru.MCore;
 using UnityEngine;
 
-namespace Maru.Scripts.MRenderer {
+namespace Maru.MRenderer {
     public class ReBoner {
         private Dictionary<string, Transform> boneMap;
 

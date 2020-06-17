@@ -2,7 +2,7 @@ using Maru.MCore;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Shelley.Scripts.ShelleyStudio.UI.ColorPicker {
+namespace ShelleyStudio.UI.ColorPicker {
     public class ColorPickerPresetRemove : VentBehavior, IPointerClickHandler {
         public int id;
         public string key;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Maru.Scripts.MUI {
+namespace Maru.MUI {
     public class UIMesh : MonoBehaviour {
         [Tooltip(">0 -> in front of canvas, toward camera")]
         public float unscaledDistance;

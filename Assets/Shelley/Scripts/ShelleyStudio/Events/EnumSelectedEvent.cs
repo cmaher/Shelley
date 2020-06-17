@@ -1,7 +1,7 @@
 using System;
 using Maru.MCore;
 
-namespace Shelley.Scripts.ShelleyStudio.Events {
+namespace ShelleyStudio.Events {
     public struct EnumSelectedEvent<T> where T : Enum {
         public T Type;
     }

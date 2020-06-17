@@ -1,7 +1,7 @@
 using Maru.MCore;
 using UnityEngine.UI;
 
-namespace Shelley.Scripts.ShelleyStudio.UI {
+namespace ShelleyStudio.UI {
     // A class used to simply emit events 
     public class ButtonClickTranslator : VentBehavior {
         public string key;

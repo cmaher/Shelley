@@ -2,7 +2,7 @@ using Maru.MCore;
 using UnityEngine;
 using UnityEngine.UI.Extensions.ColorPicker;
 
-namespace Shelley.Scripts.ShelleyStudio.UI.ColorPicker {
+namespace ShelleyStudio.UI.ColorPicker {
     public class ColorPickerVent : MonoBehaviour {
         public string key;
         private IMessageBus vent;

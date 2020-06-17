@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using UnityEngine;
 
-namespace Shelley.Scripts.Shelley {
+namespace Shelley {
     public enum DollPartType {
         Head,
         Eyebrows,

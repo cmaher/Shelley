@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Maru.Scripts.MSerialize;
+using Maru.MSerialize;
 
-namespace Shelley.Scripts.Shelley {
+namespace Shelley {
     [Serializable]
     public class DollConfig {
         public Dictionary<DollPartType, string> activeParts;

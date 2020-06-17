@@ -32,7 +32,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 
-namespace Shelley.Scripts.ShelleyStudio.UI.ColorPicker {
+namespace ShelleyStudio.UI.ColorPicker {
     public class ColorPickerModifiablePresets : MonoBehaviour {
         public ColorPickerControl picker;
 

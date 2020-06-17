@@ -1,7 +1,7 @@
 using Maru.MCore;
 using UnityEngine;
 
-namespace Shelley.Scripts.ShelleyStudio.UI.Adjustable {
+namespace ShelleyStudio.UI.Adjustable {
     public interface IScalableUI {
         void Scale(float factor);
     }

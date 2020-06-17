@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Maru.MCore;
 using UnityEngine;
 
-namespace Shelley.Scripts.ShelleyStudio.UI {
+namespace ShelleyStudio.UI {
     [DisallowMultipleComponent]
     public class PagingCollectionView : VentBehavior {
         public int itemsPerPage; // Assumed to have some type of layout

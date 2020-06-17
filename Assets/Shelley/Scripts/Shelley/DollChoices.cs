@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Shelley.Scripts.Shelley {
+namespace Shelley {
     public class DollChoices {
         public UngenderedDollChoices Ungendered;
         public GenderedDollChoices Male;
